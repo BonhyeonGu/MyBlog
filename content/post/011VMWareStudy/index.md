@@ -2,7 +2,7 @@
 title: "VMWare 서버 공부환경 만들기"
 description: "서버와 클라이언트를 두어, 서버 테스트 환경을 만드는 과정입니다."
 date: 2022-04-01T08:30:11+09:00
-categories: ["리눅스", "서버"]
+categories: ["리눅스", "서버", "스터디"]
 tags: ["address", "dhcp", "ping", "static","vmnet", "vmware"]
 image: "thum.png"
 draft: false
@@ -34,7 +34,7 @@ Edit→Virtual Network Editor 으로 들어갑니다. 그 후에 아래의 Chang
 
 | 적용된 설정 | 설명 |
 | --- | --- |
-| Host-only | 브릿지, 나트가 아닌 오직 VM 내부에서만 동작하게 되는 망입니다. |
+| Host-only | 브릿지, 나트가 아닌 외부와 단절된, VM 내부에서만 동작하게 되는 망입니다. |
 | Connect a host vitual adapter~ | 체크를 하게되면 HostOS 설정(ex 윈도우 제어판)에도 해당 어뎁터가 감지됩니다. |
 | Use local DHCP~ | VMWare에서 지원하는 DHCP를 적용시킬 수 있습니다. |
 
