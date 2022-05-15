@@ -30,7 +30,7 @@ DNS은 Domain name을 IP Address로 변환해주는 정방향, 그 반대인 역
 
 설치하고 zone 설정을 시행합니다.
 
-```bash
+```Bash
 apt-get install bind9
 cd /etc/bind9
 nano named.conf.local
@@ -42,7 +42,7 @@ nano named.conf.local
 
 이제 정의해준 파일을 만들어 주어야 합니다. 포함된 예제가 있으니 그것을 복사해서 사용하겠습니다.
 
-```bash
+```Bash
 cp db.empty /var/cache/bind/busan.com.zone
 nano /var/cache/bind/busan.com.zone
 ```
@@ -53,7 +53,7 @@ SOA로 시작하는 내용은 DNS의 갱신, 캐시, 재요청등의 설정들�
 그 이후부터는 맨 왼쪽의 문자로 접근했을 때 내보낼 결과를 뜻합니다. 단 @는 [busan.com](http://busan.com) 자체가 요청 됐을때의 경우입니다.  
 이제 역방향 파일을 만들어주겠습니다.
 
-```bash
+```Bash
 cp /var/cache/bind/busan.com.zone /var/cache/bind/busan.com.zone.rev
 nano /var/cache/bind/busan.com.zone.rev
 ```
@@ -64,13 +64,13 @@ IN 이 PTR로 바뀌었다는 것 말고는 뜻이 동일합니다.
 
 마무리 하셨다면
 
-```bash
+```Bash
 named-checkconf
 ```
 
 로 신택스 테스트를 할 수 있습니다. 아무 출력도 없으면 통과 된 것입니다.
 
-```bash
+```Bash
 service bind9 restart
 ```
 
@@ -83,7 +83,7 @@ service bind9 restart
 
 윈도우는 쉬우니 넘어가고 Debian만 살펴보겠습니다.
 
-```bash
+```Bash
 nano /etc/resolv.conf
 ```
 
@@ -95,7 +95,7 @@ nano /etc/resolv.conf
 
 먼저 Server01로 가보겠습니다.
 
-```bash
+```Bash
 nslookup client01.busan.com
 nslookup www.busan.com
 nslookup 192.168.10.10
