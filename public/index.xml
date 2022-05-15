@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>9Bon&#39;s_Docs</title>
+    <link>https://docs.9bon.org/</link>
+    <description>Recent content on 9Bon&#39;s_Docs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ko-kr</language>
+    <lastBuildDate>Fri, 01 Apr 2022 08:30:11 +0900</lastBuildDate><atom:link href="https://docs.9bon.org/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>VMWare 서버 공부환경 만들기</title>
+      <link>https://docs.9bon.org/p/vmware-%EC%84%9C%EB%B2%84-%EA%B3%B5%EB%B6%80%ED%99%98%EA%B2%BD-%EB%A7%8C%EB%93%A4%EA%B8%B0/</link>
+      <pubDate>Fri, 01 Apr 2022 08:30:11 +0900</pubDate>
+      
+      <guid>https://docs.9bon.org/p/vmware-%EC%84%9C%EB%B2%84-%EA%B3%B5%EB%B6%80%ED%99%98%EA%B2%BD-%EB%A7%8C%EB%93%A4%EA%B8%B0/</guid>
+      <description>서론 GuestOS에서 무언가를 설치하기 위해 인터넷과 연결하여 사용할 때가 있을 것이며
+인터넷이 아닌 공부 목적의, 내부 네트워크의 환경을 사용하는 일도 있을 것입니다. 이 두가지를 쉽게 오가면서 사용할 수 있도록
+미리 준비 해놓으면 굉장히 편리합니다.
+우리의 목표는 아래의 토폴로지와 같은 매우 간단한 형태의 네트워크망입니다.
+VMNet 설명 VMNet은 VMWare Workstation에서 지원하는 가상 인터페이스, 네트워크입니다. 이것을 통하여 내부 네트워크망을 구현할 수 있습니다.
+네트워크 환경은 Subneting, Gateway 그리고 구축하지 않아도 제공되는 DHCP 서비스등을 설정할 수 있으며 인터페이스는 위의 네트워크 환경이 아니더라도 NAT, Bridge 등을 지원합니다.</description>
+    </item>
+    
+    <item>
+      <title>리눅스 디스크 백업</title>
+      <link>https://docs.9bon.org/p/%EB%A6%AC%EB%88%85%EC%8A%A4-%EB%94%94%EC%8A%A4%ED%81%AC-%EB%B0%B1%EC%97%85/</link>
+      <pubDate>Fri, 25 Mar 2022 11:21:02 +0900</pubDate>
+      
+      <guid>https://docs.9bon.org/p/%EB%A6%AC%EB%88%85%EC%8A%A4-%EB%94%94%EC%8A%A4%ED%81%AC-%EB%B0%B1%EC%97%85/</guid>
+      <description>백업 설명 백업/복원은 말 그대로 나중에 되돌릴 수 있게 사본을 복사하여 저장하는 기능입니다. 과거에도 OS에서 지원하는
+소프트웨어가 있었지만, 그럼에도 저 같은 경우에는 CD, USB에 담아서 사용하는 고스트를 자주 봤었던 기억이 있습니다.
+그 이유와 관련하여 방식의 종류를 살펴보도록 하겠습니다.
+백업의 종류 디스크를 통째로, 디스크의 일부 파티션만, 파일만 백업, 이것을 떠나서 백업은 세 가지의 방식이 존재합니다.
+1일 2일 3일, 총 삼일 동안 파일이 써지고 있는 동일한 시스템을 백업했다고 가정하고 예를 들어보겠습니다.
+전체 백업(Full)</description>
+    </item>
+    
+    <item>
+      <title>리눅스 디스크 문제</title>
+      <link>https://docs.9bon.org/p/%EB%A6%AC%EB%88%85%EC%8A%A4-%EB%94%94%EC%8A%A4%ED%81%AC-%EB%AC%B8%EC%A0%9C/</link>
+      <pubDate>Sat, 12 Mar 2022 03:43:58 +0900</pubDate>
+      
+      <guid>https://docs.9bon.org/p/%EB%A6%AC%EB%88%85%EC%8A%A4-%EB%94%94%EC%8A%A4%ED%81%AC-%EB%AC%B8%EC%A0%9C/</guid>
+      <description>하드디스크의 문제 증상 저장, 삭제시 에러문구 : &amp;ldquo;Structure needs cleaning&amp;rdquo;, &amp;ldquo;구조에 청소가 필요합니다&amp;rdquo;
+ls 시 : ??? ?? ???? 로 표시
+설명 불량, 노후화, 최악에는 소프트웨어의 오류에도 하드디스크에 치명적인 문제가 발생할 수 있습니다.
+제가 겪은 문제는 서버가 일종의 과부하를 받을 때 디렉토리 일부가 사라져 조회조차 하지 못하는 상황에
+놓이는 것이였습니다.
+놀라서 umount하거나 reboot해서 돌아와보면 디렉토리가 다시 보였지만
+디렉토리를 포함한 파일의 일부가 열리지만 소실되었거나, 열리지도 않으며 청소가 필요하다는 경고가 나타났습니다.
+흥미로웠던 사실은 비교적 최근에 생성된 것만 그런 상태였습니다.</description>
+    </item>
+    
+    <item>
+      <title>리눅스 디스크 사용</title>
+      <link>https://docs.9bon.org/p/%EB%A6%AC%EB%88%85%EC%8A%A4-%EB%94%94%EC%8A%A4%ED%81%AC-%EC%82%AC%EC%9A%A9/</link>
+      <pubDate>Tue, 01 Mar 2022 23:17:11 +0900</pubDate>
+      
+      <guid>https://docs.9bon.org/p/%EB%A6%AC%EB%88%85%EC%8A%A4-%EB%94%94%EC%8A%A4%ED%81%AC-%EC%82%AC%EC%9A%A9/</guid>
+      <description>Partion 설명 기본적으로 리눅스의 Filesystem은 다음과 같은 과정을 통해 만들어집니다. Partion &amp;gt; Format &amp;gt; Mount 의 과정을 거칩니다.
+윈도우는 자동 마운트됩니다.
+기본적으로 Partion은 하나의 보조기억장치를 여러 개의 Filesystem으로 만들고 싶을 때 사용합니다. 분할해서 사용하지
+않는다고 해도 칸 하나를 사용하겠다는 명시가 필요합니다.
+추가로 리눅스에서는 여러개의 저장 장치를 하나로 합치는 LVM이라는 개념이 존재합니다. Partion의 반대 개념에 가까우며
+최근에 윈도우에도 비슷한 기능이 추가되었습니다.
+명령어 fdisk -l 로 정확한 장치를 찾아서
+fdisk /dev/[장치명] 으로 파티션 모드에 진입할 수 있습니다.</description>
+    </item>
+    
+    <item>
+      <title>도커와 윈도우</title>
+      <link>https://docs.9bon.org/p/%EB%8F%84%EC%BB%A4%EC%99%80-%EC%9C%88%EB%8F%84%EC%9A%B0/</link>
+      <pubDate>Sun, 20 Feb 2022 16:54:39 +0900</pubDate>
+      
+      <guid>https://docs.9bon.org/p/%EB%8F%84%EC%BB%A4%EC%99%80-%EC%9C%88%EB%8F%84%EC%9A%B0/</guid>
+      <description>윈도우 윈도우에서의 도커 도커의 기본 환경은 리눅스에 맞춰져 있습니다. 따라서 윈도우에서 도커를 사용하려면 다른 방법을 선택할 필요가 있으며
+각 방법은 장단점이 존재했습니다. 대부분 가상머신을 이용한 방법입니다.
+가상 머신 출처
+가상머신은 기존의 운영체제(Host OS)에 가상의 운영체제(Guest OS)를 올릴 수 있게 해주는 소프트웨어 입니다.
+도커도 가상머신과 흡사하지만 GuestOS를 모두 올리는 것이 아니라. 필요한 쉘과 커널등만 올린다는 차이점이 있습니다.
+즉 도커는 가상머신 만큼 자유롭지는 못하나. 환경을 만들고 사용하는 부분에서 가볍게 진행 가능합니다.
+정리해보면 윈도우에서 우분투 컨테이너를 사용하려면</description>
+    </item>
+    
+    <item>
+      <title>도커 파일</title>
+      <link>https://docs.9bon.org/p/%EB%8F%84%EC%BB%A4-%ED%8C%8C%EC%9D%BC/</link>
+      <pubDate>Sun, 02 Jan 2022 02:21:44 +0900</pubDate>
+      
+      <guid>https://docs.9bon.org/p/%EB%8F%84%EC%BB%A4-%ED%8C%8C%EC%9D%BC/</guid>
+      <description>간단한 형식 운영체제 #원본이 될 이미지, https://hub.docker.com/ 참고#버전을 기록하지 않으면 최신 버전을 사용하게 된다.FROMubuntu:16.04#작성자 정보, 필수는 아님, 옛날에는 MAINTAINER을 사용했으나 대체됨LABEL email=&amp;#34;tayasriel@gmail.com&amp;#34;LABEL name=&amp;#34;BonhyeonGu&amp;#34;#언어 설정, ENV 자체는 도커 이미지 환경변수를 조작한다.ENV LC_ALL=C.UTF-8ENV LANG=C.UTF-8#명령어, 물음이 오는것을 피해야 진행이 가능하다.RUN apt-get update -y &amp;amp;&amp;amp; \  apt-get install -y nano #노출될 포트, 주의할 점은 이게 포트포워딩을 해주는 것이 아님EXPOSE5000, 5001인터프리터 FROMubuntuLABEL email=&amp;#34;tayasriel@gmail.com&amp;#34;LABEL name=&amp;#34;BonhyeonGu&amp;#34;RUN apt-get update -y &amp;amp;&amp;amp; \  apt-get install -y python-pip python-dev#호스트 경로 .</description>
+    </item>
+    
+    <item>
+      <title>RDP  문제</title>
+      <link>https://docs.9bon.org/p/rdp-%EB%AC%B8%EC%A0%9C/</link>
+      <pubDate>Fri, 31 Dec 2021 11:38:57 +0900</pubDate>
+      
+      <guid>https://docs.9bon.org/p/rdp-%EB%AC%B8%EC%A0%9C/</guid>
+      <description>설명 문제 윈도우즈, 윈도우즈 서버 운영체제를 사용할 때 정책을 사용해야 하는 이유로
+반드시 공식 지원하는 &amp;lsquo;RDP&amp;rsquo;를 사용해야 할 때가 있습니다.
+해당 프로그램은 대부분의 기능을 지원하지만 의외의 문제점이 있습니다.
+바로 SSH, 원격 터미널과 흡사한 부분이 있는 것입니다.
+RDP 은 유저가 연결을 끊으면 로그오프되어 Foreground 는 당연하고 Background마저 설정해 놓지 않으면 닫히게 됩니다.
+한번은 윈도우 환경에서만 지원하는 GUI Foreground 프로세스를 지속적으로 가동시킬 목적으로 AWS에서 Windows Server를 구입하여 사용한 적이 있었습니다.
+하지만 위와 같은 이유로 곤혹을 겪었습니다.</description>
+    </item>
+    
+    <item>
+      <title>zsh, oh-my-zsh!</title>
+      <link>https://docs.9bon.org/p/zsh-oh-my-zsh/</link>
+      <pubDate>Fri, 24 Dec 2021 16:11:32 +0900</pubDate>
+      
+      <guid>https://docs.9bon.org/p/zsh-oh-my-zsh/</guid>
+      <description>zsh 설명 기능이 다양해서 유행중인 bash 쉘을 대체하는 쉘입니다.
+설치 apt-get install zsh chsh -s `which zsh` 쉘은 유저에 귀속되므로 권한에 주의해야 합니다. 또한 작은 따옴표가 아닙니다.
+재시작 하면 설치가 완료됩니다.
+echo $SHELL 로 확인 할 수 있습니다.
+oh-my-zsh! 설명 zsh를 설정할 수 있는 편리한 콘피그들을 제공해주는 프레임워크입니다.
+설치 curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh 해당 설치법은 http://ohmyz.sh/ 에서 제공하는 방법입니다. 문제가 생길경우 이곳에서 편집되었는지 확인할 수 있습니다.
+설정 vim ~/.zshrc 에서 제가 주로 사용하는 것은</description>
+    </item>
+    
+    <item>
+      <title>Photograph</title>
+      <link>https://docs.9bon.org/photograph/</link>
+      <pubDate>Mon, 04 Oct 2021 20:11:31 +0900</pubDate>
+      
+      <guid>https://docs.9bon.org/photograph/</guid>
+      <description>2021 창업교육센터, 창업동아리팀 Pandemic
+2020 네트워크 중급자 스터디 진행
+2017 네트워크 스터디, 리눅스 스터디 진행
+2014 2014 전국기능대회 정보통신 3과목
+아래는 전국대회 조건에 따라, 고등학생때 작성했던 문제 중 1과목입니다.
+작성한 문제</description>
+    </item>
+    
+    <item>
+      <title>ServerLog</title>
+      <link>https://docs.9bon.org/serverlog/</link>
+      <pubDate>Sun, 03 Oct 2021 23:21:22 +0900</pubDate>
+      
+      <guid>https://docs.9bon.org/serverlog/</guid>
+      <description>v01 (2017~2020.11) 사진 사양    총 금액 ~60,000원     기종 라즈베리파이3   OS 라즈비안   CPU 4Core 1.2GHz   RAM 1GB   HDD 외장-1TB    ARM 아키텍처 환경은 많은 단점이 있었습니다.
+지원하지 않는것이 많았으며 복잡한 루틴이 어려웠습니다.
+사양    최종 가동 서비스 데몬     WEB + CLOUD APACHE + PYDIO   FTP VSFTPD   DB MYSQL   SHARE DIRECTORY SAMBA    웹 클라우드 또한 PYDIO와 OwnCloud 등 여러가지 오픈소스를 사용 했었습니다.</description>
+    </item>
+    
+    <item>
+      <title>도커 명령어와 예제</title>
+      <link>https://docs.9bon.org/p/%EB%8F%84%EC%BB%A4-%EB%AA%85%EB%A0%B9%EC%96%B4%EC%99%80-%EC%98%88%EC%A0%9C/</link>
+      <pubDate>Sun, 03 Oct 2021 01:40:54 +0900</pubDate>
+      
+      <guid>https://docs.9bon.org/p/%EB%8F%84%EC%BB%A4-%EB%AA%85%EB%A0%B9%EC%96%B4%EC%99%80-%EC%98%88%EC%A0%9C/</guid>
+      <description>기본 컨테이너 조회 docker ps -a   첨자 뜻     -a 꺼져있는 것을 포함하여 모두    컨테이너 시작, 종료 docker apache start   이후 내용 뜻     start 실행   restart 재시작   stop 중지   status 상태확인    컨테이너 생성/수정 일반적인 경우 docker container run --name nextcloud -d -v /media/ext1/Docker/cloud/:/var/www/html/data -p 1234:80 nextcloud   첨자 뜻     -run 생성 후 바로 실행함   &amp;ndash;name 생성될 컨테이너의 이름 지정   -d 백그라운드(데몬 프로세스)로 실행   -v (복수가능) 저장공간 맵핑/마운트 컨테이너 외부(호스트) : 컨테이너 내부   -p (복수가능) 포트 맵핑/포워딩 컨테이너 외부(호스트) : 컨테이너 내부   이후 내용엔 이미지 파일 이름     환경변수 설정 docker container run --name test_DB_YJ -d -p 49152:22 -p 1234:3306 -e MYSQL_ROOT_PASSWORD=12345 mariadb --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_cidocker run -e &amp;#34;ACCEPT_EULA=Y&amp;#34; -e &amp;#34;SA_PASSWORD=12345&amp;#34; -p 1234:1433 --name rpadb -d mcr.</description>
+    </item>
+    
+    <item>
+      <title>아파치 SSL 적용, Let&#39;s Encrypt</title>
+      <link>https://docs.9bon.org/p/%EC%95%84%ED%8C%8C%EC%B9%98-ssl-%EC%A0%81%EC%9A%A9-lets-encrypt/</link>
+      <pubDate>Fri, 01 Oct 2021 18:41:21 +0900</pubDate>
+      
+      <guid>https://docs.9bon.org/p/%EC%95%84%ED%8C%8C%EC%B9%98-ssl-%EC%A0%81%EC%9A%A9-lets-encrypt/</guid>
+      <description>서론 only HTTP 사용된 전달은 보호되지 않습니다. 우리가 입력할 아이디와 비밀번호는 평문으로 전달되게 될 것이며
+이는 공격자가 쉽게 중간에서 가로챌 수 있습니다.
+이를 방지하기 위해 지금은 TLS내지 SSL을 사용한 HTTPS가 사용되고 있습니다.
+국내에서는 웹서버 정보제공자가 로그인과 관련된 페이지에서 HTTPS 사용을 의무한 법안이 시행중입니다.
+인증서 페이지 제공자와 수신자는 CA(인증 기관&amp;ndash;업체)를 사이로 아래와 같은 작업을 시행합니다.
+Let&amp;rsquo;s Encrypt https://letsencrypt.org/ko/  Let&amp;rsquo;s Encrypt 는 무료 CA입니다. 대신 해당 인증서는 짧은 유효기간을 가졌으며 설정의 제한이 많지만</description>
+    </item>
+    
+    <item>
+      <title>아파치 가상호스트 설정</title>
+      <link>https://docs.9bon.org/p/%EC%95%84%ED%8C%8C%EC%B9%98-%EA%B0%80%EC%83%81%ED%98%B8%EC%8A%A4%ED%8A%B8-%EC%84%A4%EC%A0%95/</link>
+      <pubDate>Thu, 02 Sep 2021 19:32:24 +0900</pubDate>
+      
+      <guid>https://docs.9bon.org/p/%EC%95%84%ED%8C%8C%EC%B9%98-%EA%B0%80%EC%83%81%ED%98%B8%EC%8A%A4%ED%8A%B8-%EC%84%A4%EC%A0%95/</guid>
+      <description>서론 웹 서버 데몬은 한 호스트를 여러 호스트처럼 쓸 수 있는 가상 호스트(VirtualHost) 를 대부분 지원하고 있습니다. 포트번호, 서브도메인, 출발지 주소등의 규칙을 적용시킵니다. 이번엔 Debian과 Apache로 서브 도메인에 따른 규칙으로 가상 호스트를 구현해 보도록 하겠습니다. 마지막엔 cloud.9bon.org와 9bon.org가 똑같은 장치에 구성되어있음에 불구하고 서로 다른 내용을 보여주는 것이 목표입니다.
+아파치 준비 아파치가 설치되어있지 않으면 패키지 관리자로 쉽게 설치 가능합니다.
+apt-get update &amp;amp;&amp;amp; apt-get install apache2 또한 앞으로의 과정 중 재시작을 하고 싶을땐 다음과 같습니다.</description>
+    </item>
+    
+    <item>
+      <title>휴고 서버에 직접 구동시키기</title>
+      <link>https://docs.9bon.org/p/%ED%9C%B4%EA%B3%A0-%EC%84%9C%EB%B2%84%EC%97%90-%EC%A7%81%EC%A0%91-%EA%B5%AC%EB%8F%99%EC%8B%9C%ED%82%A4%EA%B8%B0/</link>
+      <pubDate>Wed, 01 Sep 2021 14:21:27 +1023</pubDate>
+      
+      <guid>https://docs.9bon.org/p/%ED%9C%B4%EA%B3%A0-%EC%84%9C%EB%B2%84%EC%97%90-%EC%A7%81%EC%A0%91-%EA%B5%AC%EB%8F%99%EC%8B%9C%ED%82%A4%EA%B8%B0/</guid>
+      <description>주의사항 2022.03.20 하드디스크가 문제가 생겼었고, 교환 받은 디스크도 종종 긁히는 소리가 갑자기 생기는데 Hugo를 직접 호스팅 하기 전까지 이런적은 없었습니다.
+hugo server 로 24시간 작동시키는것이 다른 문제가 있는지 의심하는 중입니다. 주의하시길 바랍니다.
+서론 학습했던 것들을 정리하기 위해 정적 페이지를 알아보다 HUGO와 Github page를 사용한 대중적인 게시글들을 확인할 수 있었습니다. Github page를 사용하면 관리하기 편리할 것 같지만 호스팅 경험을 위하여 예전부터 동작 중인 개인 서버를 통해 가동해 보겠습니다.
+Homebrew 설치 2021년 08월 29일 기준 데비안 10.</description>
+    </item>
+    
+    <item>
+      <title>Archives</title>
+      <link>https://docs.9bon.org/archives/</link>
+      <pubDate>Wed, 01 Sep 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.9bon.org/archives/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>About</title>
+      <link>https://docs.9bon.org/about/</link>
+      <pubDate>Tue, 31 Aug 2021 19:09:40 +0900</pubDate>
+      
+      <guid>https://docs.9bon.org/about/</guid>
+      <description>Contact 🙋
+tayasriel@gmail.com
+Introduce 🧑‍💼
+Link :
+Photograph 📸
+https://docs.9bon.org/photograph/
+ServerLog 🧰
+https://docs.9bon.org/serverlog/</description>
+    </item>
+    
+    <item>
+      <title>Search</title>
+      <link>https://docs.9bon.org/search/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.9bon.org/search/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

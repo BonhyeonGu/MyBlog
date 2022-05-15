@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>docker-compose on 9Bon&#39;s_Docs</title>
+    <link>https://docs.9bon.org/tags/docker-compose/</link>
+    <description>Recent content in docker-compose on 9Bon&#39;s_Docs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ko-kr</language>
+    <lastBuildDate>Sun, 02 Jan 2022 02:21:44 +0900</lastBuildDate><atom:link href="https://docs.9bon.org/tags/docker-compose/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>도커 파일</title>
+      <link>https://docs.9bon.org/p/%EB%8F%84%EC%BB%A4-%ED%8C%8C%EC%9D%BC/</link>
+      <pubDate>Sun, 02 Jan 2022 02:21:44 +0900</pubDate>
+      
+      <guid>https://docs.9bon.org/p/%EB%8F%84%EC%BB%A4-%ED%8C%8C%EC%9D%BC/</guid>
+      <description>간단한 형식 운영체제 #원본이 될 이미지, https://hub.docker.com/ 참고#버전을 기록하지 않으면 최신 버전을 사용하게 된다.FROMubuntu:16.04#작성자 정보, 필수는 아님, 옛날에는 MAINTAINER을 사용했으나 대체됨LABEL email=&amp;#34;tayasriel@gmail.com&amp;#34;LABEL name=&amp;#34;BonhyeonGu&amp;#34;#언어 설정, ENV 자체는 도커 이미지 환경변수를 조작한다.ENV LC_ALL=C.UTF-8ENV LANG=C.UTF-8#명령어, 물음이 오는것을 피해야 진행이 가능하다.RUN apt-get update -y &amp;amp;&amp;amp; \  apt-get install -y nano #노출될 포트, 주의할 점은 이게 포트포워딩을 해주는 것이 아님EXPOSE5000, 5001인터프리터 FROMubuntuLABEL email=&amp;#34;tayasriel@gmail.com&amp;#34;LABEL name=&amp;#34;BonhyeonGu&amp;#34;RUN apt-get update -y &amp;amp;&amp;amp; \  apt-get install -y python-pip python-dev#호스트 경로 .</description>
+    </item>
+    
+  </channel>
+</rss>

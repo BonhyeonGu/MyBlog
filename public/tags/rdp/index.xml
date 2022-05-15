@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>rdp on 9Bon&#39;s_Docs</title>
+    <link>https://docs.9bon.org/tags/rdp/</link>
+    <description>Recent content in rdp on 9Bon&#39;s_Docs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ko-kr</language>
+    <lastBuildDate>Fri, 31 Dec 2021 11:38:57 +0900</lastBuildDate><atom:link href="https://docs.9bon.org/tags/rdp/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>RDP  문제</title>
+      <link>https://docs.9bon.org/p/rdp-%EB%AC%B8%EC%A0%9C/</link>
+      <pubDate>Fri, 31 Dec 2021 11:38:57 +0900</pubDate>
+      
+      <guid>https://docs.9bon.org/p/rdp-%EB%AC%B8%EC%A0%9C/</guid>
+      <description>설명 문제 윈도우즈, 윈도우즈 서버 운영체제를 사용할 때 정책을 사용해야 하는 이유로
+반드시 공식 지원하는 &amp;lsquo;RDP&amp;rsquo;를 사용해야 할 때가 있습니다.
+해당 프로그램은 대부분의 기능을 지원하지만 의외의 문제점이 있습니다.
+바로 SSH, 원격 터미널과 흡사한 부분이 있는 것입니다.
+RDP 은 유저가 연결을 끊으면 로그오프되어 Foreground 는 당연하고 Background마저 설정해 놓지 않으면 닫히게 됩니다.
+한번은 윈도우 환경에서만 지원하는 GUI Foreground 프로세스를 지속적으로 가동시킬 목적으로 AWS에서 Windows Server를 구입하여 사용한 적이 있었습니다.
+하지만 위와 같은 이유로 곤혹을 겪었습니다.</description>
+    </item>
+    
+  </channel>
+</rss>

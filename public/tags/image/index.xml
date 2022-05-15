@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>image on 9Bon&#39;s_Docs</title>
+    <link>https://docs.9bon.org/tags/image/</link>
+    <description>Recent content in image on 9Bon&#39;s_Docs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ko-kr</language>
+    <lastBuildDate>Sun, 02 Jan 2022 02:21:44 +0900</lastBuildDate><atom:link href="https://docs.9bon.org/tags/image/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>도커 파일</title>
+      <link>https://docs.9bon.org/p/%EB%8F%84%EC%BB%A4-%ED%8C%8C%EC%9D%BC/</link>
+      <pubDate>Sun, 02 Jan 2022 02:21:44 +0900</pubDate>
+      
+      <guid>https://docs.9bon.org/p/%EB%8F%84%EC%BB%A4-%ED%8C%8C%EC%9D%BC/</guid>
+      <description>간단한 형식 운영체제 #원본이 될 이미지, https://hub.docker.com/ 참고#버전을 기록하지 않으면 최신 버전을 사용하게 된다.FROMubuntu:16.04#작성자 정보, 필수는 아님, 옛날에는 MAINTAINER을 사용했으나 대체됨LABEL email=&amp;#34;tayasriel@gmail.com&amp;#34;LABEL name=&amp;#34;BonhyeonGu&amp;#34;#언어 설정, ENV 자체는 도커 이미지 환경변수를 조작한다.ENV LC_ALL=C.UTF-8ENV LANG=C.UTF-8#명령어, 물음이 오는것을 피해야 진행이 가능하다.RUN apt-get update -y &amp;amp;&amp;amp; \  apt-get install -y nano #노출될 포트, 주의할 점은 이게 포트포워딩을 해주는 것이 아님EXPOSE5000, 5001인터프리터 FROMubuntuLABEL email=&amp;#34;tayasriel@gmail.com&amp;#34;LABEL name=&amp;#34;BonhyeonGu&amp;#34;RUN apt-get update -y &amp;amp;&amp;amp; \  apt-get install -y python-pip python-dev#호스트 경로 .</description>
+    </item>
+    
+    <item>
+      <title>도커 명령어와 예제</title>
+      <link>https://docs.9bon.org/p/%EB%8F%84%EC%BB%A4-%EB%AA%85%EB%A0%B9%EC%96%B4%EC%99%80-%EC%98%88%EC%A0%9C/</link>
+      <pubDate>Sun, 03 Oct 2021 01:40:54 +0900</pubDate>
+      
+      <guid>https://docs.9bon.org/p/%EB%8F%84%EC%BB%A4-%EB%AA%85%EB%A0%B9%EC%96%B4%EC%99%80-%EC%98%88%EC%A0%9C/</guid>
+      <description>기본 컨테이너 조회 docker ps -a   첨자 뜻     -a 꺼져있는 것을 포함하여 모두    컨테이너 시작, 종료 docker apache start   이후 내용 뜻     start 실행   restart 재시작   stop 중지   status 상태확인    컨테이너 생성/수정 일반적인 경우 docker container run --name nextcloud -d -v /media/ext1/Docker/cloud/:/var/www/html/data -p 1234:80 nextcloud   첨자 뜻     -run 생성 후 바로 실행함   &amp;ndash;name 생성될 컨테이너의 이름 지정   -d 백그라운드(데몬 프로세스)로 실행   -v (복수가능) 저장공간 맵핑/마운트 컨테이너 외부(호스트) : 컨테이너 내부   -p (복수가능) 포트 맵핑/포워딩 컨테이너 외부(호스트) : 컨테이너 내부   이후 내용엔 이미지 파일 이름     환경변수 설정 docker container run --name test_DB_YJ -d -p 49152:22 -p 1234:3306 -e MYSQL_ROOT_PASSWORD=12345 mariadb --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_cidocker run -e &amp;#34;ACCEPT_EULA=Y&amp;#34; -e &amp;#34;SA_PASSWORD=12345&amp;#34; -p 1234:1433 --name rpadb -d mcr.</description>
+    </item>
+    
+  </channel>
+</rss>
