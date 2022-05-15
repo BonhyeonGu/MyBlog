@@ -2,7 +2,7 @@
 title: "DNS Server, BIND9"
 description: "리눅스의 BIND9를 사용하여 DNS를 구축하는 내용입니다."
 date: 2022-04-12T20:49:09+09:00
-categories: ["리눅스", "서버"]
+categories: ["리눅스", "서버", "스터디"]
 tags: ["address", "bind9", "dns", "ping"]
 image: "thum.png"
 draft: false
