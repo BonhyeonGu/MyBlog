@@ -5,13 +5,15 @@ date: 2022-04-12T20:49:09+09:00
 categories: ["리눅스", "서버"]
 tags: ["address", "bind9", "dns", "ping"]
 image: "thum.png"
-draft: true
+draft: false
 ---
 
 ## 서론
 
 앞에서 IP Address로 신호를 보내봤지만, Domain name형식이 아닌 주소를 쓰는 경우는 매우 보기 어렵습니다.  
-대부분의 학생분들은 DNS라는 단어를 들어보셨을 거라 생각합니다. IP Address와 Domain name간의 맵핑을 이루게 해주는 서비스, 내지 서버입니다.  
+대부분의 학생분들은 DNS라는 단어를 들어보셨을 거라 생각합니다. IP Address와 Domain name간의 맵핑을 이루게 해주는 서비스, 내지 서버입니다.
+
+  
 실은 여기 Domain이란 단어는 우리가 알고있는 문자 형식의 주소를 뜻하는 말보다 더 여러가지의 내용이 포괄된 단어입니다. 이 내용과 관련해서는 다음에 다루어보도록 하겠습니다.
 
 ## Bind9
@@ -103,7 +105,7 @@ nslookup 192.168.10.10
 ![nslookup](6.png)
 
 정상적으로 나오는 모습을 확인할 수 있습니다.  
-client01의 브라우저로 http://www.busan.com 에 접속해 보겠습니다.
+client01의 브라우저로 [www.busan.com](http://www.busan.com) 에 접속해 보겠습니다.
 
 ![브라우저](7.png)
 
