@@ -1,0 +1,364 @@
+Start building sites … 
+hugo v0.87.0+extended linux/amd64 BuildDate=unknown
+WARN 2022/03/13 14:02:53 Menu item [/archives/] is using [pre] field to set icon, please use [params.icon] instead.
+More information: https://docs.stack.jimmycai.com/configuration/custom-menu.html
+WARN 2022/03/13 14:02:53 Menu item [/search/] is using [pre] field to set icon, please use [params.icon] instead.
+More information: https://docs.stack.jimmycai.com/configuration/custom-menu.html
+
+                   | KO  
+-------------------+-----
+  Pages            | 83  
+  Paginator pages  |  6  
+  Non-page files   | 30  
+  Static files     |  1  
+  Processed images | 54  
+  Aliases          | 37  
+  Sitemaps         |  1  
+  Cleaned          |  0  
+
+Built in 1143 ms
+Watching for changes in /media/ext1/Hugo/docs.9bon.org/{archetypes,assets,content,data,layouts,static,themes}
+Watching for config changes in /media/ext1/Hugo/docs.9bon.org/config.yaml, /media/ext1/Hugo/docs.9bon.org/themes/hugo-theme-stack/config.yaml
+Environment: "development"
+Serving pages from memory
+Running in Fast Render Mode. For full rebuilds on change: hugo server --disableFastRender
+Web Server is available at //docs.9bon.org/ (bind address 0.0.0.0)
+Press Ctrl+C to stop
+
+Change detected, rebuilding site.
+2022-03-13 14:15:22.166 +0900
+Source changed "/media/ext1/Hugo/docs.9bon.org/content/post/007DockerWindows/index.md": WRITE
+WARN 2022/03/13 14:15:22 Menu item [/archives/] is using [pre] field to set icon, please use [params.icon] instead.
+More information: https://docs.stack.jimmycai.com/configuration/custom-menu.html
+WARN 2022/03/13 14:15:22 Menu item [/search/] is using [pre] field to set icon, please use [params.icon] instead.
+More information: https://docs.stack.jimmycai.com/configuration/custom-menu.html
+Total in 30 ms
+
+Change detected, rebuilding site.
+2022-03-13 14:16:29.667 +0900
+Source changed "/media/ext1/Hugo/docs.9bon.org/content/post/008LinuxMount/1.png": REMOVE
+Source changed "/media/ext1/Hugo/docs.9bon.org/content/post/008LinuxMount/2.png": REMOVE
+WARN 2022/03/13 14:16:29 Menu item [/archives/] is using [pre] field to set icon, please use [params.icon] instead.
+More information: https://docs.stack.jimmycai.com/configuration/custom-menu.html
+WARN 2022/03/13 14:16:29 Menu item [/archives/] is using [pre] field to set icon, please use [params.icon] instead.
+More information: https://docs.stack.jimmycai.com/configuration/custom-menu.html
+WARN 2022/03/13 14:16:29 Menu item [/search/] is using [pre] field to set icon, please use [params.icon] instead.
+More information: https://docs.stack.jimmycai.com/configuration/custom-menu.html
+Total in 29 ms
+hugo: downloading modules …
+hugo: collected modules in 8396 ms
+Start building sites … 
+hugo v0.87.0+extended linux/amd64 BuildDate=unknown
+WARN 2022/03/14 08:54:53 Menu item [/archives/] is using [pre] field to set icon, please use [params.icon] instead.
+More information: https://docs.stack.jimmycai.com/configuration/custom-menu.html
+WARN 2022/03/14 08:54:53 Menu item [/search/] is using [pre] field to set icon, please use [params.icon] instead.
+More information: https://docs.stack.jimmycai.com/configuration/custom-menu.html
+
+                   | KO  
+-------------------+-----
+  Pages            | 83  
+  Paginator pages  |  6  
+  Non-page files   | 30  
+  Static files     |  1  
+  Processed images | 59  
+  Aliases          | 37  
+  Sitemaps         |  1  
+  Cleaned          |  0  
+
+Built in 20648 ms
+Watching for changes in /media/ext1/Hugo/docs.9bon.org/{archetypes,assets,content,data,layouts,static,themes}
+Watching for config changes in /media/ext1/Hugo/docs.9bon.org/config.yaml, /media/ext1/Hugo/docs.9bon.org/themes/hugo-theme-stack/config.yaml
+Environment: "development"
+Serving pages from memory
+Running in Fast Render Mode. For full rebuilds on change: hugo server --disableFastRender
+Web Server is available at //docs.9bon.org/ (bind address 0.0.0.0)
+Press Ctrl+C to stop
+
+Change detected, rebuilding site.
+2022-03-14 13:39:33.338 +0900
+Source changed "/media/ext1/Hugo/docs.9bon.org/content/post/007DockerWindows/index.md": WRITE
+WARN 2022/03/14 13:39:33 Menu item [/archives/] is using [pre] field to set icon, please use [params.icon] instead.
+More information: https://docs.stack.jimmycai.com/configuration/custom-menu.html
+WARN 2022/03/14 13:39:33 Menu item [/search/] is using [pre] field to set icon, please use [params.icon] instead.
+More information: https://docs.stack.jimmycai.com/configuration/custom-menu.html
+Total in 29 ms
+Start building sites … 
+hugo v0.87.0+extended linux/amd64 BuildDate=unknown
+WARN 2022/03/14 19:30:31 Menu item [/archives/] is using [pre] field to set icon, please use [params.icon] instead.
+More information: https://docs.stack.jimmycai.com/configuration/custom-menu.html
+WARN 2022/03/14 19:30:31 Menu item [/search/] is using [pre] field to set icon, please use [params.icon] instead.
+More information: https://docs.stack.jimmycai.com/configuration/custom-menu.html
+
+                   | KO  
+-------------------+-----
+  Pages            | 83  
+  Paginator pages  |  6  
+  Non-page files   | 30  
+  Static files     |  1  
+  Processed images | 51  
+  Aliases          | 37  
+  Sitemaps         |  1  
+  Cleaned          |  0  
+
+Built in 372 ms
+Watching for changes in /media/ext1/Hugo/docs.9bon.org/{archetypes,assets,content,data,layouts,static,themes}
+Watching for config changes in /media/ext1/Hugo/docs.9bon.org/config.yaml, /media/ext1/Hugo/docs.9bon.org/themes/hugo-theme-stack/config.yaml
+Environment: "development"
+Serving pages from memory
+Running in Fast Render Mode. For full rebuilds on change: hugo server --disableFastRender
+Web Server is available at //docs.9bon.org/ (bind address 0.0.0.0)
+Press Ctrl+C to stop
+
+Change detected, rebuilding site.
+2022-03-15 12:36:04.372 +0900
+Source changed "/media/ext1/Hugo/docs.9bon.org/content/post/008LinuxDisk/index.md": WRITE
+WARN 2022/03/15 12:36:04 Menu item [/archives/] is using [pre] field to set icon, please use [params.icon] instead.
+More information: https://docs.stack.jimmycai.com/configuration/custom-menu.html
+WARN 2022/03/15 12:36:04 Menu item [/search/] is using [pre] field to set icon, please use [params.icon] instead.
+More information: https://docs.stack.jimmycai.com/configuration/custom-menu.html
+Total in 26 ms
+
+Change detected, rebuilding site.
+2022-03-15 12:36:34.371 +0900
+Source changed "/media/ext1/Hugo/docs.9bon.org/content/post/008LinuxDisk/index.md": WRITE
+WARN 2022/03/15 12:36:34 Menu item [/archives/] is using [pre] field to set icon, please use [params.icon] instead.
+More information: https://docs.stack.jimmycai.com/configuration/custom-menu.html
+WARN 2022/03/15 12:36:34 Menu item [/search/] is using [pre] field to set icon, please use [params.icon] instead.
+More information: https://docs.stack.jimmycai.com/configuration/custom-menu.html
+Total in 254 ms
+
+Change detected, rebuilding site.
+2022-03-15 13:31:51.871 +0900
+Source changed "/media/ext1/Hugo/docs.9bon.org/content/post/008LinuxDisk/index.md": WRITE
+WARN 2022/03/15 13:31:51 Menu item [/archives/] is using [pre] field to set icon, please use [params.icon] instead.
+More information: https://docs.stack.jimmycai.com/configuration/custom-menu.html
+WARN 2022/03/15 13:31:51 Menu item [/search/] is using [pre] field to set icon, please use [params.icon] instead.
+More information: https://docs.stack.jimmycai.com/configuration/custom-menu.html
+Total in 28 ms
+
+Change detected, rebuilding site.
+2022-03-15 13:31:52.370 +0900
+Source changed "/media/ext1/Hugo/docs.9bon.org/content/post/008LinuxDisk/index.md": WRITE
+WARN 2022/03/15 13:31:52 Menu item [/archives/] is using [pre] field to set icon, please use [params.icon] instead.
+More information: https://docs.stack.jimmycai.com/configuration/custom-menu.html
+WARN 2022/03/15 13:31:52 Menu item [/search/] is using [pre] field to set icon, please use [params.icon] instead.
+More information: https://docs.stack.jimmycai.com/configuration/custom-menu.html
+Total in 29 ms
+Start building sites … 
+hugo v0.87.0+extended linux/amd64 BuildDate=unknown
+WARN 2022/03/15 13:37:57 Menu item [/archives/] is using [pre] field to set icon, please use [params.icon] instead.
+More information: https://docs.stack.jimmycai.com/configuration/custom-menu.html
+WARN 2022/03/15 13:37:57 Menu item [/search/] is using [pre] field to set icon, please use [params.icon] instead.
+More information: https://docs.stack.jimmycai.com/configuration/custom-menu.html
+
+                   | KO  
+-------------------+-----
+  Pages            | 83  
+  Paginator pages  |  6  
+  Non-page files   | 30  
+  Static files     |  1  
+  Processed images | 49  
+  Aliases          | 37  
+  Sitemaps         |  1  
+  Cleaned          |  0  
+
+Built in 374 ms
+Watching for changes in /media/ext1/Hugo/docs.9bon.org/{archetypes,assets,content,data,layouts,static,themes}
+Watching for config changes in /media/ext1/Hugo/docs.9bon.org/config.yaml, /media/ext1/Hugo/docs.9bon.org/themes/hugo-theme-stack/config.yaml
+Environment: "development"
+Serving pages from memory
+Running in Fast Render Mode. For full rebuilds on change: hugo server --disableFastRender
+Web Server is available at //docs.9bon.org/ (bind address 0.0.0.0)
+Press Ctrl+C to stop
+
+Change detected, rebuilding site.
+2022-03-15 13:39:21.724 +0900
+Source changed "/media/ext1/Hugo/docs.9bon.org/content/post/008LinuxHardDisk/index.md": WRITE
+WARN 2022/03/15 13:39:21 Menu item [/archives/] is using [pre] field to set icon, please use [params.icon] instead.
+More information: https://docs.stack.jimmycai.com/configuration/custom-menu.html
+WARN 2022/03/15 13:39:21 Menu item [/search/] is using [pre] field to set icon, please use [params.icon] instead.
+More information: https://docs.stack.jimmycai.com/configuration/custom-menu.html
+Total in 445 ms
+
+Change detected, rebuilding site.
+2022-03-15 13:39:24.724 +0900
+Source changed "/media/ext1/Hugo/docs.9bon.org/content/post/008LinuxHardDisk/index.md": WRITE
+WARN 2022/03/15 13:39:24 Menu item [/archives/] is using [pre] field to set icon, please use [params.icon] instead.
+More information: https://docs.stack.jimmycai.com/configuration/custom-menu.html
+WARN 2022/03/15 13:39:24 Menu item [/search/] is using [pre] field to set icon, please use [params.icon] instead.
+More information: https://docs.stack.jimmycai.com/configuration/custom-menu.html
+Total in 35 ms
+
+Change detected, rebuilding site.
+2022-03-15 13:43:22.222 +0900
+Source changed "/media/ext1/Hugo/docs.9bon.org/content/post/008LinuxHardDisk/thum.png": REMOVE
+WARN 2022/03/15 13:43:22 Menu item [/archives/] is using [pre] field to set icon, please use [params.icon] instead.
+More information: https://docs.stack.jimmycai.com/configuration/custom-menu.html
+WARN 2022/03/15 13:43:22 Menu item [/search/] is using [pre] field to set icon, please use [params.icon] instead.
+More information: https://docs.stack.jimmycai.com/configuration/custom-menu.html
+Total in 31 ms
+
+Change detected, rebuilding site.
+2022-03-15 13:43:26.222 +0900
+Source changed "/media/ext1/Hugo/docs.9bon.org/content/post/008LinuxHardDisk/thum.png": CREATE
+WARN 2022/03/15 13:43:26 Menu item [/archives/] is using [pre] field to set icon, please use [params.icon] instead.
+More information: https://docs.stack.jimmycai.com/configuration/custom-menu.html
+WARN 2022/03/15 13:43:26 Menu item [/search/] is using [pre] field to set icon, please use [params.icon] instead.
+More information: https://docs.stack.jimmycai.com/configuration/custom-menu.html
+ERROR 2022/03/15 13:43:26 render of "page" failed: execute of template failed: template: _default/single.html:16:7: executing "main" at <partial "article/article.html" .>: error calling partial: execute of template failed: template: partials/article/article.html:2:7: executing "partials/article/article.html" at <partial "article/components/header" .>: error calling partial: "/media/ext1/Hugo/docs.9bon.org/themes/hugo-theme-stack/layouts/partials/article/components/header.html:13:48": execute of template failed: template: partials/article/components/header.html:13:48: executing "partials/article/components/header.html" at <$image.resource.Resize>: error calling Resize: image "/media/ext1/Hugo/docs.9bon.org/content/post/008LinuxHardDisk/thum.png": resize : image: unknown format
+ERROR 2022/03/15 13:43:26 Rebuild failed:
+
+ERROR 2022/03/15 13:43:26 Failed to render pages: render of "home" failed: execute of template failed: template: index.html:9:15: executing "main" at <partial "article-list/default" .>: error calling partial: execute of template failed: template: partials/article-list/default.html:3:7: executing "partials/article-list/default.html" at <partial "article/components/header" .>: error calling partial: "/media/ext1/Hugo/docs.9bon.org/themes/hugo-theme-stack/layouts/partials/article/components/header.html:13:48": execute of template failed: template: partials/article/components/header.html:13:48: executing "partials/article/components/header.html" at <$image.resource.Resize>: error calling Resize: image "/media/ext1/Hugo/docs.9bon.org/content/post/008LinuxHardDisk/thum.png": resize : image: unknown format
+Total in 17 ms
+
+Change detected, rebuilding site.
+2022-03-15 13:43:26.724 +0900
+Source changed "/media/ext1/Hugo/docs.9bon.org/content/post/008LinuxHardDisk/thum.png": WRITE
+WARN 2022/03/15 13:43:26 Menu item [/archives/] is using [pre] field to set icon, please use [params.icon] instead.
+More information: https://docs.stack.jimmycai.com/configuration/custom-menu.html
+WARN 2022/03/15 13:43:26 Menu item [/search/] is using [pre] field to set icon, please use [params.icon] instead.
+More information: https://docs.stack.jimmycai.com/configuration/custom-menu.html
+Total in 247 ms
+
+Change detected, rebuilding site.
+2022-03-16 16:01:08.724 +0900
+Source changed "/media/ext1/Hugo/docs.9bon.org/content/post/008LinuxHardDisk/index.md": WRITE
+WARN 2022/03/16 16:01:08 Menu item [/archives/] is using [pre] field to set icon, please use [params.icon] instead.
+More information: https://docs.stack.jimmycai.com/configuration/custom-menu.html
+WARN 2022/03/16 16:01:08 Menu item [/search/] is using [pre] field to set icon, please use [params.icon] instead.
+More information: https://docs.stack.jimmycai.com/configuration/custom-menu.html
+Total in 28 ms
+
+Change detected, rebuilding site.
+2022-03-16 16:01:09.223 +0900
+Source changed "/media/ext1/Hugo/docs.9bon.org/content/post/008LinuxHardDisk/index.md": WRITE
+WARN 2022/03/16 16:01:09 Menu item [/archives/] is using [pre] field to set icon, please use [params.icon] instead.
+More information: https://docs.stack.jimmycai.com/configuration/custom-menu.html
+WARN 2022/03/16 16:01:09 Menu item [/search/] is using [pre] field to set icon, please use [params.icon] instead.
+More information: https://docs.stack.jimmycai.com/configuration/custom-menu.html
+Total in 32 ms
+
+Change detected, rebuilding site.
+2022-03-16 16:01:26.224 +0900
+Source changed "/media/ext1/Hugo/docs.9bon.org/content/post/008LinuxHardDisk/index.md": WRITE
+WARN 2022/03/16 16:01:26 Menu item [/archives/] is using [pre] field to set icon, please use [params.icon] instead.
+More information: https://docs.stack.jimmycai.com/configuration/custom-menu.html
+WARN 2022/03/16 16:01:26 Menu item [/search/] is using [pre] field to set icon, please use [params.icon] instead.
+More information: https://docs.stack.jimmycai.com/configuration/custom-menu.html
+Total in 30 ms
+
+Change detected, rebuilding site.
+2022-03-16 16:01:26.723 +0900
+Source changed "/media/ext1/Hugo/docs.9bon.org/content/post/008LinuxHardDisk/index.md": WRITE
+WARN 2022/03/16 16:01:26 Menu item [/archives/] is using [pre] field to set icon, please use [params.icon] instead.
+More information: https://docs.stack.jimmycai.com/configuration/custom-menu.html
+WARN 2022/03/16 16:01:26 Menu item [/search/] is using [pre] field to set icon, please use [params.icon] instead.
+More information: https://docs.stack.jimmycai.com/configuration/custom-menu.html
+Total in 28 ms
+
+Change detected, rebuilding site.
+2022-03-16 16:01:40.723 +0900
+Source changed "/media/ext1/Hugo/docs.9bon.org/content/post/008LinuxHardDisk/index.md": WRITE
+WARN 2022/03/16 16:01:40 Menu item [/archives/] is using [pre] field to set icon, please use [params.icon] instead.
+More information: https://docs.stack.jimmycai.com/configuration/custom-menu.html
+WARN 2022/03/16 16:01:40 Menu item [/search/] is using [pre] field to set icon, please use [params.icon] instead.
+More information: https://docs.stack.jimmycai.com/configuration/custom-menu.html
+Total in 32 ms
+
+Change detected, rebuilding site.
+2022-03-16 16:02:06.722 +0900
+Source changed "/media/ext1/Hugo/docs.9bon.org/content/post/008LinuxHardDisk/index.md": WRITE
+WARN 2022/03/16 16:02:06 Menu item [/archives/] is using [pre] field to set icon, please use [params.icon] instead.
+More information: https://docs.stack.jimmycai.com/configuration/custom-menu.html
+WARN 2022/03/16 16:02:06 Menu item [/search/] is using [pre] field to set icon, please use [params.icon] instead.
+More information: https://docs.stack.jimmycai.com/configuration/custom-menu.html
+Total in 32 ms
+
+Change detected, rebuilding site.
+2022-03-16 16:07:27.222 +0900
+Source changed "/media/ext1/Hugo/docs.9bon.org/content/post/008LinuxHardDisk/index.md": WRITE
+WARN 2022/03/16 16:07:27 Menu item [/archives/] is using [pre] field to set icon, please use [params.icon] instead.
+More information: https://docs.stack.jimmycai.com/configuration/custom-menu.html
+WARN 2022/03/16 16:07:27 Menu item [/search/] is using [pre] field to set icon, please use [params.icon] instead.
+More information: https://docs.stack.jimmycai.com/configuration/custom-menu.html
+Total in 32 ms
+hugo: downloading modules …
+hugo: collected modules in 5895 ms
+Start building sites … 
+hugo v0.87.0+extended linux/amd64 BuildDate=unknown
+WARN 2022/03/19 20:40:47 Menu item [/archives/] is using [pre] field to set icon, please use [params.icon] instead.
+More information: https://docs.stack.jimmycai.com/configuration/custom-menu.html
+WARN 2022/03/19 20:40:47 Menu item [/search/] is using [pre] field to set icon, please use [params.icon] instead.
+More information: https://docs.stack.jimmycai.com/configuration/custom-menu.html
+
+                   | KO  
+-------------------+-----
+  Pages            | 92  
+  Paginator pages  |  7  
+  Non-page files   | 31  
+  Static files     |  1  
+  Processed images | 61  
+  Aliases          | 41  
+  Sitemaps         |  1  
+  Cleaned          |  0  
+
+Built in 25542 ms
+Watching for changes in /media/ext1/Hugo/docs.9bon.org/{archetypes,assets,content,data,layouts,static,themes}
+Watching for config changes in /media/ext1/Hugo/docs.9bon.org/config.yaml, /media/ext1/Hugo/docs.9bon.org/themes/hugo-theme-stack/config.yaml
+Environment: "development"
+Serving pages from memory
+Running in Fast Render Mode. For full rebuilds on change: hugo server --disableFastRender
+Web Server is available at //docs.9bon.org/ (bind address 0.0.0.0)
+Press Ctrl+C to stop
+
+Change detected, rebuilding site.
+2022-03-19 21:18:01.542 +0900
+Source changed "/media/ext1/Hugo/docs.9bon.org/content/post/008LinuxHardDisk/1.png": CREATE
+WARN 2022/03/19 21:18:01 Menu item [/archives/] is using [pre] field to set icon, please use [params.icon] instead.
+More information: https://docs.stack.jimmycai.com/configuration/custom-menu.html
+WARN 2022/03/19 21:18:01 Menu item [/search/] is using [pre] field to set icon, please use [params.icon] instead.
+More information: https://docs.stack.jimmycai.com/configuration/custom-menu.html
+Total in 30 ms
+
+Change detected, rebuilding site.
+2022-03-19 21:18:02.040 +0900
+Source changed "/media/ext1/Hugo/docs.9bon.org/content/post/008LinuxHardDisk/1.png": WRITE
+WARN 2022/03/19 21:18:02 Menu item [/archives/] is using [pre] field to set icon, please use [params.icon] instead.
+More information: https://docs.stack.jimmycai.com/configuration/custom-menu.html
+WARN 2022/03/19 21:18:02 Menu item [/search/] is using [pre] field to set icon, please use [params.icon] instead.
+More information: https://docs.stack.jimmycai.com/configuration/custom-menu.html
+Total in 29 ms
+
+Change detected, rebuilding site.
+2022-03-19 21:20:32.042 +0900
+Source changed "/media/ext1/Hugo/docs.9bon.org/content/post/008LinuxHardDisk/index.md": WRITE
+WARN 2022/03/19 21:20:32 Menu item [/archives/] is using [pre] field to set icon, please use [params.icon] instead.
+More information: https://docs.stack.jimmycai.com/configuration/custom-menu.html
+WARN 2022/03/19 21:20:32 Menu item [/search/] is using [pre] field to set icon, please use [params.icon] instead.
+More information: https://docs.stack.jimmycai.com/configuration/custom-menu.html
+Total in 28 ms
+
+Change detected, rebuilding site.
+2022-03-19 21:21:59.542 +0900
+Source changed "/media/ext1/Hugo/docs.9bon.org/content/post/008LinuxHardDisk/index.md": WRITE
+WARN 2022/03/19 21:21:59 Menu item [/archives/] is using [pre] field to set icon, please use [params.icon] instead.
+More information: https://docs.stack.jimmycai.com/configuration/custom-menu.html
+WARN 2022/03/19 21:21:59 Menu item [/search/] is using [pre] field to set icon, please use [params.icon] instead.
+More information: https://docs.stack.jimmycai.com/configuration/custom-menu.html
+Total in 78 ms
+
+Change of config file detected, rebuilding site.
+2022-03-20 11:40:14.542 +0900
+WARN 2022/03/20 11:40:14 Menu item [/archives/] is using [pre] field to set icon, please use [params.icon] instead.
+More information: https://docs.stack.jimmycai.com/configuration/custom-menu.html
+WARN 2022/03/20 11:40:14 Menu item [/search/] is using [pre] field to set icon, please use [params.icon] instead.
+More information: https://docs.stack.jimmycai.com/configuration/custom-menu.html
+Rebuilt in 486 ms
+
+Change of config file detected, rebuilding site.
+2022-03-20 11:42:12.040 +0900
+WARN 2022/03/20 11:42:12 Menu item [/archives/] is using [pre] field to set icon, please use [params.icon] instead.
+More information: https://docs.stack.jimmycai.com/configuration/custom-menu.html
+WARN 2022/03/20 11:42:12 Menu item [/search/] is using [pre] field to set icon, please use [params.icon] instead.
+More information: https://docs.stack.jimmycai.com/configuration/custom-menu.html
+Rebuilt in 566 ms

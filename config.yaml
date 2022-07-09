@@ -1,4 +1,4 @@
-baseurl: https://docs.9bon.org/
+baseurl: docs.9bon.org
 languageCode: ko-kr
 theme: hugo-theme-stack
 paginate: 5
@@ -8,20 +8,7 @@ title: 9Bon's_Docs
 disqusShortname: docs-9bon-org
 
 # GA Tracking ID
-googleAnalytics: "G-RY2XNPER73"
-
-#search
-# robots.txt
-enableRobotsTXT: true
-
-# sitemap 생성
-# always, hourly daily, weekly, monthly, yearly, never
-sitemap:
-   changefreq: "monthly"
-   filename: "sitemap.xml"
-   priority: 0.5
-##
-
+googleAnalytics:
 
 # Theme i18n support
 # Available values: en, fr, id, ja, ko, pt-br, zh-cn, es, de, nl, it
@@ -36,11 +23,11 @@ params:
         - post
     featuredImageField: image
     rssFullContent: true
-    favicon: favicon.ico
+    favicon: favicon.png
 
     footer:
         since: 2021
-        customText: 방문해주셔서 감사합니다.
+        customText: 개인 저전력 서버 9bon.org에서 직접 호스팅중인 페이지입니다.
 
     dateFormat:
         published: Jan 02, 2006
@@ -48,7 +35,7 @@ params:
 
     sidebar:
         #emoji: 🧰
-        subtitle: Hungry
+        subtitle: Developer and Server engineer
         avatar:
             enabled: true
             local: true
@@ -213,7 +200,7 @@ menu:
 
     social:
         - identifier: 1_git
-          url: "https://github.com/BonhyeonGu"
+          url: "https://github.com/9-b0N"
           params:
               icon: brand-github
 
