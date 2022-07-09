@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>fsck on 9Bon&#39;s_Docs</title>
+    <link>https://docs.9bon.org/tags/fsck/</link>
+    <description>Recent content in fsck on 9Bon&#39;s_Docs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ko-kr</language>
+    <lastBuildDate>Sat, 12 Mar 2022 03:43:58 +0900</lastBuildDate><atom:link href="https://docs.9bon.org/tags/fsck/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>리눅스 디스크 문제</title>
+      <link>https://docs.9bon.org/p/%EB%A6%AC%EB%88%85%EC%8A%A4-%EB%94%94%EC%8A%A4%ED%81%AC-%EB%AC%B8%EC%A0%9C/</link>
+      <pubDate>Sat, 12 Mar 2022 03:43:58 +0900</pubDate>
+      
+      <guid>https://docs.9bon.org/p/%EB%A6%AC%EB%88%85%EC%8A%A4-%EB%94%94%EC%8A%A4%ED%81%AC-%EB%AC%B8%EC%A0%9C/</guid>
+      <description>하드디스크의 문제 증상 저장, 삭제시 에러문구 : &amp;ldquo;Structure needs cleaning&amp;rdquo;, &amp;ldquo;구조에 청소가 필요합니다&amp;rdquo;
+ls 시 : ??? ?? ???? 로 표시
+설명 불량, 노후화, 최악에는 소프트웨어의 오류에도 하드디스크에 치명적인 문제가 발생할 수 있습니다.
+제가 겪은 문제는 서버가 일종의 과부하를 받을 때 디렉토리 일부가 사라져 조회조차 하지 못하는 상황에
+놓이는 것이였습니다.
+놀라서 umount하거나 reboot해서 돌아와보면 디렉토리가 다시 보였지만
+디렉토리를 포함한 파일의 일부가 열리지만 소실되었거나, 열리지도 않으며 청소가 필요하다는 경고가 나타났습니다.
+흥미로웠던 사실은 비교적 최근에 생성된 것만 그런 상태였습니다.</description>
+    </item>
+    
+  </channel>
+</rss>

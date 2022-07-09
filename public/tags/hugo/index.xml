@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>hugo on 9Bon&#39;s_Docs</title>
+    <link>https://docs.9bon.org/tags/hugo/</link>
+    <description>Recent content in hugo on 9Bon&#39;s_Docs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ko-kr</language>
+    <lastBuildDate>Wed, 01 Sep 2021 14:21:27 +1023</lastBuildDate><atom:link href="https://docs.9bon.org/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>휴고 서버에 직접 구동시키기</title>
+      <link>https://docs.9bon.org/p/%ED%9C%B4%EA%B3%A0-%EC%84%9C%EB%B2%84%EC%97%90-%EC%A7%81%EC%A0%91-%EA%B5%AC%EB%8F%99%EC%8B%9C%ED%82%A4%EA%B8%B0/</link>
+      <pubDate>Wed, 01 Sep 2021 14:21:27 +1023</pubDate>
+      
+      <guid>https://docs.9bon.org/p/%ED%9C%B4%EA%B3%A0-%EC%84%9C%EB%B2%84%EC%97%90-%EC%A7%81%EC%A0%91-%EA%B5%AC%EB%8F%99%EC%8B%9C%ED%82%A4%EA%B8%B0/</guid>
+      <description>주의사항 2022.03.20 하드디스크가 문제가 생겼었고, 교환 받은 디스크도 종종 긁히는 소리가 갑자기 생기는데 Hugo를 직접 호스팅 하기 전까지 이런적은 없었습니다.
+hugo server 로 24시간 작동시키는것이 다른 문제가 있는지 의심하는 중입니다. 주의하시길 바랍니다.
+서론 학습했던 것들을 정리하기 위해 정적 페이지를 알아보다 HUGO와 Github page를 사용한 대중적인 게시글들을 확인할 수 있었습니다. Github page를 사용하면 관리하기 편리할 것 같지만 호스팅 경험을 위하여 예전부터 동작 중인 개인 서버를 통해 가동해 보겠습니다.
+Homebrew 설치 2021년 08월 29일 기준 데비안 10.</description>
+    </item>
+    
+  </channel>
+</rss>

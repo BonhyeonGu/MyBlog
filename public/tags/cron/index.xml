@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>cron on 9Bon&#39;s_Docs</title>
+    <link>https://docs.9bon.org/tags/cron/</link>
+    <description>Recent content in cron on 9Bon&#39;s_Docs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ko-kr</language>
+    <lastBuildDate>Fri, 01 Oct 2021 18:41:21 +0900</lastBuildDate><atom:link href="https://docs.9bon.org/tags/cron/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>아파치 SSL 적용, Let&#39;s Encrypt</title>
+      <link>https://docs.9bon.org/p/%EC%95%84%ED%8C%8C%EC%B9%98-ssl-%EC%A0%81%EC%9A%A9-lets-encrypt/</link>
+      <pubDate>Fri, 01 Oct 2021 18:41:21 +0900</pubDate>
+      
+      <guid>https://docs.9bon.org/p/%EC%95%84%ED%8C%8C%EC%B9%98-ssl-%EC%A0%81%EC%9A%A9-lets-encrypt/</guid>
+      <description>서론 only HTTP 사용된 전달은 보호되지 않습니다. 우리가 입력할 아이디와 비밀번호는 평문으로 전달되게 될 것이며
+이는 공격자가 쉽게 중간에서 가로챌 수 있습니다.
+이를 방지하기 위해 지금은 TLS내지 SSL을 사용한 HTTPS가 사용되고 있습니다.
+국내에서는 웹서버 정보제공자가 로그인과 관련된 페이지에서 HTTPS 사용을 의무한 법안이 시행중입니다.
+인증서 페이지 제공자와 수신자는 CA(인증 기관&amp;ndash;업체)를 사이로 아래와 같은 작업을 시행합니다.
+Let&amp;rsquo;s Encrypt https://letsencrypt.org/ko/ Let&amp;rsquo;s Encrypt 는 무료 CA입니다. 대신 해당 인증서는 짧은 유효기간을 가졌으며 설정의 제한이 많지만</description>
+    </item>
+    
+  </channel>
+</rss>

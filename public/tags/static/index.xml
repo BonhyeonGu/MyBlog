@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>static on 9Bon&#39;s_Docs</title>
+    <link>https://docs.9bon.org/tags/static/</link>
+    <description>Recent content in static on 9Bon&#39;s_Docs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ko-kr</language>
+    <lastBuildDate>Fri, 01 Apr 2022 08:30:11 +0900</lastBuildDate><atom:link href="https://docs.9bon.org/tags/static/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>VMWare 서버 공부환경 만들기</title>
+      <link>https://docs.9bon.org/p/vmware-%EC%84%9C%EB%B2%84-%EA%B3%B5%EB%B6%80%ED%99%98%EA%B2%BD-%EB%A7%8C%EB%93%A4%EA%B8%B0/</link>
+      <pubDate>Fri, 01 Apr 2022 08:30:11 +0900</pubDate>
+      
+      <guid>https://docs.9bon.org/p/vmware-%EC%84%9C%EB%B2%84-%EA%B3%B5%EB%B6%80%ED%99%98%EA%B2%BD-%EB%A7%8C%EB%93%A4%EA%B8%B0/</guid>
+      <description>서론 GuestOS에서 무언가를 설치하기 위해 인터넷과 연결하여 사용할 때가 있을 것이며
+인터넷이 아닌 공부 목적의, 내부 네트워크의 환경을 사용하는 일도 있을 것입니다. 이 두가지를 쉽게 오가면서 사용할 수 있도록
+미리 준비 해놓으면 굉장히 편리합니다.
+우리의 목표는 아래의 토폴로지와 같은 매우 간단한 형태의 네트워크망입니다.
+VMNet 설명 VMNet은 VMWare Workstation에서 지원하는 가상 인터페이스, 네트워크입니다. 이것을 통하여 내부 네트워크망을 구현할 수 있습니다.
+네트워크 환경은 Subneting, Gateway 그리고 구축하지 않아도 제공되는 DHCP 서비스등을 설정할 수 있으며 인터페이스는 위의 네트워크 환경이 아니더라도 NAT, Bridge 등을 지원합니다.</description>
+    </item>
+    
+  </channel>
+</rss>

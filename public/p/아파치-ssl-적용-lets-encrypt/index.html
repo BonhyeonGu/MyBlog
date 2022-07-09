@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="ko-kr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='아파치와 Let&#39;s Encrypt를 사용하여 HTTPS를 호스팅하고 편의 기능을 추가합니다.'><title>아파치 SSL 적용, Let&#39;s Encrypt</title>
+
+<link rel='canonical' href='https://docs.9bon.org/p/%EC%95%84%ED%8C%8C%EC%B9%98-ssl-%EC%A0%81%EC%9A%A9-lets-encrypt/'>
+
+<link rel="stylesheet" href="/scss/style.min.9548733e003ddfd331209598b39909b6f8cb4f42ee5f551f2d9d10b27b5bfe39.css"><meta property='og:title' content='아파치 SSL 적용, Let&#39;s Encrypt'>
+<meta property='og:description' content='아파치와 Let&#39;s Encrypt를 사용하여 HTTPS를 호스팅하고 편의 기능을 추가합니다.'>
+<meta property='og:url' content='https://docs.9bon.org/p/%EC%95%84%ED%8C%8C%EC%B9%98-ssl-%EC%A0%81%EC%9A%A9-lets-encrypt/'>
+<meta property='og:site_name' content='9Bon&#39;s_Docs'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='apache' /><meta property='article:tag' content='certbot' /><meta property='article:tag' content='cron' /><meta property='article:tag' content='redirect' /><meta property='article:tag' content='ssl' /><meta property='article:published_time' content='2021-10-01T18:41:21&#43;09:00'/><meta property='article:modified_time' content='2021-10-01T18:41:21&#43;09:00'/><meta property='og:image' content='https://docs.9bon.org/p/%EC%95%84%ED%8C%8C%EC%B9%98-ssl-%EC%A0%81%EC%9A%A9-lets-encrypt/thum.png' />
+<meta name="twitter:title" content="아파치 SSL 적용, Let&#39;s Encrypt">
+<meta name="twitter:description" content="아파치와 Let&#39;s Encrypt를 사용하여 HTTPS를 호스팅하고 편의 기능을 추가합니다."><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://docs.9bon.org/p/%EC%95%84%ED%8C%8C%EC%B9%98-ssl-%EC%A0%81%EC%9A%A9-lets-encrypt/thum.png' />
+    <link rel="shortcut icon" href="favicon.ico" />
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RY2XNPER73"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-RY2XNPER73', { 'anonymize_ip': false });
+}
+</script>
+<style>
+		
+    :root {
+        --article-font-family: "IBM Plex Sans KR", var(--base-font-family);
+    }
+</style>
+
+<script>
+		(function () {
+		    const customFont = document.createElement('link');
+		    customFont.href = "https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@200&display=swap";
+		
+		    customFont.type = "text/css";
+		    customFont.rel = "stylesheet";
+		
+		    document.head.appendChild(customFont);
+		}());
+</script>
+    </head>
+    <body class="
+    article-page has-toc
+">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex 
+    
+        extended
+    
+">
+    
+        <div id="article-toolbar">
+            <a href="/" class="back-home">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
+
+
+
+                <span>뒤로가기</span>
+            </a>
+        </div>
+    
+<main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/%EC%95%84%ED%8C%8C%EC%B9%98-ssl-%EC%A0%81%EC%9A%A9-lets-encrypt/">
+                <img src="/p/%EC%95%84%ED%8C%8C%EC%B9%98-ssl-%EC%A0%81%EC%9A%A9-lets-encrypt/thum_hu41c3bc7f4d7437a9085f5f36b9638c8f_31272_800x0_resize_box_3.png"
+                        srcset="/p/%EC%95%84%ED%8C%8C%EC%B9%98-ssl-%EC%A0%81%EC%9A%A9-lets-encrypt/thum_hu41c3bc7f4d7437a9085f5f36b9638c8f_31272_800x0_resize_box_3.png 800w, /p/%EC%95%84%ED%8C%8C%EC%B9%98-ssl-%EC%A0%81%EC%9A%A9-lets-encrypt/thum_hu41c3bc7f4d7437a9085f5f36b9638c8f_31272_1600x0_resize_box_3.png 1600w"
+                        width="800" 
+                        height="400" 
+                        loading="lazy"
+                        alt="Featured image of post 아파치 SSL 적용, Let&#39;s Encrypt" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%EB%A6%AC%EB%88%85%EC%8A%A4/" style="background-color: #784bee; color: #fff;">
+                리눅스
+            </a>
+        
+            <a href="/categories/%EC%84%9C%EB%B2%84/" style="background-color: #080b35; color: #fff;">
+                서버
+            </a>
+        
+    </header>
+    
+
+    <h2 class="article-title">
+        <a href="/p/%EC%95%84%ED%8C%8C%EC%B9%98-ssl-%EC%A0%81%EC%9A%A9-lets-encrypt/">아파치 SSL 적용, Let&#39;s Encrypt</a>
+    </h2>
+
+    
+    <h3 class="article-subtitle">
+        아파치와 Let&#39;s Encrypt를 사용하여 HTTPS를 호스팅하고 편의 기능을 추가합니다.
+    </h3>
+    
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Oct 01, 2021</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    3 분 정도
+                </time>
+            </div>
+        
+    </footer>
+    
+</div>
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="서론">서론</h2>
+<p>only HTTP 사용된 전달은 보호되지 않습니다. 우리가 입력할 아이디와 비밀번호는 평문으로 전달되게 될 것이며<br>
+이는 공격자가 쉽게 중간에서 가로챌 수 있습니다.<br>
+이를 방지하기 위해 지금은 TLS내지 SSL을 사용한 HTTPS가 사용되고 있습니다.<br>
+국내에서는 웹서버 정보제공자가 로그인과 관련된 페이지에서 HTTPS 사용을 의무한 법안이 시행중입니다.</p>
+<h3 id="인증서">인증서</h3>
+<p>페이지 제공자와 수신자는 CA(인증 기관&ndash;업체)를 사이로 아래와 같은 작업을 시행합니다.</p>
+<h3 id="lets-encrypt">Let&rsquo;s Encrypt</h3>
+<pre><code>https://letsencrypt.org/ko/
+</code></pre>
+<p>Let&rsquo;s Encrypt 는 무료 CA입니다. 대신 해당 인증서는 짧은 유효기간을 가졌으며 설정의 제한이 많지만<br>
+<strong>certbot</strong>을 통하여 쉽고 빠른 추가/갱신이 가능합니다.</p>
+<h2 id="certbot">certbot</h2>
+<p>certbot은 Let&rsquo;s Encrypt에서 인증서와 키의 발급을 용이하게 도와주는 프로그램입니다. 아래처럼 설치할 수 있습니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">apt-get install python3-certbot-apache
+</span></span></code></pre></div><p>공식 사이트에는 python-certbot-apache 라고 나와 있었지만 작동되지 않습니다. 파이썬 버전에 참고해야 하는 것 같습니다.</p>
+<h3 id="일반-인증서-발급">일반 인증서 발급</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">certbot --apache certonly
+</span></span></code></pre></div><p>입력후 도메인을 포함한</p>
+<h3 id="와일드카드-인증서-발급">와일드카드 인증서 발급</h3>
+<p>와일드카드 인증서는 하나의 부모 도메인 인증서로 자식 모두를 등록시킬 수 있는 인증서입니다.<br>
+하지만 자동 갱신을 시킬 방법이 없어 이점에 주의해야합니다.</p>
+<p>만약 <code>www.a.com, mail.a.com</code> 등 *a.com을 인증시키는 것이 목표라면 다음과 같습니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">certbot certonly --manual --preferred-challenges dns -d <span class="s2">&#34;*.a.com&#34;</span> -d <span class="s2">&#34;a.com&#34;</span>
+</span></span></code></pre></div><p>하지만 위의 일반 인증서 발급과 다르게 추가 인증이 필요하다는 메세지를 볼 수 있습니다. 몇가지 제시를 해주는데<br>
+도메인이 본인의 것이 맞다면 도메인 인증이 가장 편리한 것 같습니다.</p>
+<p>저는 구글 도메인 서비스를 이용 중이기 때문에 아래의 화면에서 설정 가능합니다.</p>
+<p><img src="/p/%EC%95%84%ED%8C%8C%EC%B9%98-ssl-%EC%A0%81%EC%9A%A9-lets-encrypt/002-google.png"
+	width="1005"
+	height="376"
+	srcset="/p/%EC%95%84%ED%8C%8C%EC%B9%98-ssl-%EC%A0%81%EC%9A%A9-lets-encrypt/002-google_hu4f2bd7349f00618c3a33491322cfc093_18650_480x0_resize_box_3.png 480w, /p/%EC%95%84%ED%8C%8C%EC%B9%98-ssl-%EC%A0%81%EC%9A%A9-lets-encrypt/002-google_hu4f2bd7349f00618c3a33491322cfc093_18650_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image1"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="267"
+		data-flex-basis="641px"
+	
+></p>
+<p>타입은 텍스트로 한 후 호스트이름과 데이터에 요구조건대로 적용하면 완료됩니다.<br>
+단 도메인 정보가 전파되는데 시간이 걸릴 수 있으니 조금 기다렸다가 nslookup등으로 확인 한 후 다음 버튼을 누르시는걸 권장합니다.</p>
+<h3 id="인증서-취소">인증서 취소</h3>
+<p>여러가지 방법이 있지만 인증키를 모두 가지고 있다면 아래 방법이 가장 편리합니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">certbot revoke --cert-path cert.pem --key-path privkey.pem
+</span></span></code></pre></div><h2 id="cron-을-통한-자동갱신">cron 을 통한 자동갱신</h2>
+<p>인증서를 갱신시키는 명령어는 다음과 같습니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">certbot renew --quiet
+</span></span></code></pre></div><p>하지만 유효기간이 가까워 지기 전마다 해당 명령어를 치는 것은 불편할 것입니다.<br>
+따라서 리눅스 잡 스케줄러인 cron을 사용하여 원하는 날짜가 됐을때 자동으로 해당 명령어를 사용하게 합시다.<br>
+아래  명령어로 스케줄러 설정 파일에 들어갈 수 있습니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">crontab -e
+</span></span></code></pre></div><p>크론텝은 5개의 숫자와 예약 명령어로 한 줄씩 추가 할 수 있습니다.<br>
+각 숫자는 순서대로 분, 시간, 일, 월, 요일(일요일=0)이며 *로 대체되면 그 부분은 상관없게 됩니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="m">0</span> <span class="m">0</span> <span class="m">2</span> * * /bin/bash -l -c <span class="s1">&#39;certbot renew --quiet&#39;</span>
+</span></span></code></pre></div><p>즉 이렇게 하면 매월 2일마다 갱신작업을 실행합니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">service cron restart
+</span></span></code></pre></div><p>후</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">service cron status
+</span></span></code></pre></div><p>로 제대로 동작중인지 확인할 수 있습니다.
+만약 문제가 생겼고 해결이 안된다면</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">crontab -r
+</span></span></code></pre></div><p>로 cron을 초기화 시킬수 있습니다.</p>
+<h2 id="아파치-설정">아파치 설정</h2>
+<p>마지막으로 아파치에 적용하면 작업종료입니다.</p>
+<h3 id="인증서-적용">인증서 적용</h3>
+<p>먼저 모듈을 키고 수정할 사이트를 내려줍니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">a2enmod ssl
+</span></span><span class="line"><span class="cl">a2dissite www.a.com
+</span></span></code></pre></div><p>이제 사이트 설정 콘피그에 들어가 기본 HTTP포트 80으로 호스팅 되어있는 부분을 삭제하고 SSL포트 443번으로 수정시킨 후 아래 처럼 만들어줍니다. <strong>경로에 주의해야 합니다.</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ApacheConf" data-lang="ApacheConf"><span class="line"><span class="cl"><span class="nt">&lt;VirtualHost</span> <span class="s">*:443</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">ServerName</span>  www.a.com
+</span></span><span class="line"><span class="cl">    <span class="nb">DocumentRoot</span> <span class="sx">/var/www/www.a.com</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nb">SSLEngine</span> <span class="k">on</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">SSLCertificateKeyFile</span> <span class="sx">/etc/letsencrypt/live/www.a.com/privkey.pem</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">SSLCertificateFile</span> <span class="sx">/etc/letsencrypt/live/www.a.com/cert.pem</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">SSLCACertificateFile</span> <span class="sx">/etc/letsencrypt/live/www.a.com/fullchain.pem</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;Directory</span> <span class="s">/</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">AllowOverride</span> <span class="k">All</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">Options</span> <span class="k">All</span> -Indexes
+</span></span><span class="line"><span class="cl">        <span class="nb">Require</span> <span class="k">all</span> granted
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/Directory&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/VirtualHost&gt;</span>
+</span></span></code></pre></div><p>저장 후</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">a2ensite www.a.com
+</span></span><span class="line"><span class="cl">service apache2 restart
+</span></span></code></pre></div><h3 id="http-접근시-대처">HTTP 접근시 대처</h3>
+<p>만약 서버측에서 HTTPS로 구현 했음에도 불구하고 유저가 HTTP로 접근한다면 접속 불가하게 만드는 것 보다 자동으로 HTTPS로 재접근 되게 만드는 것이 유저 친화적일 것입니다. 이런 기능을 <strong>Rewrite, Redirect</strong>라고 합니다. 모듈명은 Rewrite입니다.</p>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>Rewrite</th>
+<th>Redirect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>서버 사이드</td>
+<td>클라이언트 사이드</td>
+</tr>
+<tr>
+<td>클라이언트 모르게 설정된 경로로 바뀜, URL을 숨기는 용도로도 사용가능</td>
+<td>클라이언트측 브라우저가 설정된 경로로 재접근함</td>
+</tr>
+</tbody>
+</table></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">a2enmod rewrite
+</span></span><span class="line"><span class="cl">a2dissite www.a.com
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ApacheConf" data-lang="ApacheConf"><span class="line"><span class="cl"><span class="nt">&lt;VirtualHost</span> <span class="s">*:443</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">ServerName</span>  www.a.com
+</span></span><span class="line"><span class="cl">    <span class="nb">DocumentRoot</span> <span class="sx">/var/www/www.a.com</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nb">SSLEngine</span> <span class="k">on</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">SSLCertificateKeyFile</span> <span class="sx">/etc/letsencrypt/live/www.a.com/privkey.pem</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">SSLCertificateFile</span> <span class="sx">/etc/letsencrypt/live/www.a.com/cert.pem</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">SSLCACertificateFile</span> <span class="sx">/etc/letsencrypt/live/www.a.com/fullchain.pem</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;Directory</span> <span class="s">/</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">AllowOverride</span> <span class="k">All</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">Options</span> <span class="k">All</span> -Indexes
+</span></span><span class="line"><span class="cl">        <span class="nb">Require</span> <span class="k">all</span> granted
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/Directory&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/VirtualHost&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;VirtualHost</span> <span class="s">*:80</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">ServerName</span> www.a.com
+</span></span><span class="line"><span class="cl">        <span class="nb">Redirect</span> / https://www.a.com
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/VirtualHost&gt;</span>
+</span></span></code></pre></div>
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/apache/">apache</a>
+        
+            <a href="/tags/certbot/">certbot</a>
+        
+            <a href="/tags/cron/">cron</a>
+        
+            <a href="/tags/redirect/">redirect</a>
+        
+            <a href="/tags/ssl/">ssl</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    <aside class="related-contents--wrapper">
+    
+    
+        <h2 class="section-title">관련 글</h2>
+        <div class="related-contents">
+            <div class="flex article-list--tile">
+                
+                    
+<article class="has-image">
+    <a href="/p/%EC%95%84%ED%8C%8C%EC%B9%98-%EA%B0%80%EC%83%81%ED%98%B8%EC%8A%A4%ED%8A%B8-%EC%84%A4%EC%A0%95/">
+        
+        
+            <div class="article-image">
+                <img src="/p/%EC%95%84%ED%8C%8C%EC%B9%98-%EA%B0%80%EC%83%81%ED%98%B8%EC%8A%A4%ED%8A%B8-%EC%84%A4%EC%A0%95/thum.76fcd4b11fef3ec1396eb88113be8691_hu93117a104f66c66e072a709f88188d19_37623_250x150_fill_box_smart1_3.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 아파치 가상호스트 설정"
+                        
+                        data-hash="md5-dvzUsR/vPsE5briBE76GkQ==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">아파치 가상호스트 설정</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/p/dns-server-bind9/">
+        
+        
+            <div class="article-image">
+                <img src="/p/dns-server-bind9/thum.f68d12ea7bc480efb838f4446fab1e30_hu824554077030e2b5363c801976600b24_607940_250x150_fill_box_smart1_3.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post DNS Server, BIND9"
+                        
+                        data-hash="md5-9o0S6nvEgO&#43;4OPREb6seMA==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">DNS Server, BIND9</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/p/vmware-%EC%84%9C%EB%B2%84-%EA%B3%B5%EB%B6%80%ED%99%98%EA%B2%BD-%EB%A7%8C%EB%93%A4%EA%B8%B0/">
+        
+        
+            <div class="article-image">
+                <img src="/p/vmware-%EC%84%9C%EB%B2%84-%EA%B3%B5%EB%B6%80%ED%99%98%EA%B2%BD-%EB%A7%8C%EB%93%A4%EA%B8%B0/thum.50041dff7df9331350bd180ce7d44ef6_hu935fc5a71ae9667b09b6d28bb6bef806_18367_250x150_fill_box_smart1_3.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post VMWare 서버 공부환경 만들기"
+                        
+                        data-hash="md5-UAQd/335MxNQvRgM59RO9g==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">VMWare 서버 공부환경 만들기</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/p/%EB%A6%AC%EB%88%85%EC%8A%A4-%EB%94%94%EC%8A%A4%ED%81%AC-%EB%B0%B1%EC%97%85/">
+        
+        
+            <div class="article-image">
+                <img src="/p/%EB%A6%AC%EB%88%85%EC%8A%A4-%EB%94%94%EC%8A%A4%ED%81%AC-%EB%B0%B1%EC%97%85/thum.b95d44b257abc769f73bd4a7479b47d8_hu8d768d0c7f2f69c48b4738ec3466ffb8_400747_250x150_fill_box_smart1_3.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 리눅스 디스크 백업"
+                        
+                        data-hash="md5-uV1Eslerx2n3O9SnR5tH2A==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">리눅스 디스크 백업</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/p/%EB%A6%AC%EB%88%85%EC%8A%A4-%EB%94%94%EC%8A%A4%ED%81%AC-%EB%AC%B8%EC%A0%9C/">
+        
+        
+            <div class="article-image">
+                <img src="/p/%EB%A6%AC%EB%88%85%EC%8A%A4-%EB%94%94%EC%8A%A4%ED%81%AC-%EB%AC%B8%EC%A0%9C/thum.77ed33f32895413fb6eb2ef487a44768_hu4f4c739fc0a57bc676838f361bf202d4_469813_250x150_fill_box_smart1_3.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 리눅스 디스크 문제"
+                        
+                        data-hash="md5-d&#43;0z8yiVQT&#43;26y70h6RHaA==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">리눅스 디스크 문제</h2>
+        </div>
+    </a>
+</article>
+                
+            </div>
+        </div>
+    
+</aside>
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "docs-9bon-org" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (DISQUS) {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2021 - 
+        
+        2022 9Bon&#39;s_Docs
+    </section>
+    
+    <section class="powerby">
+        
+            방문해주셔서 감사합니다. <br/>
+        <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a>로 만듦 <br />
+        <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>의 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.8.0">Stack</a></b> 테마 사용 중
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+
+            </main>
+    
+        <aside class="sidebar right-sidebar sticky">
+            <section class="widget archives">
+                <div class="widget-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+                </div>
+                <h2 class="widget-title section-title">목차</h2>
+                
+                <div class="widget--toc">
+                    <nav id="TableOfContents">
+  <ol>
+    <li><a href="#서론">서론</a>
+      <ol>
+        <li><a href="#인증서">인증서</a></li>
+        <li><a href="#lets-encrypt">Let&rsquo;s Encrypt</a></li>
+      </ol>
+    </li>
+    <li><a href="#certbot">certbot</a>
+      <ol>
+        <li><a href="#일반-인증서-발급">일반 인증서 발급</a></li>
+        <li><a href="#와일드카드-인증서-발급">와일드카드 인증서 발급</a></li>
+        <li><a href="#인증서-취소">인증서 취소</a></li>
+      </ol>
+    </li>
+    <li><a href="#cron-을-통한-자동갱신">cron 을 통한 자동갱신</a></li>
+    <li><a href="#아파치-설정">아파치 설정</a>
+      <ol>
+        <li><a href="#인증서-적용">인증서 적용</a></li>
+        <li><a href="#http-접근시-대처">HTTP 접근시 대처</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+                </div>
+            </section>
+        </aside>
+    
+
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

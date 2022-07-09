@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>윈도우 on 9Bon&#39;s_Docs</title>
+    <link>https://docs.9bon.org/categories/%EC%9C%88%EB%8F%84%EC%9A%B0/</link>
+    <description>Recent content in 윈도우 on 9Bon&#39;s_Docs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ko-kr</language>
+    <lastBuildDate>Sun, 20 Feb 2022 16:54:39 +0900</lastBuildDate><atom:link href="https://docs.9bon.org/categories/%EC%9C%88%EB%8F%84%EC%9A%B0/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>도커와 윈도우</title>
+      <link>https://docs.9bon.org/p/%EB%8F%84%EC%BB%A4%EC%99%80-%EC%9C%88%EB%8F%84%EC%9A%B0/</link>
+      <pubDate>Sun, 20 Feb 2022 16:54:39 +0900</pubDate>
+      
+      <guid>https://docs.9bon.org/p/%EB%8F%84%EC%BB%A4%EC%99%80-%EC%9C%88%EB%8F%84%EC%9A%B0/</guid>
+      <description>윈도우 윈도우에서의 도커 도커의 기본 환경은 리눅스에 맞춰져 있습니다. 따라서 윈도우에서 도커를 사용하려면 다른 방법을 선택할 필요가 있으며
+각 방법은 장단점이 존재했습니다. 대부분 가상머신을 이용한 방법입니다.
+가상 머신 출처
+가상머신은 기존의 운영체제(Host OS)에 가상의 운영체제(Guest OS)를 올릴 수 있게 해주는 소프트웨어 입니다.
+도커도 가상머신과 흡사하지만 GuestOS를 모두 올리는 것이 아니라. 필요한 쉘과 커널등만 올린다는 차이점이 있습니다.
+즉 도커는 가상머신 만큼 자유롭지는 못하나. 환경을 만들고 사용하는 부분에서 가볍게 진행 가능합니다.
+정리해보면 윈도우에서 우분투 컨테이너를 사용하려면</description>
+    </item>
+    
+    <item>
+      <title>RDP  문제</title>
+      <link>https://docs.9bon.org/p/rdp-%EB%AC%B8%EC%A0%9C/</link>
+      <pubDate>Fri, 31 Dec 2021 11:38:57 +0900</pubDate>
+      
+      <guid>https://docs.9bon.org/p/rdp-%EB%AC%B8%EC%A0%9C/</guid>
+      <description>설명 문제 윈도우즈, 윈도우즈 서버 운영체제를 사용할 때 정책을 사용해야 하는 이유로
+반드시 공식 지원하는 &amp;lsquo;RDP&amp;rsquo;를 사용해야 할 때가 있습니다.
+해당 프로그램은 대부분의 기능을 지원하지만 의외의 문제점이 있습니다.
+바로 SSH, 원격 터미널과 흡사한 부분이 있는 것입니다.
+RDP 은 유저가 연결을 끊으면 로그오프되어 Foreground 는 당연하고 Background마저 설정해 놓지 않으면 닫히게 됩니다.
+한번은 윈도우 환경에서만 지원하는 GUI Foreground 프로세스를 지속적으로 가동시킬 목적으로 AWS에서 Windows Server를 구입하여 사용한 적이 있었습니다.
+하지만 위와 같은 이유로 곤혹을 겪었습니다.</description>
+    </item>
+    
+  </channel>
+</rss>
