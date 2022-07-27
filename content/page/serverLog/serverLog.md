@@ -1,7 +1,7 @@
 ---
 title: "ServerLog"
 description:
-date: 2021-10-03T23:21:22+09:00
+date: 2021-10-03T23:21:23+09:00
 lastmod: '2022-04-01T22:48:51+09:00'
 draft: false
 ---
