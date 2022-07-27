@@ -16,7 +16,7 @@ menu:
 ---
 
 **Contact** 🙋  
-tayasriel@gmail.com
+bonhyeon.gu@9bon.org
 
 **Introduce** 🧑‍💼  
 Link :
