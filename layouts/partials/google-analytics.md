@@ -1,0 +1,10 @@
+<!-- layout/partials/google-analytics.md-->
+<script async src="https://www.googletagmanager.com/gtag/js?id={{ .Site.Params.googleAnalytics }}"></script>
+<scirpt>
+ window.dataLayer = window.dataLayer || [];
+ function gtag() {
+  dataLayer.push(arguments);
+ }
+ gtag('js', new Date());
+ gtag('config', '{{ .Site.Params.googleAnalytics }}');
+</script>
