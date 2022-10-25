@@ -218,19 +218,19 @@ kubectl port-forward svc/istio-ingressgateway -n istio-system 8080:80
 
 ### 설치법
 
-https://github.com/kubeflow/manifests
-https://learning-sarah.tistory.com/entry/Kubeflow-13-%EC%84%A4%EC%B9%98
-https://jwher.github.io/posts/install-kubeflow/
-https://lsjsj92.tistory.com/580
-https://yooloo.tistory.com/229
-https://velog.io/@ehddnr/kubernetes-kubeflow-%EC%84%A4%EC%B9%98-feat.-GCP
-https://losskatsu.github.io/it-infra/mlops01/#
-https://velog.io/@csk6124/Kubeflow-1.4-%EC%84%A4%EC%B9%98
+https://github.com/kubeflow/manifests  
+https://learning-sarah.tistory.com/entry/Kubeflow-13-%EC%84%A4%EC%B9%98  
+https://jwher.github.io/posts/install-kubeflow/  
+https://lsjsj92.tistory.com/580  
+https://yooloo.tistory.com/229  
+https://velog.io/@ehddnr/kubernetes-kubeflow-%EC%84%A4%EC%B9%98-feat.-GCP  
+https://losskatsu.github.io/it-infra/mlops01/#  
+https://velog.io/@csk6124/Kubeflow-1.4-%EC%84%A4%EC%B9%98  
 https://velog.io/@dev_halo/%EC%95%84%EB%AC%B4%EB%8F%84-%EC%95%88%EC%95%8C%EB%A0%A4%EC%A3%BC%EB%8A%94-on-premise-Kubeflow-%EA%B5%AC%EC%B6%95%ED%95%B4%EB%B3%B4%EC%9E%90
 
 ### 트러블 슈팅
 
-https://hackmd.io/@maelvls/debug-cert-manager-webhook
-https://github.com/calebhailey/homelab/issues/3#issuecomment-569543391
-https://github.com/kubeflow/manifests/issues/2086
+https://hackmd.io/@maelvls/debug-cert-manager-webhook  
+https://github.com/calebhailey/homelab/issues/3#issuecomment-569543391  
+https://github.com/kubeflow/manifests/issues/2086  
 https://mlops-for-all.github.io/docs/setup-components/install-components-kf/
