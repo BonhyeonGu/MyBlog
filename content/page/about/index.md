@@ -7,7 +7,7 @@ aliases:
   - about-hugo
   - contact
 
-lastmod: '2022-02-26'
+lastmod: '2022-10-25'
 menu:
     main: 
         weight: -10
@@ -19,7 +19,7 @@ menu:
 bonhyeon.gu@9bon.org
 
 **Introduce** 🧑‍💼  
-Link :
+https://bonhyeon.9bon.org/
 
 **Photograph** 📸  
 https://docs.9bon.org/photograph/
