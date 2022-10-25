@@ -217,7 +217,12 @@ menu:
           params:
               icon: brand-github
 
-        - identifier: 2_cloud
+        - identifier: 2_portfol
+          url: "https://bonhyeon.9bon.org"
+          params:
+              icon: mood-wink
+
+        - identifier: 3_cloud
           url: "https://cloud.9bon.org"
           params:
               icon: cloud
