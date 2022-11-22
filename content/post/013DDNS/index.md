@@ -2,7 +2,7 @@
 title: "리눅스 DHCP, DDNS"
 description: "DHCP 구축과 그에따른 DDNS 구축 방법입니다."
 date: 2022-06-28T21:55:53+09:00
-categories: ["리눅스", "서버"]
+categories: ["리눅스", "서버", "스터디"]
 tags: ["ddns", "dhcp", "rndc", "hostname"]
 image: "thum.png"
 draft: false
