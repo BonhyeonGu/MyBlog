@@ -2,6 +2,7 @@
 title: "쿠버플로우 설치"
 description: "쿠버플로우 설치법과 간단한 서술의 내용입니다."
 date: 2022-10-20T04:46:35+09:00
+lastmod: 2022-12-06T12:29:59+09:00
 categories: ["도커", "리눅스", "서버"]
 tags: ["docker", "kubeflow", "kubernetes", "ML-Ops"]
 image: "thum.png"
@@ -23,12 +24,12 @@ Clone이 가능한 가상머신을 기준, GPU가 없는 것을 예제로 설명
 
 ### 고려사항
 
-다음은 이유는 파악 못했으나, 설치문제 원인을 확실히 찾아낸 것들의 내용입니다. **2022-10** 기준입니다.
+다음은 이유는 파악 못했으나, 문제 원인을 찾아낸 것들의 내용입니다. **2022-12** 기준입니다.
 
  - 우분투 22.04 환경 쿠버네티스 설치에서 인증 메니저 노드가 설치 안되는 것을 확인했습니다. 20.04는 문제가 없었습니다.
  - Readme에서는 쿠버플로우 1.20 이상 버전을 권장했으나 1.21.5-00 버전이 아니면 설치 문제가 발생했습니다.
  - 마스터, 워커노드 모두 사양을 크게 잡아먹었습니다. 각 노드 모두 16GB이상의 메모리가 아니면 문제가 생겼습니다.
-
+ - 종종 kubeflow manifests의Install with a single command 방법이 종료되지 않는 문제를 겪었습니다. 
 
 
 ## 설치
@@ -80,8 +81,6 @@ sudo systemctl daemon-reload
 sudo usermod -aG docker ${USER}
 newgrp docker
 sudo chmod 666 /var/run/docker.sock
-sudo chown "$USER":"$USER" /home/"$USER"/.docker -R
-sudo chmod g+rwx "$HOME/.docker" -R
 sudo systemctl restart docker
 sudo systemctl daemon-reload
 sudo systemctl enable docker
@@ -137,12 +136,19 @@ sudo chown nobody:nogroup /nfsroot
 sudo chmod 777 /nfsroot
 ```
 
+해당 과정은 NFS Client Provisioner를쿠버네티스가 사용할 수 있게 구축하고  
+사용할 NFS Server도 마스터 노드에 올리는 과정을 설명하고 있습니다.
+
 sudo nano /etc/exports 로 아래 내용 추가
 
 ```bash
 /nfsroot 192.168.80.110(rw,insecure,sync,no_root_squash,no_subtree_check)
 /nfsroot 192.168.80.111(rw,insecure,sync,no_root_squash,no_subtree_check)
 ```
+
+해당 과정을 통하여, 존재하는 모든 노드에 NFS 공간을 할당하고 있습니다.  
+쿠버플로우에서 NFS는 의무가 아니지만 없을경우 가변적으로, 쿠버플로우가 볼륨을 잡기 때문에  
+비추천 하고 있습니다. 
 
 ```bash
 sudo service nfs-kernel-server restart
@@ -179,11 +185,14 @@ kubectl apply -f https://raw.githubusercontent.com/mojokb/handson-kubeflow/maste
   ]
 ```
 
+그리고 재시작합니다.
+
 ```bash
 sudo systemctl restart docker
 ```
 
-*/etc/hosts*에 추가
+*/etc/hosts*에 추가(이 부분은 미리 추가해도 됨)
+
 ```bash
 192.168.80.110 kubeflow-registry.default.svc.cluster.local
 ```
@@ -211,10 +220,16 @@ while ! kustomize build example | kubectl apply -f -; do echo "Retrying to apply
 ```bash
 kubectl port-forward svc/istio-ingressgateway -n istio-system 8080:80
 ```
-로 user@example.com/12341234을 사용하여 로컬상의 테스트가 가능합니다.
-
+로 user@example.com/12341234을 사용하여 로컬상의 테스트가 가능합니다.  
+또는 
+```bash
+kubectl port-forward --address 0.0.0.0 svc/istio-ingressgateway -n istio-system 8080:80
+```
+로 외부노출을 허용시킬 수 있습니다.
 
 ## 참고 자료들
+
+만약에 정상작동하지 않을 경우 아래의 자료를 확인해주세요.
 
 ### 설치법
 
