@@ -16,7 +16,7 @@ draft: false
 ### 설치
 ```bash
 apt-get install zsh
-chsh -s `which zsh`
+chsh -s /usr/bin/zsh
 ```
 쉘은 유저에 귀속되므로 **권한에 주의해야 합니다.**
 또한 **작은 따옴표가 아닙니다.**
