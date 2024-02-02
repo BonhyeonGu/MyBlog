@@ -6,7 +6,7 @@ lastmod: 2022-12-06T12:29:59+09:00
 categories: ["도커", "리눅스", "서버"]
 tags: ["docker", "kubeflow", "kubernetes", "ML-Ops"]
 image: "thum.png"
-draft: yes
+draft: false
 ---
 
 ## 서론
