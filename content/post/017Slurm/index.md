@@ -19,7 +19,7 @@ draft: true
 
 ## CMD
 
-```powershell
+```ps1
 fsutil file setCaseSensitiveInfo <경로> enable
 fsutil file setCaseSensitiveInfo <경로> disable
 ```
