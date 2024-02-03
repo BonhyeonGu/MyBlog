@@ -247,5 +247,7 @@ markup:
     highlight:
         codeFences: true
         guessSyntax: false
+        highlightLines: true
+        lineNos: true
         noClasses: false
         style: "monokai"
