@@ -19,7 +19,7 @@ draft: false
 
 ## CMD
 
-```bash
+```powershell
 fsutil file setCaseSensitiveInfo <경로> enable
 fsutil file setCaseSensitiveInfo <경로> disable
 ```
