@@ -250,4 +250,4 @@ markup:
         highlightLines: true
         lineNos: true
         noClasses: false
-        style: "monokai"
+        style: "dracula"
