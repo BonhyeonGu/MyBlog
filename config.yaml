@@ -173,7 +173,7 @@ menu:
           #name: Home
           #url: /
           #weight: -100
-          #pre: home
+          #icon: home
           #params:
               ### For demonstration purpose, the home link will be open in a new tab
               #newTab: false
@@ -182,7 +182,7 @@ menu:
        #   name: About
        #   url: /about/
        #   weight: -10
-       #   pre: user
+       #   icon: user
        #   params:
               ### For demonstration purpose, the home link will be open in a new tab
        #       newTab: false
@@ -191,7 +191,7 @@ menu:
           #name: ServerLog
           #url: /serverLog/
           #weight: -9
-          #pre: ad-2
+          #icon: ad-2
           #params:
                #newTab: false
 
@@ -199,7 +199,7 @@ menu:
           name: Archives
           url: /archives/
           weight: -8
-          pre: archives
+          icon: archives
           params:
               ### For demonstration purpose, the home link will be open in a new tab
               newTab: false
@@ -208,7 +208,7 @@ menu:
           name: Search
           url: /search/
           weight: -7
-          pre: search
+          icon: search
 
 
     social:
