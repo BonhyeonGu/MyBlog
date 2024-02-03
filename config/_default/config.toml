@@ -8,7 +8,6 @@ title = "9Bon's_Docs"
 # Theme i18n support
 # Available values: en, fr, id, ja, ko, pt-br, zh-cn, zh-tw, es, de, nl, it, th, el, uk, ar
 defaultContentLanguage = "ko"
-googleAnalytics = "G-RY2XNPER73"
 
 # Set hasCJKLanguage to true if DefaultContentLanguage is in [zh-cn ja ko]
 # This will make .Summary and .WordCount behave correctly for CJK languages.
@@ -16,3 +15,6 @@ hasCJKLanguage = false
 
 # Change it to your Disqus shortname before using
 disqusShortname = "docs-9bon-org"
+
+[params]
+googleAnalytics = "G-RY2XNPER73"

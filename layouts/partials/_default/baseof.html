@@ -1,0 +1,4 @@
+<head>
+    {{ if .Site.Params.googleAnalytics }} {{ partial "google-analytics.html" . }} {{ end }} {{- partial "head/head.html"
+    . -}} {{- block "head" . -}}{{ end }}
+</head>
