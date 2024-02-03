@@ -245,4 +245,7 @@ markup:
         ordered: true
         startLevel: 2
     highlight:
+        codeFences: true
+        guessSyntax: false
         noClasses: false
+        style: "monokai"
