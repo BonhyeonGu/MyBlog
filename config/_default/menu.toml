@@ -1,0 +1,32 @@
+# Configure main menu and social menu
+#[[main]]
+#identifier = "home"
+#name = "Home"
+#url = "/"
+#[main.params]
+#icon = "home"
+#newtab = true
+
+[[social]]
+identifier = "github"
+name = "0_GitHub"
+url = "https://github.com/BonhyeonGu"
+
+[social.params]
+icon = "brand-github"
+
+[[social]]
+identifier = "portfol"
+name = "1_Porfolio"
+url = "https://bonhyeon.9bon.org"
+
+[social.params]
+icon = "mood-wink"
+
+[[social]]
+identifier = "cloud"
+name = "3_Cloud"
+url = "https://cloud.9bon.org"
+
+[social.params]
+icon = "cloud"
