@@ -6,7 +6,7 @@ lastmod: 2023-01-10T17:42:59+09:00
 categories: ["윈도우"]
 tags: ["filename", "uppercase", "lowercase"]
 image: "thum.png"
-draft: false
+draft: true
 ---
 
 ## 서론
