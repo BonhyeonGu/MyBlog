@@ -18,3 +18,10 @@ disqusShortname = "docs-9bon-org"
 
 [params]
 googleAnalytics = "G-RY2XNPER73"
+
+enableRobotsTXT = true
+[sitemap]
+# always, hourly daily, weekly, monthly, yearly, never
+  changefreq = "monthly"
+  filename = "sitemap.xml"
+  priority = 0.5
