@@ -16,8 +16,9 @@ hasCJKLanguage = false
 # Change it to your Disqus shortname before using
 disqusShortname = "docs-9bon-org"
 
-[params]
-googleAnalytics = "G-RY2XNPER73"
+[services]
+  [services.googleAnalytics]
+    googleAnalytics = "G-RY2XNPER73"
 
 enableRobotsTXT = true
 [sitemap]
