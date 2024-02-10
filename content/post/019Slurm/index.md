@@ -1,10 +1,10 @@
 ---
-title: "쿠버플로우 설치"
-description: "쿠버플로우 설치법과 간단한 서술의 내용입니다."
-date: 2022-10-20T04:46:35+09:00
-lastmod: 2022-12-06T12:29:59+09:00
+title: "단일 Slurm 설치 거기에 도커를 더한"
+description: "하나 머신이 서버, 계산, 클라이언트를 담당할 때 도커와 함께 사용할 설명합니다."
+date: 2024-01-03T13:45:15+09:00
+lastmod: 2024-01-03T13:45:15+09:00
 categories: ["도커", "리눅스", "서버"]
-tags: ["docker", "kubeflow", "kubernetes", "ML-Ops"]
+tags: ["docker", "kubeflow", "scheduler", "slurm", "ml-ops"]
 image: "thum.png"
 draft: true
 ---
@@ -13,49 +13,86 @@ draft: true
 
 ### 개요
 
-쿠버플로우, 큐베플로우, 쿠브플로우.. 이것을 배포해야 하는 일이 있었습니다.  
-하지만 추가 패키지를 이용하지 않고 K8s로 직접 설치하는 자료는 적었으며 따라해도 오류가 발생했습니다.
+딥러닝 환경이 유행하기 전에 이미 예전부터 많은 사람들이 작업 스케줄러 혹은 클러스터 관리자를 사용하고 있었습니다.  
+스케줄러는 하나 혹은 다수의 컴퓨터 속 CPU, RAM 자원을 여러 사용자가 요청해야 하는 환경에서  
+순차적, 효율적으로 작업을 처리할 수 있게 도와줍니다.  
+추가로 딥러닝 환경의 니즈가 늘어나면서, 지원하는 자원 중 GPU가 포함하게 되었습니다.
 
-그도 그럴것이 쿠버플로우는 계속해서 업데이트가 되고 있으며, 운영체제, 쿠버네티스, 도커를 포함한 여러 패키지의 업데이트에도 민감하기 때문에 문제가 계속 생기는 것 같습니다.
+### 쿠브플로우와 차이
 
-이번 포스트에선 쿠버플로우에 대한 설명을 따로 하진 않을 것이며,  
-Clone이 가능한 가상머신을 기준, GPU가 없는 것을 예제로 설명해 보도록 하겠습니다.  
-해당 포스트를 이해하셨다면 서버에 직접 설치하는건 문제 없을거라 예상합니다.
+앞 포스팅에서 쿠버네티스, 쿠브플로우 설치에 대해 이야기 했습니다. 하지만 둘은 방향이 다릅니다.  
+이 내용에 대해 잠깐 이야기 해보도록 하겠습니다.
 
-### 고려사항
+![쿠브플로우와 슬럼](1.png)
 
-다음은 이유는 파악 못했으나, 문제 원인을 찾아낸 것들의 내용입니다. **2022-12** 기준입니다.
+쿠브플로우는 클러스터, 쿠버네티스로 만들어진 환경에 올라가는 서비스입니다.  
+쿠버네티스는 하나의 Master nord와 다수의 Slave nore로 이루어져 있으며 사용자에게  
+주피터 노트북, VSCode를 배포할 수 있습니다.
 
- - 우분투 22.04 환경 쿠버네티스 설치에서 인증 메니저 노드가 설치 안되는 것을 확인했습니다. 20.04는 문제가 없었습니다.
- - Readme에서는 쿠버플로우 1.20 이상 버전을 권장했으나 1.21.5-00 버전이 아니면 설치 문제가 발생했습니다.
- - 마스터, 워커노드 모두 사양을 크게 잡아먹었습니다. 각 노드 모두 16GB이상의 메모리가 아니면 문제가 생겼습니다.
- - 종종 kubeflow manifests의Install with a single command 방법이 종료되지 않는 문제를 겪었습니다. 
+슬럼은 세 개의 서비스로 나누어져 있습니다. Server, Compute, Client 입니다.  
+Server과 Client는 각각 호스팅과 그에게 전달을 도와주는 역할입니다.  
+Server는 Client가 전달한 작업 명세서를 확인하고 어떤 Compute 에게 전달할 지 판단합니다.
+
+쿠브플로우는 쿠버네티스라는 클러스터 환경에 올라가 파이썬 환경을 배포할 수 있는 편리한 솔루션이라고 하면  
+슬럼은 좀 더 낮고 단순한 서비스로서 GPU를 포함한 자원을 돌아가면서 사용할 수 있게 해주는 솔루션이라고  
+생각하면 좋을 것 같습니다.
+
+### 컨테이너와 같이
+
+개발환경을 나누는 법은 많습니다. 파이썬의 경우 아나콘다로 가상 환경을 만들 수 있으며,  
+아니면 컨테이너를 활용하는 것이 일반적인 방법입니다.
+이 방법을 응용하여 사용자에게 컨테이너만 전달한다면 보안적으로도 문제점을 해소할 수 있습니다.  
+
+저는 슬럼을 컨테이너에 응용하기 위해 처음엔 아래와 같은 설계를 생각 했습니다.
+
+![잘못된 구조](2.png)
+
+컨테이너에 SSH와 Slurm Client를 설치한 후 베어메탈에 설치된 Slurm Server, Slurm Compute와 접촉하게  
+만드는 것입니다.  
+그리고 각 개발환경은 컨테이너 내에 있어서 환경 분리의 목적도 이루는 것입니다.
+
+하지만 이 구조는 문제가 있습니다. Slurm의 작업(Job)은 명령어를 뜻합니다. 만약 파이썬 작업을 신청하는 것이 목적이라면  
+명령어가 파이썬이 되는 것입니다.  
+명령어는 Compute가 처리하게 됩니다. 즉 다시 말해 Compute에 모든 개발환경이 설치되어야 한다는 것입니다.  
+그럼 어떻게 Slurm과 컨테이너를 같이 사용할 수 있을까요?
+
+### docker run 을 명령어로
+
+다르게 생각해서, 도커 이미지를 미리 만들어 놓고, run --rm 을 통째로 작업이라 전달 하기로 했습니다.  
+즉 사용자가 환경을 사용하는 절차는 다음과 같습니다.
+
+1. 사용자는 도커파일을 작성하고 이미지를 생성합니다.
+2. 사용자는 run --rm (한번 이미지를 실행하고 종료되는) 명령을 Slurm에게 전달합니다.
+
+문제를 방지하기 위해 권한 조정이 필요될 수 있습니다.
 
 
 ## 설치
 
-config등을 수정, 추가하는 부분은 위와 아래의 글을 참고해주세요
+설명되는 과정은 Ubunut 22.04 LTS 기준입니다. CUDA 관련 설치는 모두 완료되었다고 가정합니다.
 
-### 공통 사전 설치
+### apt
 
-```bash
-sudo apt-get update
-sudo apt-get install \
-    ca-certificates \
-    curl \
-    gnupg \
-    lsb-release
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
- echo \
-  "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
-  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-sudo apt-get update
-sudo apt-get install docker-ce docker-ce-cli containerd.io
-sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose
+```zsh
+sudo apt update
+sudo apt install slurm-wlm slurmd slurmctld
 ```
+
+다음은 설정파일을 작성해야 합니다. Slurm은 특이하게도 기본 설정파일을 제공하지 않고  
+웹 페이지에서 출력하도록 되어있습니다.  셀프 호스팅으로 웹 사이트를 열 수 있으나  
+https://slurm.schedmd.com/configurator.easy.html 에서도 가능합니다.  
+설정한 파일은 /etc/slurm/.conf 에 저장합니다
+
+저는 아래와 같은 설정파일을 사용하겠습니다.
+
+```zsh
+sudo apt update
+sudo apt install slurm-wlm slurmd slurmctld
+```
+
 도커, 도커 컴포즈를 설치합니다. 버전이 문제가 없다면 다른 방식으로 설치해도 무방할 것 같습니다.
 
+다음은 slurm config을 설정합니다.
 
 su--
 ```bash
