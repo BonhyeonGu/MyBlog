@@ -99,7 +99,7 @@ CA인증서 및 키 생성
 
 클라이언트 CSR에 서명하여 클라이언트 인증서 생성
 ```zsh
-./easyrsa sign-req client client1
+./easyrsa sign-req client h100
 ```
 
 DH 파라미터 생성
