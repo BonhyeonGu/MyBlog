@@ -4,7 +4,7 @@ description: "다른 망에 설치된 Gateway를 사용하기 위한 VPN 설정�
 date: 2023-05-15T17:22:49+09:00
 lastmod: 2023-05-15T17:22:49+09:00
 categories: ["리눅스", "서버"]
-tags: ["certificate", "vpn", "openvpn", "gateway", "forward"]
+tags: ["address", "certificate", "vpn", "openvpn", "gateway", "forward"]
 image: "thum.png"
 draft: false
 ---

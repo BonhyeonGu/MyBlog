@@ -1,10 +1,10 @@
 ---
 title: "Filebeat 를 이용한 Elastic Stack"
-description: "하나 머신이 서버, 계산, 클라이언트를 담당할 때 도커와 함께 사용할 설명합니다."
+description: "Elastic Search를 설치하는 법에 관한 내용입니다."
 date: 2024-02-01T19:21:58+09:00
 lastmod: 2024-02-01T19:21:58+09:00
 categories: ["도커", "리눅스", "서버"]
-tags: ["docker", "kubeflow", "scheduler", "slurm", "ml-ops"]
+tags: ["docker", "log"]
 image: "thum.png"
 draft: true
 ---
