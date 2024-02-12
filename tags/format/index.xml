@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>format on 9Bon's_Docs</title><link>https://docs.9bon.org/tags/format/</link><description>Recent content in format on 9Bon's_Docs</description><generator>Hugo -- gohugo.io</generator><language>ko-kr</language><lastBuildDate>Tue, 01 Mar 2022 23:17:11 +0900</lastBuildDate><atom:link href="https://docs.9bon.org/tags/format/index.xml" rel="self" type="application/rss+xml"/><item><title>리눅스 디스크 사용</title><link>https://docs.9bon.org/p/%EB%A6%AC%EB%88%85%EC%8A%A4-%EB%94%94%EC%8A%A4%ED%81%AC-%EC%82%AC%EC%9A%A9/</link><pubDate>Tue, 01 Mar 2022 23:17:11 +0900</pubDate><guid>https://docs.9bon.org/p/%EB%A6%AC%EB%88%85%EC%8A%A4-%EB%94%94%EC%8A%A4%ED%81%AC-%EC%82%AC%EC%9A%A9/</guid><description>&lt;img src="https://docs.9bon.org/p/%EB%A6%AC%EB%88%85%EC%8A%A4-%EB%94%94%EC%8A%A4%ED%81%AC-%EC%82%AC%EC%9A%A9/thum.png" alt="Featured image of post 리눅스 디스크 사용" />&lt;h2 id="partion">Partion&lt;/h2>
+&lt;h3 id="설명">설명&lt;/h3>
+&lt;p>기본적으로 리눅스의 Filesystem은 다음과 같은 과정을 통해 만들어집니다. Partion &amp;gt; Format &amp;gt; Mount 의 과정을 거칩니다.&lt;br>
+윈도우는 자동 마운트됩니다.&lt;/p>
+&lt;p>기본적으로 Partion은 하나의 보조기억장치를 여러 개의 Filesystem으로 만들고 싶을 때 사용합니다. 분할해서 사용하지&lt;br>
+않는다고 해도 칸 하나를 사용하겠다는 명시가 필요합니다.&lt;/p>
+&lt;p>추가로 리눅스에서는 여러개의 저장 장치를 하나로 합치는 LVM이라는 개념이 존재합니다. Partion의 반대 개념에 가까우며&lt;br>
+최근에 윈도우에도 비슷한 기능이 추가되었습니다.&lt;/p>
+&lt;h3 id="명령어">명령어&lt;/h3>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">fdisk -l
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>로 정확한 장치를 찾아서&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">fdisk /dev/&lt;span class="o">[&lt;/span>장치명&lt;span class="o">]&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>으로 파티션 모드에 진입할 수 있습니다. 명령어로 진행되는 것이 아니라, 마법사형식을 이용합니다.&lt;br>
+n, p 등을 누르면서 안내하는 내용을 따르면 문제 없습니다.&lt;/p>
+&lt;p>윈도우와 다르게 고려되어야 할 사항은 주영역, 가상영역, 그리고 Swap입니다. 이것은 가상메모리의 역할을 합니다.&lt;/p>
+&lt;h2 id="format">Format&lt;/h2>
+&lt;h3 id="설명-1">설명&lt;/h3>
+&lt;p>저장공간의 Format은 선택한 공간에 FileSystem을 구성시키는 것을 뜻합니다. 이 단어가 주로 초기화 작업을 뜻하는 이유는&lt;br>
+FileSystem은 하나의 공간에 하나만 사용될 수 있으며 새롭게 FileSystem 을 구성시킬때 본래있던&lt;br>
+저장장치의 파일을 가르키는 맵핑, 테이블 정보가 덮어씌워지면서 사실상 정보가 삭제된 것처럼 되기 때문입니다.&lt;/p>
+&lt;p>리눅스에서 자주 사용되는 FileSystem은Ext4, XFS등이 있습니다. 자세한 내용은 다음에 다루겠습니다.&lt;/p>
+&lt;h3 id="명령어-1">명령어&lt;/h3>
+&lt;p>혹시 쓰던 저장장치를 포맷할 계획이라면 당연히 unmount된 상태여야 합니다.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">mkfs.&lt;span class="o">[&lt;/span>파일 시스템 타입&lt;span class="o">]&lt;/span> /dev/&lt;span class="o">[&lt;/span>장치&lt;span class="o">]&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>마찬가지로 마법사 형식입니다. y를 누르며 진행할 수 있습니다.&lt;/p>
+&lt;h2 id="mount">Mount&lt;/h2>
+&lt;h3 id="설명-2">설명&lt;/h3>
+&lt;p>mount는 특정 저장장치를 디렉토리와 연결하는 행위입니다. 윈도우는 알아서 해주거나, 파일 관리자를 거쳐 해결할 수 있으며&lt;br>
+요즘 우분투 사용자 편의를 위해 알아서 데스크탑에 mount 하게 됩니다.&lt;/p>
+&lt;p>물론 mount를 하여 제대로 쓰기 위해선 fdisk와 같은 명령어로 포멧, 파일시스템 구축이 완료된 상태여야 합니다.&lt;/p>
+&lt;h3 id="mount-상태-확인">Mount 상태 확인&lt;/h3>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">findmnt
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;em>fdisk -l 또는 mount -l&lt;/em> 도 있지만 해당 경우에는 위의 명령어가 훨씬 보기 편리했습니다.&lt;/p>
+&lt;h3 id="mount-하기">Mount 하기&lt;/h3>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">mount /dev/&amp;lt;장치명&amp;gt; &amp;lt;마운트 포인트&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>취소는&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">umount /dev/&amp;lt;장치명&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>하지만 위의 명령어는 일시적이며 reboot 후 필요하다면 다시 입력해야 합니다.&lt;/p>
+&lt;h3 id="fstab-파일시스템-테이블">fstab-파일시스템 테이블&lt;/h3>
+&lt;p>부팅 시 자동으로 mount가 되기 위해선 해당 파일을 수정해야 합니다.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">nano /etc/fstab
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://docs.9bon.org/p/%EB%A6%AC%EB%88%85%EC%8A%A4-%EB%94%94%EC%8A%A4%ED%81%AC-%EC%82%AC%EC%9A%A9/1.png"
+width="751"
+height="200"
+srcset="https://docs.9bon.org/p/%EB%A6%AC%EB%88%85%EC%8A%A4-%EB%94%94%EC%8A%A4%ED%81%AC-%EC%82%AC%EC%9A%A9/1_hud4ab1e8f4f03947783069e1b30865973_25325_480x0_resize_box_3.png 480w, https://docs.9bon.org/p/%EB%A6%AC%EB%88%85%EC%8A%A4-%EB%94%94%EC%8A%A4%ED%81%AC-%EC%82%AC%EC%9A%A9/1_hud4ab1e8f4f03947783069e1b30865973_25325_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="fstab"
+class="gallery-image"
+data-flex-grow="375"
+data-flex-basis="901px"
+>&lt;/p>
+&lt;p>기본적인 mount 는 하단에 &lt;em>&amp;lt;장치명&amp;gt; &amp;lt;마운트 포인트&amp;gt; &amp;lt;파일 시스템 종류&amp;gt; &amp;lt;옵션&amp;gt;&lt;/em> 을 추가하면
+reboot 후부터 적용됩니다.&lt;/p>
+&lt;p>주의해야 할 사항이 있는데&lt;br>
+만약 현재 ssh등의 방법으로 remote중에 이것을 변경했다면 &lt;strong>반드시 오탈자가 없는지 확인해야 합니다.&lt;/strong>&lt;/p>
+&lt;p>만약 오타가 존재한다면 리눅스가 reboot 중에 SSH server를 포함한 프로세스를 실행하기 전 오류로 중단되므로 담당자가 remote를&lt;br>
+하지 못하고 직접 가서 local상으로 부팅 설정을 해야 하는 상황이 발생합니다.&lt;/p></description></item></channel></rss>

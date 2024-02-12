@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>dump on 9Bon's_Docs</title><link>https://docs.9bon.org/tags/dump/</link><description>Recent content in dump on 9Bon's_Docs</description><generator>Hugo -- gohugo.io</generator><language>ko-kr</language><lastBuildDate>Fri, 25 Mar 2022 11:21:02 +0900</lastBuildDate><atom:link href="https://docs.9bon.org/tags/dump/index.xml" rel="self" type="application/rss+xml"/><item><title>리눅스 디스크 백업</title><link>https://docs.9bon.org/p/%EB%A6%AC%EB%88%85%EC%8A%A4-%EB%94%94%EC%8A%A4%ED%81%AC-%EB%B0%B1%EC%97%85/</link><pubDate>Fri, 25 Mar 2022 11:21:02 +0900</pubDate><guid>https://docs.9bon.org/p/%EB%A6%AC%EB%88%85%EC%8A%A4-%EB%94%94%EC%8A%A4%ED%81%AC-%EB%B0%B1%EC%97%85/</guid><description>&lt;img src="https://docs.9bon.org/p/%EB%A6%AC%EB%88%85%EC%8A%A4-%EB%94%94%EC%8A%A4%ED%81%AC-%EB%B0%B1%EC%97%85/thum.png" alt="Featured image of post 리눅스 디스크 백업" />&lt;h2 id="백업">백업&lt;/h2>
+&lt;h3 id="설명">설명&lt;/h3>
+&lt;p>백업/복원은 말 그대로 나중에 되돌릴 수 있게 사본을 복사하여 저장하는 기능입니다. 과거에도 OS에서 지원하는&lt;br>
+소프트웨어가 있었지만, 그럼에도 저 같은 경우에는 CD, USB에 담아서 사용하는 고스트를 자주 봤었던 기억이 있습니다.&lt;/p>
+&lt;p>그 이유와 관련하여 방식의 종류를 살펴보도록 하겠습니다.&lt;/p>
+&lt;h3 id="백업의-종류">백업의 종류&lt;/h3>
+&lt;p>디스크를 통째로, 디스크의 일부 파티션만, 파일만 백업, 이것을 떠나서 백업은 세 가지의 방식이 존재합니다.&lt;br>
+1일 2일 3일, 총 삼일 동안 파일이 써지고 있는 동일한 시스템을 백업했다고 가정하고 예를 들어보겠습니다.&lt;/p>
+&lt;p>전체 백업(Full)&lt;br>
+1일 //// __ __&lt;br>
+2일 //// //// __&lt;br>
+3일 //// //// ////&lt;/p>
+&lt;p>차등 백업(Differential)&lt;br>
+1일 //// __ __&lt;br>
+2일 __ //// __&lt;br>
+3일 __ //// ////&lt;/p>
+&lt;p>증분 백업(Incremental)&lt;br>
+1일 //// __ __&lt;br>
+2일 __ //// __&lt;br>
+3일 __ __ ////&lt;/p>
+&lt;p>간단히 전체는 그 말대로 모든 내용을, 차등은 첫 백업 이후의 내용들을, 증분백업은 각 백업시의 변화 내용을&lt;br>
+기록하는 것입니다. 이렇게 보면 증분백업이 가장 좋아보이지만 복원시 오랜 시간이 소모되고 백업 파일이&lt;br>
+하나라도 손실되면 복원이 불가능한 특징을 가지고 있습니다.&lt;/p>
+&lt;p>요즘엔 고스트가 윈도우에 설치되어 증분백업까지 지원을 하지만 과거의, 특히 컴퓨터 수리를 업으로 하는 입장에서는&lt;br>
+각기 다른 시스템을 접해야 했기 때문에 전체 백업이 좋은 선택지였다고 생각합니다.&lt;/p>
+&lt;p>참고로 맥의 타임머신도 기본은 증분백업이며, 타임머신을 포함한 대부분 요즘 소프트웨어는 세 가지 백업 방식을&lt;br>
+모두 지원하고 있습니다.&lt;/p>
+&lt;h2 id="명령">명령&lt;/h2>
+&lt;h3 id="tar">tar&lt;/h3>
+&lt;p>tar은 백업보다 압축이 주 목적인 명령어입니다.&lt;/p>
+&lt;p>파일 전체백업&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">tar cvfp home.tar /file
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>파일 증분백업&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">tar cvfp home.tar /file
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>백업 위치지정&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">tar zcf /dev/sdb1 /file
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="sb">``&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">현재 디렉토리에 압축 해제
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="sb">```&lt;/span>bash
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">tar zcf /dev/sdb1 /now
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="dump">dump&lt;/h3>
+&lt;p>파일 전체백업&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">dump -0f /dev/sdb1 /file
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>파티션 백업(sda1), 경로지정, 정보 기록(-u:/etc/dumpdates로)&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">dump -0u -f /dev/sdb1 /dev/sda1
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>증분 백업(-2:2레벨의 백업)&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">dump -2u -f /dev/sdb1 /dev/sda1
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>복원(-r:전체:단 파일시스템 마운트 동일해야함, -i:대화식)&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">restore -rf /dev/sdb1
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="dd">dd&lt;/h3>
+&lt;p>디스크 전체, 특정 파티션 모두 가능합니다. 해당 명령어는 백업뿐만 아니라 여러곳에서 쓰입니다.&lt;/p>
+&lt;p>전체 백업(bs:블럭 사이즈, 디스크 형편에 맞출 것)&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">dd &lt;span class="k">if&lt;/span>&lt;span class="o">=&lt;/span>/dev/sda &lt;span class="nv">of&lt;/span>&lt;span class="o">=&lt;/span>/dev/sdb &lt;span class="nv">bs&lt;/span>&lt;span class="o">=&lt;/span>256k
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></description></item></channel></rss>

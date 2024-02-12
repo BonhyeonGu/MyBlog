@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>filename on 9Bon's_Docs</title><link>https://docs.9bon.org/tags/filename/</link><description>Recent content in filename on 9Bon's_Docs</description><generator>Hugo -- gohugo.io</generator><language>ko-kr</language><lastBuildDate>Tue, 10 Jan 2023 17:42:59 +0900</lastBuildDate><atom:link href="https://docs.9bon.org/tags/filename/index.xml" rel="self" type="application/rss+xml"/><item><title>윈도우 대소문자 파일 이름 구별</title><link>https://docs.9bon.org/p/%EC%9C%88%EB%8F%84%EC%9A%B0-%EB%8C%80%EC%86%8C%EB%AC%B8%EC%9E%90-%ED%8C%8C%EC%9D%BC-%EC%9D%B4%EB%A6%84-%EA%B5%AC%EB%B3%84/</link><pubDate>Tue, 10 Jan 2023 17:42:59 +0900</pubDate><guid>https://docs.9bon.org/p/%EC%9C%88%EB%8F%84%EC%9A%B0-%EB%8C%80%EC%86%8C%EB%AC%B8%EC%9E%90-%ED%8C%8C%EC%9D%BC-%EC%9D%B4%EB%A6%84-%EA%B5%AC%EB%B3%84/</guid><description>&lt;img src="https://docs.9bon.org/p/%EC%9C%88%EB%8F%84%EC%9A%B0-%EB%8C%80%EC%86%8C%EB%AC%B8%EC%9E%90-%ED%8C%8C%EC%9D%BC-%EC%9D%B4%EB%A6%84-%EA%B5%AC%EB%B3%84/thum.png" alt="Featured image of post 윈도우 대소문자 파일 이름 구별" />&lt;h2 id="서론">서론&lt;/h2>
+&lt;p>윈도우는 파일 이름에서 대문자, 소문자를 구별하지 않습니다.&lt;br>
+당연히 프로그래밍 언어, 라이브리를 사용할 때에도 마찬가지입니다.&lt;/p>
+&lt;p>정확히는 NTFS와 같은 윈도우 파일시스템은 대소문자를 구별하지만 OS에서 허용하지 않게 되어있습니다.&lt;br>
+따라서 자신의 프로그램을 위해 아래의 명령어를 고려할 수 있습니다.&lt;/p>
+&lt;h2 id="cmd">CMD&lt;/h2>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-powershell" data-lang="powershell">&lt;span class="line">&lt;span class="cl">&lt;span class="n">fsutil&lt;/span> &lt;span class="n">file&lt;/span> &lt;span class="n">setCaseSensitiveInfo&lt;/span> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="n">경로&lt;/span>&lt;span class="p">&amp;gt;&lt;/span> &lt;span class="n">enable&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">fsutil&lt;/span> &lt;span class="n">file&lt;/span> &lt;span class="n">setCaseSensitiveInfo&lt;/span> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="n">경로&lt;/span>&lt;span class="p">&amp;gt;&lt;/span> &lt;span class="n">disable&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></description></item></channel></rss>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>fstab on 9Bon's_Docs</title><link>https://docs.9bon.org/tags/fstab/</link><description>Recent content in fstab on 9Bon's_Docs</description><generator>Hugo -- gohugo.io</generator><language>ko-kr</language><lastBuildDate>Sat, 12 Mar 2022 03:43:58 +0900</lastBuildDate><atom:link href="https://docs.9bon.org/tags/fstab/index.xml" rel="self" type="application/rss+xml"/><item><title>리눅스 디스크 문제</title><link>https://docs.9bon.org/p/%EB%A6%AC%EB%88%85%EC%8A%A4-%EB%94%94%EC%8A%A4%ED%81%AC-%EB%AC%B8%EC%A0%9C/</link><pubDate>Sat, 12 Mar 2022 03:43:58 +0900</pubDate><guid>https://docs.9bon.org/p/%EB%A6%AC%EB%88%85%EC%8A%A4-%EB%94%94%EC%8A%A4%ED%81%AC-%EB%AC%B8%EC%A0%9C/</guid><description>&lt;img src="https://docs.9bon.org/p/%EB%A6%AC%EB%88%85%EC%8A%A4-%EB%94%94%EC%8A%A4%ED%81%AC-%EB%AC%B8%EC%A0%9C/thum.png" alt="Featured image of post 리눅스 디스크 문제" />&lt;h2 id="하드디스크의-문제">하드디스크의 문제&lt;/h2>
+&lt;h3 id="증상">증상&lt;/h3>
+&lt;p>저장, 삭제시 에러문구 : &amp;ldquo;Structure needs cleaning&amp;rdquo;, &amp;ldquo;구조에 청소가 필요합니다&amp;rdquo;&lt;br>
+ls 시 : ??? ?? ???? 로 표시&lt;/p>
+&lt;h3 id="설명">설명&lt;/h3>
+&lt;p>불량, 노후화, 최악에는 소프트웨어의 오류에도 하드디스크에 치명적인 문제가 발생할 수 있습니다.&lt;br>
+제가 겪은 문제는 서버가 일종의 과부하를 받을 때 디렉토리 일부가 사라져 조회조차 하지 못하는 상황에&lt;br>
+놓이는 것이였습니다.&lt;/p>
+&lt;p>놀라서 umount하거나 reboot해서 돌아와보면 디렉토리가 다시 보였지만&lt;br>
+디렉토리를 포함한 파일의 일부가 열리지만 소실되었거나, 열리지도 않으며 청소가 필요하다는 경고가 나타났습니다.&lt;br>
+흥미로웠던 사실은 비교적 최근에 생성된 것만 그런 상태였습니다. 추정해보면 EXT파일시스템의 특징이&lt;br>
+여기서 보이는 것이 아닐까 생각했습니다.&lt;/p>
+&lt;p>현재는 과거의 사태에 높은 확률을 따라, 하드디스크의 불량이라고 생각하고 있지만&lt;br>
+정확한 원인을 알기는 어려운 상황입니다. 이런일이 발생한다면 어떻게 대처하고 판단해야하는지&lt;br>
+작성해 보겠습니다.&lt;/p>
+&lt;h2 id="해결">해결&lt;/h2>
+&lt;h3 id="fsck">fsck&lt;/h3>
+&lt;p>fsck는 리눅스에서 지원하는 Filesystem fix 명령입니다. 실행하면 체크를 하고, 문제가 생긴 항목을 불러준 뒤&lt;br>
+허락하면 교정을 시작합니다. 당연히 un mount 되어있는 상황이여야 합니다.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">umount /dev/&amp;lt;장치명&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">fsck -y /dev/&amp;lt;장치명&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Yes 또는 No로 물어보는 항목이 많고 대부분 오래 걸리므로 -y를 붙여 진행할 수 있습니다.&lt;/p>
+&lt;h3 id="badblocks">badblocks&lt;/h3>
+&lt;p>badblocks는 리눅스에서 기본적으로 하드디스크의 badblock을 점검해주는 명령어 입니다.&lt;br>
+어차피 읽기 전용모드로 작동되기 때문에 un mount 되어 있을 필요는 없으나&lt;br>
+항상 장치적 문제를 해결할 때는 un mount 하시는 것을 추천드리고 싶습니다.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">umount /dev/&amp;lt;장치명&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">badblocks -v -o out.txt /dev/&amp;lt;장치명&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>-v는 자세하게 보여달라는 뜻이고 -o는 badblock list 를 file output으로 해달라는 뜻입니다.&lt;/p>
+&lt;h3 id="smartctl">smartctl&lt;/h3>
+&lt;p>smartctl은 기본 제공은 아니지만 자주 사용했었던 것입니다.&lt;br>
+하드디스크의 모니터링 기술 SMART(Self-Monitoring, Analysis, and Reporting Technology)을 사용하여&lt;br>
+점검하는 도구이며 아주 옛날의 하드디스크가 아닌 이상 대부분 장착되어 있습니다.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">apt-get install smartmontools
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">umount /dev/&amp;lt;장치명&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">smartctl -a /dev/&amp;lt;장치명&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>자세히는 -a, 간단히는 -H, 정보만은 -i 옵션을 사용하여 진행 가능합니다.&lt;/p></description></item></channel></rss>

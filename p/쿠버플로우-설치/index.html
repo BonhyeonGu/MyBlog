@@ -1,0 +1,225 @@
+<!doctype html><html lang=ko-kr dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="쿠버플로우 설치법과 간단한 서술의 내용입니다."><title>쿠버플로우 설치</title>
+<link rel=canonical href=https://docs.9bon.org/p/%EC%BF%A0%EB%B2%84%ED%94%8C%EB%A1%9C%EC%9A%B0-%EC%84%A4%EC%B9%98/><link rel=stylesheet href=/scss/style.min.abbd69b2908fdfcd5179898beaafd374514a86538d81639ddd2c58c06ae54e40.css><meta property="og:title" content="쿠버플로우 설치"><meta property="og:description" content="쿠버플로우 설치법과 간단한 서술의 내용입니다."><meta property="og:url" content="https://docs.9bon.org/p/%EC%BF%A0%EB%B2%84%ED%94%8C%EB%A1%9C%EC%9A%B0-%EC%84%A4%EC%B9%98/"><meta property="og:site_name" content="9Bon's_Docs"><meta property="og:type" content="article"><meta property="article:section" content="Post"><meta property="article:tag" content="docker"><meta property="article:tag" content="kubeflow"><meta property="article:tag" content="kubernetes"><meta property="article:tag" content="ml-ops"><meta property="article:published_time" content="2022-10-20T04:46:35+09:00"><meta property="article:modified_time" content="2022-12-06T12:29:59+09:00"><meta property="og:image" content="https://docs.9bon.org/p/%EC%BF%A0%EB%B2%84%ED%94%8C%EB%A1%9C%EC%9A%B0-%EC%84%A4%EC%B9%98/thum.png"><meta name=twitter:title content="쿠버플로우 설치"><meta name=twitter:description content="쿠버플로우 설치법과 간단한 서술의 내용입니다."><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://docs.9bon.org/p/%EC%BF%A0%EB%B2%84%ED%94%8C%EB%A1%9C%EC%9A%B0-%EC%84%A4%EC%B9%98/thum.png"><link rel="shortcut icon" href=/favicon.png><script async src="https://www.googletagmanager.com/gtag/js?id=G-J6VYRNTTDG"></script><script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-J6VYRNTTDG",{anonymize_ip:!1})}</script><style>:root{--article-font-family:"IBM Plex Sans KR", var(--base-font-family)}</style><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@200&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label="메뉴 여닫기">
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/avatar_huaef87c9587ca1f1e28e83ecfd9cba8c0_184448_300x0_resize_box_3.png width=300 height=300 class=site-logo loading=lazy alt=Avatar></a></figure><div class=site-meta><h1 class=site-name><a href=/>9Bon's_Docs</a></h1><h2 class=site-description>Hungry</h2></div></header><ol class=social-menu><li><a href=https://github.com/BonhyeonGu target=_blank title=0_GitHub rel=me><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li><li><a href=https://bonhyeon.9bon.org target=_blank title=1_Porfolio rel=me><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mood-wink" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="12" cy="12" r="9"/><path d="M15 10h.01"/><path d="M9.5 15a3.5 3.5.0 005 0"/><path d="M8.5 8.5 10 10l-1.5 1.5"/></svg></a></li><li><a href=https://cloud.9bon.org target=_blank title=3_Cloud rel=me><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-cloud" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 18a4.6 4.4.0 010-9 5 4.5.0 0111 2h1a3.5 3.5.0 010 7H7"/></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg>
+<span>Home</span></a></li><li><a href=/about/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg>
+<span>About</span></a></li><li><a href=/archives/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+<span>Archives</span></a></li><li><a href=/search/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+<span>Search</span></a></li><div class=menu-bottom-section><li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>다크 모드</span></li></div></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">목차</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#서론>서론</a><ol><li><a href=#개요>개요</a></li><li><a href=#고려사항>고려사항</a></li></ol></li><li><a href=#설치>설치</a><ol><li><a href=#공통-사전-설치>공통 사전 설치</a></li><li><a href=#마스터-노드-설치-조인-전>마스터 노드 설치-조인 전</a></li><li><a href=#마스터-노드-설치-조인-후>마스터 노드 설치-조인 후</a></li><li><a href=#마스터-워커-공통-설치-진행>마스터, 워커 공통 설치 진행</a></li><li><a href=#워커노드에서-nfs-확인>워커노드에서 nfs 확인</a></li><li><a href=#마스터-노드에서의-쿠버플로우-설치>마스터 노드에서의 쿠버플로우 설치</a></li></ol></li><li><a href=#참고-자료들>참고 자료들</a><ol><li><a href=#설치법>설치법</a></li><li><a href=#트러블-슈팅>트러블 슈팅</a></li></ol></li></ol></nav></div></section></aside><main class="main full-width"><article class="has-image main-article"><header class=article-header><div class=article-image><a href=/p/%EC%BF%A0%EB%B2%84%ED%94%8C%EB%A1%9C%EC%9A%B0-%EC%84%A4%EC%B9%98/><img src=/p/%EC%BF%A0%EB%B2%84%ED%94%8C%EB%A1%9C%EC%9A%B0-%EC%84%A4%EC%B9%98/thum_hua73f32689426d4b33249e781ef385a89_69335_800x0_resize_box_3.png srcset="/p/%EC%BF%A0%EB%B2%84%ED%94%8C%EB%A1%9C%EC%9A%B0-%EC%84%A4%EC%B9%98/thum_hua73f32689426d4b33249e781ef385a89_69335_800x0_resize_box_3.png 800w, /p/%EC%BF%A0%EB%B2%84%ED%94%8C%EB%A1%9C%EC%9A%B0-%EC%84%A4%EC%B9%98/thum_hua73f32689426d4b33249e781ef385a89_69335_1600x0_resize_box_3.png 1600w" width=800 height=249 loading=lazy alt="Featured image of post 쿠버플로우 설치"></a></div><div class=article-details><header class=article-category><a href=/categories/%EB%8F%84%EC%BB%A4/ style=background-color:#0073e2;color:#fff>도커
+</a><a href=/categories/%EB%A6%AC%EB%88%85%EC%8A%A4/ style=background-color:#784bee;color:#fff>리눅스
+</a><a href=/categories/%EC%84%9C%EB%B2%84/ style=background-color:#080b35;color:#fff>서버</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/p/%EC%BF%A0%EB%B2%84%ED%94%8C%EB%A1%9C%EC%9A%B0-%EC%84%A4%EC%B9%98/>쿠버플로우 설치</a></h2><h3 class=article-subtitle>쿠버플로우 설치법과 간단한 서술의 내용입니다.</h3></div><footer class=article-time><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published>Oct 20, 2022</time></div><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<time class=article-time--reading>4 분 정도</time></div></footer></div></header><section class=article-content><h2 id=서론>서론</h2><h3 id=개요>개요</h3><p>쿠버플로우, 큐베플로우, 쿠브플로우.. 이것을 배포해야 하는 일이 있었습니다.<br>하지만 추가 패키지를 이용하지 않고 K8s로 직접 설치하는 자료는 적었으며 따라해도 오류가 발생했습니다.</p><p>그도 그럴것이 쿠버플로우는 계속해서 업데이트가 되고 있으며, 운영체제, 쿠버네티스, 도커를 포함한 여러 패키지의 업데이트에도 민감하기 때문에 문제가 계속 생기는 것 같습니다.</p><p>이번 포스트에선 쿠버플로우에 대한 설명을 따로 하진 않을 것이며,<br>Clone이 가능한 가상머신을 기준, GPU가 없는 것을 예제로 설명해 보도록 하겠습니다.<br>해당 포스트를 이해하셨다면 서버에 직접 설치하는건 문제 없을거라 예상합니다.</p><h3 id=고려사항>고려사항</h3><p>다음은 이유는 파악 못했으나, 문제 원인을 찾아낸 것들의 내용입니다. <strong>2022-12</strong> 기준입니다.</p><ul><li>우분투 22.04 환경 쿠버네티스 설치에서 인증 메니저 노드가 설치 안되는 것을 확인했습니다. 20.04는 문제가 없었습니다.</li><li>Readme에서는 쿠버플로우 1.20 이상 버전을 권장했으나 1.21.5-00 버전이 아니면 설치 문제가 발생했습니다.</li><li>마스터, 워커노드 모두 사양을 크게 잡아먹었습니다. 각 노드 모두 16GB이상의 메모리가 아니면 문제가 생겼습니다.</li><li>종종 kubeflow manifests의Install with a single command 방법이 종료되지 않는 문제를 겪었습니다.</li></ul><h2 id=설치>설치</h2><p>config등을 수정, 추가하는 부분은 위와 아래의 글을 참고해주세요</p><h3 id=공통-사전-설치>공통 사전 설치</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo apt-get update
+</span></span><span class=line><span class=cl>sudo apt-get install <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>    ca-certificates <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>    curl <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>    gnupg <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>    lsb-release
+</span></span><span class=line><span class=cl>curl -fsSL https://download.docker.com/linux/ubuntu/gpg <span class=p>|</span> sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+</span></span><span class=line><span class=cl> <span class=nb>echo</span> <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  <span class=s2>&#34;deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+</span></span></span><span class=line><span class=cl><span class=s2>  </span><span class=k>$(</span>lsb_release -cs<span class=k>)</span><span class=s2> stable&#34;</span> <span class=p>|</span> sudo tee /etc/apt/sources.list.d/docker.list &gt; /dev/null
+</span></span><span class=line><span class=cl>sudo apt-get update
+</span></span><span class=line><span class=cl>sudo apt-get install docker-ce docker-ce-cli containerd.io
+</span></span><span class=line><span class=cl>sudo curl -L <span class=s2>&#34;https://github.com/docker/compose/releases/download/1.29.2/docker-compose-</span><span class=k>$(</span>uname -s<span class=k>)</span><span class=s2>-</span><span class=k>$(</span>uname -m<span class=k>)</span><span class=s2>&#34;</span> -o /usr/local/bin/docker-compose
+</span></span><span class=line><span class=cl>sudo chmod +x /usr/local/bin/docker-compose
+</span></span></code></pre></td></tr></table></div></div><p>도커, 도커 컴포즈를 설치합니다. 버전이 문제가 없다면 다른 방식으로 설치해도 무방할 것 같습니다.</p><p>su&ndash;</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>cat &gt; /etc/docker/daemon.json <span class=s>&lt;&lt;EOF
+</span></span></span><span class=line><span class=cl><span class=s>{
+</span></span></span><span class=line><span class=cl><span class=s>  &#34;exec-opts&#34;: [&#34;native.cgroupdriver=systemd&#34;],
+</span></span></span><span class=line><span class=cl><span class=s>  &#34;log-driver&#34;: &#34;json-file&#34;,
+</span></span></span><span class=line><span class=cl><span class=s>  &#34;log-opts&#34;: {
+</span></span></span><span class=line><span class=cl><span class=s>    &#34;max-size&#34;: &#34;100m&#34;
+</span></span></span><span class=line><span class=cl><span class=s>  },
+</span></span></span><span class=line><span class=cl><span class=s>  &#34;storage-driver&#34;: &#34;overlay2&#34;,
+</span></span></span><span class=line><span class=cl><span class=s>  &#34;storage-opts&#34;: [
+</span></span></span><span class=line><span class=cl><span class=s>    &#34;overlay2.override_kernel_check=true&#34;
+</span></span></span><span class=line><span class=cl><span class=s>  ]
+</span></span></span><span class=line><span class=cl><span class=s>}
+</span></span></span><span class=line><span class=cl><span class=s>EOF</span>
+</span></span></code></pre></td></tr></table></div></div><p>suend&ndash;</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo mkdir -p /etc/systemd/system/docker.service.d
+</span></span><span class=line><span class=cl>sudo systemctl daemon-reload
+</span></span><span class=line><span class=cl>sudo usermod -aG docker <span class=si>${</span><span class=nv>USER</span><span class=si>}</span>
+</span></span><span class=line><span class=cl>newgrp docker
+</span></span><span class=line><span class=cl>sudo chmod <span class=m>666</span> /var/run/docker.sock
+</span></span><span class=line><span class=cl>sudo systemctl restart docker
+</span></span><span class=line><span class=cl>sudo systemctl daemon-reload
+</span></span><span class=line><span class=cl>sudo systemctl <span class=nb>enable</span> docker
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg <span class=p>|</span> sudo apt-key add
+</span></span><span class=line><span class=cl>sudo apt-add-repository <span class=s2>&#34;deb http://apt.kubernetes.io/ kubernetes-xenial main&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>sudo apt-get install -y <span class=nv>kubelet</span><span class=o>=</span>1.21.5-00 <span class=nv>kubeadm</span><span class=o>=</span>1.21.5-00 <span class=nv>kubectl</span><span class=o>=</span>1.21.5-00 --allow-downgrades --allow-change-held-packages
+</span></span><span class=line><span class=cl>sudo apt-mark hold kubelet kubeadm kubectl
+</span></span></code></pre></td></tr></table></div></div><p>도커 권한 설정을 하고 쿠버네티스를 설치합니다.</p><p>su&ndash;</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>cat <span class=s>&lt;&lt;EOF &gt; /etc/sysctl.d/k8s.conf
+</span></span></span><span class=line><span class=cl><span class=s>net.bridge.bridge-nf-call-ip6tables = 1
+</span></span></span><span class=line><span class=cl><span class=s>net.bridge.bridge-nf-call-iptables = 1
+</span></span></span><span class=line><span class=cl><span class=s>EOF</span>
+</span></span></code></pre></td></tr></table></div></div><p>suend&ndash;</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo sysctl --system
+</span></span><span class=line><span class=cl>sudo systemctl daemon-reload
+</span></span><span class=line><span class=cl>sudo systemctl restart kubelet
+</span></span></code></pre></td></tr></table></div></div><p>이 이후로는 해당 가상 머신을 Clone 1회 또는 2회하여 마스터 노드와 워커노드로 나눕니다.<br>호스트 네임과 아이피 주소에 주의하세요, 호스트 네임같은 동일할 경우 문제가 발생합니다.</p><h3 id=마스터-노드-설치-조인-전>마스터 노드 설치-조인 전</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo kubeadm init
+</span></span><span class=line><span class=cl>mkdir -p <span class=nv>$HOME</span>/.kube
+</span></span><span class=line><span class=cl>sudo cp -i /etc/kubernetes/admin.conf <span class=nv>$HOME</span>/.kube/config
+</span></span><span class=line><span class=cl>sudo chown <span class=k>$(</span>id -u<span class=k>)</span>:<span class=k>$(</span>id -g<span class=k>)</span> <span class=nv>$HOME</span>/.kube/config
+</span></span><span class=line><span class=cl>kubectl taint nodes --all node-role.kubernetes.io/master-
+</span></span><span class=line><span class=cl>kubectl create -f https://raw.githubusercontent.com/cilium/cilium/v1.6/install/kubernetes/quick-install.yaml
+</span></span><span class=line><span class=cl>kubectl get pods -n kube-system --selector<span class=o>=</span>k8s-app<span class=o>=</span>cilium
+</span></span></code></pre></td></tr></table></div></div><p>쿠버네티스를 초기화합니다. 이후 출력되는 명령어를 이용하여 워커노드를 조인 시킵니다. (sudo)</p><h3 id=마스터-노드-설치-조인-후>마스터 노드 설치-조인 후</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>kubectl apply -f https://raw.githubusercontent.com/rancher/local-path-provisioner/master/deploy/local-path-storage.yaml
+</span></span><span class=line><span class=cl>sudo apt install nfs-common
+</span></span><span class=line><span class=cl>sudo apt install nfs-kernel-server
+</span></span><span class=line><span class=cl>sudo mkdir /nfsroot
+</span></span><span class=line><span class=cl>sudo chown nobody:nogroup /nfsroot
+</span></span><span class=line><span class=cl>sudo chmod <span class=m>777</span> /nfsroot
+</span></span></code></pre></td></tr></table></div></div><p>해당 과정은 NFS Client Provisioner를쿠버네티스가 사용할 수 있게 구축하고<br>사용할 NFS Server도 마스터 노드에 올리는 과정을 설명하고 있습니다.</p><p>sudo nano /etc/exports 로 아래 내용 추가</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>/nfsroot 192.168.80.110<span class=o>(</span>rw,insecure,sync,no_root_squash,no_subtree_check<span class=o>)</span>
+</span></span><span class=line><span class=cl>/nfsroot 192.168.80.111<span class=o>(</span>rw,insecure,sync,no_root_squash,no_subtree_check<span class=o>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>해당 과정을 통하여, 존재하는 모든 노드에 NFS 공간을 할당하고 있습니다.<br>쿠버플로우에서 NFS는 의무가 아니지만 없을경우 가변적으로, 쿠버플로우가 볼륨을 잡기 때문에<br>비추천 하고 있습니다.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo service nfs-kernel-server restart
+</span></span><span class=line><span class=cl>sudo systemctl <span class=nb>enable</span> rpcbind
+</span></span><span class=line><span class=cl>sudo systemctl <span class=nb>enable</span> nfs-server
+</span></span><span class=line><span class=cl>sudo systemctl start rpcbind
+</span></span><span class=line><span class=cl>sudo systemctl start nfs-server
+</span></span><span class=line><span class=cl>sudo exportfs -a
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>curl https://raw.githubusercontent.com/helm/helm/release-2.16/scripts/get &gt; get_helm.sh
+</span></span><span class=line><span class=cl>chmod <span class=m>700</span> get_helm.sh
+</span></span><span class=line><span class=cl>./get_helm.sh
+</span></span><span class=line><span class=cl>helm repo add raphael https://raphaelmonrouzeau.github.io/charts/repository/
+</span></span><span class=line><span class=cl>helm repo update
+</span></span><span class=line><span class=cl>helm install nfs-provisioner <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>--set nfs.server<span class=o>=</span>192.168.80.110 <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>--set nfs.path<span class=o>=</span>/nfsroot <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>--set storageClass.defaultClass<span class=o>=</span><span class=nb>true</span> <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>--set storageClass.name<span class=o>=</span>nfs-provisioner <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>raphael/nfs-server-provisioner
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>kubectl apply -f https://raw.githubusercontent.com/mojokb/handson-kubeflow/master/registry/kubeflow-registry-deploy.yaml
+</span></span><span class=line><span class=cl>kubectl apply -f https://raw.githubusercontent.com/mojokb/handson-kubeflow/master/registry/kubeflow-registry-svc.yaml
+</span></span></code></pre></td></tr></table></div></div><p><strong>아이피 주소 192.168.80.110, 192.168.80.111은 각각 마스터, 워커의 주소입니다.</strong> 환경에 맞춰서 사용해 주셔야 합니다.<br>쿠버플로우의 경우 nfs를 사용하지 않을 시 가변용량 저장소를 이용하기 때문에 사양문제가 발생한다고 합니다.</p><h3 id=마스터-워커-공통-설치-진행>마스터, 워커 공통 설치 진행</h3><p><em>/etc/docker/daemon.json</em>에 추가</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=s2>&#34;insecure-registries&#34;</span>: <span class=o>[</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;kubeflow-registry.default.svc.cluster.local:30000&#34;</span>
+</span></span><span class=line><span class=cl>  <span class=o>]</span>
+</span></span></code></pre></td></tr></table></div></div><p>그리고 재시작합니다.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo systemctl restart docker
+</span></span></code></pre></td></tr></table></div></div><p><em>/etc/hosts</em>에 추가(이 부분은 미리 추가해도 됨)</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>192.168.80.110 kubeflow-registry.default.svc.cluster.local
+</span></span></code></pre></td></tr></table></div></div><h3 id=워커노드에서-nfs-확인>워커노드에서 nfs 확인</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>curl kubeflow-registry.default.svc.cluster.local:30000/v2/_catalog
+</span></span></code></pre></td></tr></table></div></div><h3 id=마스터-노드에서의-쿠버플로우-설치>마스터 노드에서의 쿠버플로우 설치</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>wget https://github.com/kubernetes-sigs/kustomize/releases/download/v3.2.0/kustomize_3.2.0_linux_amd64
+</span></span><span class=line><span class=cl>mv kustomize_3.2.0_linux_amd64 kustomize
+</span></span><span class=line><span class=cl>chmod <span class=m>777</span> kustomize
+</span></span><span class=line><span class=cl>sudo mv kustomize /usr/local/bin
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>git clone https://github.com/kubeflow/manifests.git
+</span></span><span class=line><span class=cl><span class=nb>cd</span> manifests
+</span></span><span class=line><span class=cl><span class=k>while</span> ! kustomize build example <span class=p>|</span> kubectl apply -f -<span class=p>;</span> <span class=k>do</span> <span class=nb>echo</span> <span class=s2>&#34;Retrying to apply resources&#34;</span><span class=p>;</span> sleep 10<span class=p>;</span> <span class=k>done</span>
+</span></span></code></pre></td></tr></table></div></div><p>후에</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>kubectl port-forward svc/istio-ingressgateway -n istio-system 8080:80
+</span></span></code></pre></td></tr></table></div></div><p>로 <a class=link href=mailto:user@example.com>user@example.com</a>/12341234을 사용하여 로컬상의 테스트가 가능합니다.<br>또는</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>kubectl port-forward --address 0.0.0.0 svc/istio-ingressgateway -n istio-system 8080:80
+</span></span></code></pre></td></tr></table></div></div><p>로 외부노출을 허용시킬 수 있습니다.</p><h2 id=참고-자료들>참고 자료들</h2><p>만약에 정상작동하지 않을 경우 아래의 자료를 확인해주세요.</p><h3 id=설치법>설치법</h3><p><a class=link href=https://github.com/kubeflow/manifests target=_blank rel=noopener>https://github.com/kubeflow/manifests</a><br><a class=link href=https://learning-sarah.tistory.com/entry/Kubeflow-13-%EC%84%A4%EC%B9%98 target=_blank rel=noopener>https://learning-sarah.tistory.com/entry/Kubeflow-13-%EC%84%A4%EC%B9%98</a><br><a class=link href=https://jwher.github.io/posts/install-kubeflow/ target=_blank rel=noopener>https://jwher.github.io/posts/install-kubeflow/</a><br><a class=link href=https://lsjsj92.tistory.com/580 target=_blank rel=noopener>https://lsjsj92.tistory.com/580</a><br><a class=link href=https://yooloo.tistory.com/229 target=_blank rel=noopener>https://yooloo.tistory.com/229</a><br><a class=link href=https://velog.io/@ehddnr/kubernetes-kubeflow-%EC%84%A4%EC%B9%98-feat.-GCP target=_blank rel=noopener>https://velog.io/@ehddnr/kubernetes-kubeflow-%EC%84%A4%EC%B9%98-feat.-GCP</a><br><a class=link href=https://losskatsu.github.io/it-infra/mlops01/# target=_blank rel=noopener>https://losskatsu.github.io/it-infra/mlops01/#</a><br><a class=link href=https://velog.io/@csk6124/Kubeflow-1.4-%EC%84%A4%EC%B9%98 target=_blank rel=noopener>https://velog.io/@csk6124/Kubeflow-1.4-%EC%84%A4%EC%B9%98</a><br><a class=link href=https://velog.io/@dev_halo/%EC%95%84%EB%AC%B4%EB%8F%84-%EC%95%88%EC%95%8C%EB%A0%A4%EC%A3%BC%EB%8A%94-on-premise-Kubeflow-%EA%B5%AC%EC%B6%95%ED%95%B4%EB%B3%B4%EC%9E%90 target=_blank rel=noopener>https://velog.io/@dev_halo/%EC%95%84%EB%AC%B4%EB%8F%84-%EC%95%88%EC%95%8C%EB%A0%A4%EC%A3%BC%EB%8A%94-on-premise-Kubeflow-%EA%B5%AC%EC%B6%95%ED%95%B4%EB%B3%B4%EC%9E%90</a></p><h3 id=트러블-슈팅>트러블 슈팅</h3><p><a class=link href=https://hackmd.io/@maelvls/debug-cert-manager-webhook target=_blank rel=noopener>https://hackmd.io/@maelvls/debug-cert-manager-webhook</a><br><a class=link href=https://github.com/calebhailey/homelab/issues/3#issuecomment-569543391 target=_blank rel=noopener>https://github.com/calebhailey/homelab/issues/3#issuecomment-569543391</a><br><a class=link href=https://github.com/kubeflow/manifests/issues/2086 target=_blank rel=noopener>https://github.com/kubeflow/manifests/issues/2086</a><br><a class=link href=https://mlops-for-all.github.io/docs/setup-components/install-components-kf/ target=_blank rel=noopener>https://mlops-for-all.github.io/docs/setup-components/install-components-kf/</a></p></section><footer class=article-footer><section class=article-tags><a href=/tags/docker/>docker</a>
+<a href=/tags/kubeflow/>kubeflow</a>
+<a href=/tags/kubernetes/>kubernetes</a>
+<a href=/tags/ml-ops/>ml-ops</a></section><section class=article-copyright><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
+<span>Licensed under CC BY-NC-SA 4.0</span></section><section class=article-lastmod><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<span>마지막 수정: Dec 06, 2022 12:29 +0900</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>관련 글</h2><div class=related-content><div class="flex article-list--tile"><article class=has-image><a href=/p/gateway%EC%97%90-openvpn-%EC%84%A4%EC%B9%98/><div class=article-image><img src=/p/gateway%EC%97%90-openvpn-%EC%84%A4%EC%B9%98/thum.283571ceb43754817b90e5042eb05078_hu5a0a7b44549fccb70eb622685b43408e_102490_250x150_fill_box_smart1_3.png width=250 height=150 loading=lazy alt="Featured image of post Gateway에 OpenVPN 설치" data-hash="md5-KDVxzrQ3VIF7kOUELrBQeA=="></div><div class=article-details><h2 class=article-title>Gateway에 OpenVPN 설치</h2></div></a></article><article class=has-image><a href=/p/%EB%A6%AC%EB%88%85%EC%8A%A4-dhcp-ddns/><div class=article-image><img src=/p/%EB%A6%AC%EB%88%85%EC%8A%A4-dhcp-ddns/thum.14f1ec5c525ad9baab3168b69477ec52_huee7b2a00b68fcdcb5e6741874e0a4086_16212_250x150_fill_box_smart1_3.png width=250 height=150 loading=lazy alt="Featured image of post 리눅스 DHCP, DDNS" data-hash="md5-FPHsXFJa2bqrMWi2lHfsUg=="></div><div class=article-details><h2 class=article-title>리눅스 DHCP, DDNS</h2></div></a></article><article class=has-image><a href=/p/dns-server-bind9/><div class=article-image><img src=/p/dns-server-bind9/thum.f68d12ea7bc480efb838f4446fab1e30_hu824554077030e2b5363c801976600b24_607940_250x150_fill_box_smart1_3.png width=250 height=150 loading=lazy alt="Featured image of post DNS Server, BIND9" data-hash="md5-9o0S6nvEgO+4OPREb6seMA=="></div><div class=article-details><h2 class=article-title>DNS Server, BIND9</h2></div></a></article><article class=has-image><a href=/p/vmware-%EC%84%9C%EB%B2%84-%EA%B3%B5%EB%B6%80%ED%99%98%EA%B2%BD-%EB%A7%8C%EB%93%A4%EA%B8%B0/><div class=article-image><img src=/p/vmware-%EC%84%9C%EB%B2%84-%EA%B3%B5%EB%B6%80%ED%99%98%EA%B2%BD-%EB%A7%8C%EB%93%A4%EA%B8%B0/thum.50041dff7df9331350bd180ce7d44ef6_hu935fc5a71ae9667b09b6d28bb6bef806_18367_250x150_fill_box_smart1_3.png width=250 height=150 loading=lazy alt="Featured image of post VMWare 서버 공부환경 만들기" data-hash="md5-UAQd/335MxNQvRgM59RO9g=="></div><div class=article-details><h2 class=article-title>VMWare 서버 공부환경 만들기</h2></div></a></article><article class=has-image><a href=/p/%EC%95%84%ED%8C%8C%EC%B9%98-ssl-%EC%A0%81%EC%9A%A9-lets-encrypt/><div class=article-image><img src=/p/%EC%95%84%ED%8C%8C%EC%B9%98-ssl-%EC%A0%81%EC%9A%A9-lets-encrypt/thum.a57549c796089ac47d231b61fcad2ce7_hu41c3bc7f4d7437a9085f5f36b9638c8f_31272_250x150_fill_box_smart1_3.png width=250 height=150 loading=lazy alt="Featured image of post 아파치 SSL 적용, Let's Encrypt" data-hash="md5-pXVJx5YImsR9Ixth/K0s5w=="></div><div class=article-details><h2 class=article-title>아파치 SSL 적용, Let's Encrypt</h2></div></a></article></div></div></aside><div class=disqus-container><div id=disqus_thread></div><script>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//docs-9bon-org.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div><style>.disqus-container{background-color:var(--card-background);border-radius:var(--card-border-radius);box-shadow:var(--shadow-l1);padding:var(--card-padding)}</style><script>window.addEventListener("onColorSchemeChange",e=>{typeof DISQUS=="object"&&DISQUS.reset({reload:!0})})</script><footer class=site-footer><section class=copyright>&copy;
+2020 -
+2024 9Bon's_Docs</section><section class=powerby><a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a>로 만듦<br><a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a>의 <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.21.0>Stack</a></b> 테마 사용 중</section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.js defer></script><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>

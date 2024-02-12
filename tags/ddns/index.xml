@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ddns on 9Bon's_Docs</title><link>https://docs.9bon.org/tags/ddns/</link><description>Recent content in ddns on 9Bon's_Docs</description><generator>Hugo -- gohugo.io</generator><language>ko-kr</language><lastBuildDate>Tue, 28 Jun 2022 21:55:53 +0900</lastBuildDate><atom:link href="https://docs.9bon.org/tags/ddns/index.xml" rel="self" type="application/rss+xml"/><item><title>리눅스 DHCP, DDNS</title><link>https://docs.9bon.org/p/%EB%A6%AC%EB%88%85%EC%8A%A4-dhcp-ddns/</link><pubDate>Tue, 28 Jun 2022 21:55:53 +0900</pubDate><guid>https://docs.9bon.org/p/%EB%A6%AC%EB%88%85%EC%8A%A4-dhcp-ddns/</guid><description>&lt;img src="https://docs.9bon.org/p/%EB%A6%AC%EB%88%85%EC%8A%A4-dhcp-ddns/thum.png" alt="Featured image of post 리눅스 DHCP, DDNS" />&lt;h2 id="서론">서론&lt;/h2>
+&lt;h3 id="개요">개요&lt;/h3>
+&lt;p>DHCP를 리눅스에서 구성하는 것은 어렵지 않습니다. 두개 정도되는 설정파일을 수정하는 것 만으로 구성할 수 있습니다.&lt;br>
+문제는 DNS입니다. 만약 클라이언트 측의 IP Address가 동적으로 변한다면 DNS도 이에 따라 변해야 할 것입니다.&lt;/p>
+&lt;p>이렇게 정보가 바뀔 때 마다 DNS에 자동으로 갱신 시킬 수 있는 서비스를 DynamicDNS라고 부릅니다.&lt;/p>
+&lt;p>이번 작업을 하기전에 앞의 작업이 정말 이상이 없었는지 확인해 보시는걸 추천드립니다.&lt;br>
+당연히 이런건 말을 하지 않아도 앞으로 해주는 것이 좋습니다. 또한 이 과정에 없더라도 어떤 단순 명령이 동작하지 않으면&lt;br>
+앞의 과정을 기반으로 충분히 해내실 수 있어 적지 않은 것이니 찾아보시길 권장드립니다.&lt;br>
+&lt;em>(ex&amp;gt;Server02에서 ping client01.busan.com이 안되는데?)&lt;/em>&lt;/p>
+&lt;h3 id="토폴로지">토폴로지&lt;/h3>
+&lt;p>&lt;img src="https://docs.9bon.org/p/%EB%A6%AC%EB%88%85%EC%8A%A4-dhcp-ddns/1.png"
+width="1011"
+height="581"
+srcset="https://docs.9bon.org/p/%EB%A6%AC%EB%88%85%EC%8A%A4-dhcp-ddns/1_hu8c7bf1d132aa4ed6d9b8e180d4367e6d_108924_480x0_resize_box_3.png 480w, https://docs.9bon.org/p/%EB%A6%AC%EB%88%85%EC%8A%A4-dhcp-ddns/1_hu8c7bf1d132aa4ed6d9b8e180d4367e6d_108924_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="토폴로지"
+class="gallery-image"
+data-flex-grow="174"
+data-flex-basis="417px"
+>&lt;/p>
+&lt;h2 id="준비작업">준비작업&lt;/h2>
+&lt;h3 id="클라이언트-추가">클라이언트 추가&lt;/h3>
+&lt;p>먼저 클라이언트를 하나 더 추가해 놓겠습니다. 기존에 있는 클라이언트를 clone 하셔서 만들어 주시면 됩니다.&lt;br>
+단 hostname 기준으로 만들어 놓을 것이기 때문에 두 클라이언트의 hostname은 달라야 합니다.&lt;/p>
+&lt;p>hostname은 /etc/hostname 수정 후 재부팅으로 변경할 수 있습니다.&lt;/p>
+&lt;p>&lt;img src="https://docs.9bon.org/p/%EB%A6%AC%EB%88%85%EC%8A%A4-dhcp-ddns/2.png"
+width="1928"
+height="1056"
+srcset="https://docs.9bon.org/p/%EB%A6%AC%EB%88%85%EC%8A%A4-dhcp-ddns/2_hu95c0742cd7de8120c1679894fc722630_70461_480x0_resize_box_3.png 480w, https://docs.9bon.org/p/%EB%A6%AC%EB%88%85%EC%8A%A4-dhcp-ddns/2_hu95c0742cd7de8120c1679894fc722630_70461_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="호스트 네임"
+class="gallery-image"
+data-flex-grow="182"
+data-flex-basis="438px"
+>&lt;/p>
+&lt;h3 id="bind9-정적-정보-삭제">BIND9 정적 정보 삭제&lt;/h3>
+&lt;p>이번 구현을 완료하면 [hostname].busan.com 과 같이 호스트네임과 변경되는 IP Address에 따라 자동으로 정보가 생성될 것입니다.&lt;br>
+따라서 앞에서 만들어 놓은 client01 부분은 모두 삭제하겠습니다.&lt;/p>
+&lt;p>&lt;img src="https://docs.9bon.org/p/%EB%A6%AC%EB%88%85%EC%8A%A4-dhcp-ddns/3.png"
+width="1928"
+height="1056"
+srcset="https://docs.9bon.org/p/%EB%A6%AC%EB%88%85%EC%8A%A4-dhcp-ddns/3_hua134613ac4eb7c4ce46f5a558d4fd801_44069_480x0_resize_box_3.png 480w, https://docs.9bon.org/p/%EB%A6%AC%EB%88%85%EC%8A%A4-dhcp-ddns/3_hua134613ac4eb7c4ce46f5a558d4fd801_44069_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="BIND9 앞 과정 삭제"
+class="gallery-image"
+data-flex-grow="182"
+data-flex-basis="438px"
+>&lt;/p>
+&lt;h3 id="필요-패키지-설치">필요 패키지 설치&lt;/h3>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">apt-get update
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">apt-get install isc-dhcp-server bind9-utils
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>먼저 앞으로 필요한 데몬을 설치하겠습니다. 해당 데몬들은 이름에서 유추할 수 있는 기능 그대로를 제공합니다.&lt;/p>
+&lt;h2 id="bind9-설정">BIND9 설정&lt;/h2>
+&lt;h3 id="개요-1">개요&lt;/h3>
+&lt;p>BIND9는 DHCP보다 설정할 것이 적습니다.
+해당 과정은 앞으로의 BIND9 설정에도 유용하게 쓰일 개념들이 많으니 참고해서 진행하시면 좋겠습니다.&lt;/p>
+&lt;h3 id="설명">설명&lt;/h3>
+&lt;p>이 곳을 수정합니다. 도메인의 상세 설정을 하는 곳입니다.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-Bash" data-lang="Bash">&lt;span class="line">&lt;span class="cl">nano /etc/bind/named.conf.local
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>아래 내용을 추가합니다.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-Bash" data-lang="Bash">&lt;span class="line">&lt;span class="cl">include &lt;span class="s2">&amp;#34;/etc/bind/rndc.key&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">controls &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> inet 192.168.10.3 allow &lt;span class="o">{&lt;/span> 192.168.10.3&lt;span class="p">;&lt;/span> &lt;span class="o">}&lt;/span> keys &lt;span class="o">{&lt;/span> rndc-key&lt;span class="p">;&lt;/span> &lt;span class="o">}&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">}&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;strong>rndc.key&lt;/strong>라는 단어가 나왔습니다. 해당 암호화키는 DHCP와 BIND9가 서로 약속된 사이가 맞다는 것을 증명합니다.&lt;br>
+만약 없거나, 새로운 rndc.key를 발급하고 싶다면 &lt;em>rndc-confgen&lt;/em>를 사용하여 생성할 수 있습니다.&lt;/p>
+&lt;p>이번에는 BIND9를 설치하면서 자동으로 생긴 키를 사용하겠습니다.&lt;br>
+다음으로 해당 IP Address의 서비스를 해당 IP Address가 수정하는 것을 허락하겠다는 내용입니다.&lt;br>
+즉 동일한 곳에 설치된 DHCP 서비스가 BIND9와 상호작용 할 수 있다는 것을 서술합니다.&lt;/p>
+&lt;p>다음으로 앞에서 정의해 둔 도메인 정방향, 역방향 영역에 allow-update { key rndc-key; }; 를 추가합니다.&lt;br>
+해당 키를 이용한 갱신을 허락하겠다는 내용입니다. 마쳤으면 아래와 같이 나타납니다.&lt;/p>
+&lt;p>&lt;img src="https://docs.9bon.org/p/%EB%A6%AC%EB%88%85%EC%8A%A4-dhcp-ddns/4.png"
+width="1928"
+height="1056"
+srcset="https://docs.9bon.org/p/%EB%A6%AC%EB%88%85%EC%8A%A4-dhcp-ddns/4_hu1204d79c0bb95acd48260a3ec4774ccf_49922_480x0_resize_box_3.png 480w, https://docs.9bon.org/p/%EB%A6%AC%EB%88%85%EC%8A%A4-dhcp-ddns/4_hu1204d79c0bb95acd48260a3ec4774ccf_49922_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="BIND9 local"
+class="gallery-image"
+data-flex-grow="182"
+data-flex-basis="438px"
+>&lt;/p>
+&lt;p>확인이 완료되었으면 BIND9를 재시작 합니다.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-Bash" data-lang="Bash">&lt;span class="line">&lt;span class="cl">service bind9 restart
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="dhcp">DHCP&lt;/h2>
+&lt;h3 id="개요-2">개요&lt;/h3>
+&lt;p>DHCP는 서브넷팅 관련 지식이 있다면 추가적으로 설명할 내용은 없습니다.&lt;br>
+이번 포스팅에서는 갱신 시간과 같은 상세 설명은 넘어가도록 하겠습니다.&lt;/p>
+&lt;h3 id="설명-1">설명&lt;/h3>
+&lt;p>먼저 전파점 인터페이스를 설정합니다. 인터페이스 이름이 기억이 안난다면 ifconfig으로 확인할 수 있습니다.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">nano /etc/default/isc-dhcp-server
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://docs.9bon.org/p/%EB%A6%AC%EB%88%85%EC%8A%A4-dhcp-ddns/5.png"
+width="1928"
+height="1056"
+srcset="https://docs.9bon.org/p/%EB%A6%AC%EB%88%85%EC%8A%A4-dhcp-ddns/5_hufcbe288f402ca289f201183a58d28751_53714_480x0_resize_box_3.png 480w, https://docs.9bon.org/p/%EB%A6%AC%EB%88%85%EC%8A%A4-dhcp-ddns/5_hufcbe288f402ca289f201183a58d28751_53714_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="DHCP Interface"
+class="gallery-image"
+data-flex-grow="182"
+data-flex-basis="438px"
+>&lt;/p>
+&lt;p>다음은 본격적인 설정입니다. 길게 수정할 예정이기 때문에 원본 설정파일을 백업하고 파일을 그림처럼 작성합니다.&lt;br>
+주석을 풀면서 만드셔도 되고, 다 지운 뒤 새로 작성해도 상관 없습니다.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="nb">cd&lt;/span> /etc/dhcp
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cp dhcpd.conf dhcpd.conf.back
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">nano dhcpd.conf
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://docs.9bon.org/p/%EB%A6%AC%EB%88%85%EC%8A%A4-dhcp-ddns/6.png"
+width="1928"
+height="1056"
+srcset="https://docs.9bon.org/p/%EB%A6%AC%EB%88%85%EC%8A%A4-dhcp-ddns/6_hue87e05bfbaeb953c01c5ca1d7e399c5e_54469_480x0_resize_box_3.png 480w, https://docs.9bon.org/p/%EB%A6%AC%EB%88%85%EC%8A%A4-dhcp-ddns/6_hue87e05bfbaeb953c01c5ca1d7e399c5e_54469_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="DHCPD"
+class="gallery-image"
+data-flex-grow="182"
+data-flex-basis="438px"
+>&lt;/p>
+&lt;p>중요한것만 집고 넘어가면&lt;br>
+&lt;strong>option&lt;/strong>이 붙은 내용들은 DHCP서비스를 받는 호스트에게 해당 정보가 뿌려진다는 것을 뜻합니다.
+그리고 &lt;strong>subnet 영역&lt;/strong>이 우리가 기본적으로 알고있던 DHCP의 기능, 동적 주소 범위를 나타내는 것이며&lt;br>
+원한다면 이곳에 특정 MAC Address에는 고정주소가 발급되도록 만들 수 있습니다.&lt;/p>
+&lt;p>작성이 완료되었다면 dhcpd -t를 통해 문법 검사를 실시할 수 있습니다. 문제 없다면 재시작 하면 완료입니다.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">dhcpd -t
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">service isc-dhcp-server restart
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="마치며">마치며&lt;/h2>
+&lt;h3 id="검사">검사&lt;/h3>
+&lt;p>먼저 각 클라이언트를 내부망에도 불구하고 static을 해제합니다.&lt;/p>
+&lt;p>&lt;img src="https://docs.9bon.org/p/%EB%A6%AC%EB%88%85%EC%8A%A4-dhcp-ddns/7.png"
+width="1928"
+height="1056"
+srcset="https://docs.9bon.org/p/%EB%A6%AC%EB%88%85%EC%8A%A4-dhcp-ddns/7_hu8a2f1777d6a0e336a588782b05dc25f8_130844_480x0_resize_box_3.png 480w, https://docs.9bon.org/p/%EB%A6%AC%EB%88%85%EC%8A%A4-dhcp-ddns/7_hu8a2f1777d6a0e336a588782b05dc25f8_130844_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="networks"
+class="gallery-image"
+data-flex-grow="182"
+data-flex-basis="438px"
+>&lt;/p>
+&lt;p>재부팅 하면 제대로 동적할당 되고있음을 확인할 수 있습니다. 또한 nslookup으로 클라이언트의 아이피주소를 입력하면&lt;br>
+알아서 클라이언트의 호스트 이름으로 자식 도메인네임을 만든 것을 확인할 수 있습니다.&lt;/p>
+&lt;p>&lt;img src="https://docs.9bon.org/p/%EB%A6%AC%EB%88%85%EC%8A%A4-dhcp-ddns/8.png"
+width="1928"
+height="1056"
+srcset="https://docs.9bon.org/p/%EB%A6%AC%EB%88%85%EC%8A%A4-dhcp-ddns/8_hu9497e543adb7c065f03b4f304cb932c7_146447_480x0_resize_box_3.png 480w, https://docs.9bon.org/p/%EB%A6%AC%EB%88%85%EC%8A%A4-dhcp-ddns/8_hu9497e543adb7c065f03b4f304cb932c7_146447_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="확인"
+class="gallery-image"
+data-flex-grow="182"
+data-flex-basis="438px"
+>&lt;/p>
+&lt;h3 id="추가-개념">추가 개념&lt;/h3>
+&lt;p>이번 작업을 해보시면서 이해가 잘 되셨다면 의문점이 들 수 있습니다.&lt;br>
+DHCP도 서버의 일종입니다. 당연히 그럼 통신이 이루어져야 하고 이것은 같은 범위의 네트워크여야 가능합니다.&lt;/p>
+&lt;p>그렇다면 다른 범위에서 DHCP를 얻어오는것이 어떻게 이루어지는지 궁금할 수 있습니다. 이것을 가능하게 하는 기능을&lt;br>
+&lt;strong>DHCP Relay&lt;/strong> 라고 합니다.&lt;/p>
+&lt;p>이런 의문도 있습니다. 우리는 BIND9를 통해 DNS를 구성했습니다.&lt;br>
+실제 인터넷 모든 전역의 도메인 네임은 굉장히 많습니다. 이것을 전부 한 곳에 몰아서 기록 시킨 것인지 궁금합니다.&lt;br>
+실은 그렇지 않습니다. DNS 자체가 굉장히 많으며 DNS 끼리 정보를 교환합니다. 이것을 &lt;strong>DNS Fowarding&lt;/strong> 이라고 합니다.&lt;/p>
+&lt;p>이 두가지 기능에 대해선 다음 포스팅에서 만나보도록 하겠습니다.&lt;/p></description></item></channel></rss>

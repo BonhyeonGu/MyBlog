@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pages on 9Bon's_Docs</title><link>https://docs.9bon.org/page/</link><description>Recent content in Pages on 9Bon's_Docs</description><generator>Hugo -- gohugo.io</generator><language>ko-kr</language><lastBuildDate>Sun, 06 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://docs.9bon.org/page/index.xml" rel="self" type="application/rss+xml"/><item><title>Archives</title><link>https://docs.9bon.org/archives/</link><pubDate>Sun, 06 Mar 2022 00:00:00 +0000</pubDate><guid>https://docs.9bon.org/archives/</guid><description/></item><item><title>Photograph</title><link>https://docs.9bon.org/photograph/</link><pubDate>Mon, 04 Oct 2021 20:11:31 +0900</pubDate><guid>https://docs.9bon.org/photograph/</guid><description>&lt;h2 id="2021">2021&lt;/h2>
+&lt;p>창업교육센터, 창업동아리팀 Pandemic&lt;br>
+&lt;img src="https://docs.9bon.org/photograph/05.png"
+loading="lazy"
+alt="Pandemic 활동"
+>&lt;/p>
+&lt;h2 id="2020">2020&lt;/h2>
+&lt;p>네트워크 중급자 스터디 진행&lt;br>
+&lt;img src="https://docs.9bon.org/photograph/04.png"
+loading="lazy"
+alt="네트워크 스터디 프로젝트"
+>&lt;/p>
+&lt;h2 id="2017">2017&lt;/h2>
+&lt;p>네트워크 스터디, 리눅스 스터디 진행&lt;br>
+&lt;img src="https://docs.9bon.org/photograph/03.png"
+loading="lazy"
+alt="네트워크 스터디"
+>&lt;br>
+&lt;img src="https://docs.9bon.org/photograph/02.jpg"
+loading="lazy"
+alt="리눅스 스터디"
+>&lt;/p>
+&lt;h2 id="2014">2014&lt;/h2>
+&lt;p>2014 전국기능대회 정보통신 3과목&lt;br>
+&lt;img src="https://docs.9bon.org/photograph/01.png"
+loading="lazy"
+alt="고등학교 2학년"
+>&lt;br>
+아래는 전국대회 조건에 따라, 고등학생때 작성했던 문제 중 1과목입니다.&lt;br>
+&lt;a class="link" href="./01_sub.pdf" >작성한 문제&lt;/a>&lt;/p></description></item><item><title>ServerLog</title><link>https://docs.9bon.org/serverlog/</link><pubDate>Sun, 03 Oct 2021 23:21:22 +0900</pubDate><guid>https://docs.9bon.org/serverlog/</guid><description>&lt;h3 id="설명">설명&lt;/h3>
+&lt;p>해당 페이지는 제가 집에서 호스팅한 서버들을 추억으로 남겨놓는 곳입니다. 😘&lt;/p>
+&lt;h3 id="2017202011">2017~2020.11&lt;/h3>
+&lt;p>&lt;img src="https://docs.9bon.org/page/serverLog/01.png"
+loading="lazy"
+alt="1 세대"
+>
+&lt;img src = "page/serverLog/01-01.png" width="50%" height="50%">&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>금액&lt;/th>
+&lt;th>~60,000원&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>기종&lt;/td>
+&lt;td>라즈베리파이3&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>OS&lt;/td>
+&lt;td>라즈비안&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>CPU&lt;/td>
+&lt;td>4Core 1.2GHz&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>RAM&lt;/td>
+&lt;td>1GB&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>HDD&lt;/td>
+&lt;td>&lt;strong>외장&lt;/strong>-1TB&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>웹 클라우드 또한 PYDIO와 OwnCloud 등 여러가지 소스를 시도했었습니다. ARM 아키텍처는 문제점이 많았습니다.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>서비스&lt;/th>
+&lt;th>상세&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>WEB + CLOUD&lt;/td>
+&lt;td>APACHE + PYDIO&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>FTP&lt;/td>
+&lt;td>VSFTPD&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>DB&lt;/td>
+&lt;td>MYSQL&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>DIR&lt;/td>
+&lt;td>SAMBA&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="20201120220720">2020.11~2022.07.20&lt;/h3>
+&lt;p>&lt;img src="https://docs.9bon.org/page/serverLog/02.png"
+loading="lazy"
+alt="2 세대"
+>&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>금액&lt;/th>
+&lt;th>~200,000원&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>OS&lt;/td>
+&lt;td>Debian&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>CPU&lt;/td>
+&lt;td>J5040 4Core 2~3.2GHz&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>RAM&lt;/td>
+&lt;td>8GB&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>HDD&lt;/td>
+&lt;td>2TB&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>SYSFAN&lt;/td>
+&lt;td>NOCTUA120mm&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>일체형 저전력 CPU입니다. 데스크탑 아키텍처인 보드를 구해 기반을 맞췄습니다.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>서비스&lt;/th>
+&lt;th>상세&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>WEB1&lt;/td>
+&lt;td>APACHE_Main&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>WEB2&lt;/td>
+&lt;td>HUGO&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>WEB3&lt;/td>
+&lt;td>NextCloud&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>FTP&lt;/td>
+&lt;td>VSFTPD&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>DB1&lt;/td>
+&lt;td>MARIADB&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>DB2&lt;/td>
+&lt;td>MSSQL&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="20220721">2022.07.21~&lt;/h3>
+&lt;p>&lt;img src="https://docs.9bon.org/page/serverLog/03.png"
+loading="lazy"
+alt="3 세대"
+>&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>금액&lt;/th>
+&lt;th>~900,000원&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>OS&lt;/td>
+&lt;td>Ubuntu&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>CPU&lt;/td>
+&lt;td>I5 12400&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>RAM&lt;/td>
+&lt;td>32GB&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>SSD&lt;/td>
+&lt;td>500GB&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>HDD&lt;/td>
+&lt;td>2TB&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table></description></item><item><title>About</title><link>https://docs.9bon.org/about/</link><pubDate>Tue, 31 Aug 2021 19:09:40 +0900</pubDate><guid>https://docs.9bon.org/about/</guid><description>&lt;p>&lt;strong>Contact&lt;/strong> 🙋&lt;br>
+&lt;a class="link" href="mailto:bonhyeon.gu@9bon.org" >bonhyeon.gu@9bon.org&lt;/a>&lt;/p>
+&lt;p>&lt;strong>Introduce&lt;/strong> 🧑‍💼&lt;br>
+&lt;a class="link" href="https://bonhyeon.9bon.org/" target="_blank" rel="noopener"
+>https://bonhyeon.9bon.org/&lt;/a>&lt;/p>
+&lt;p>&lt;strong>Photograph&lt;/strong> 📸&lt;br>
+&lt;a class="link" href="https://docs.9bon.org/photograph/" target="_blank" rel="noopener"
+>https://docs.9bon.org/photograph/&lt;/a>&lt;/p>
+&lt;p>&lt;strong>ServerLog&lt;/strong> 🧰&lt;br>
+&lt;a class="link" href="https://docs.9bon.org/serverlog/" target="_blank" rel="noopener"
+>https://docs.9bon.org/serverlog/&lt;/a>&lt;/p></description></item><item><title>Search</title><link>https://docs.9bon.org/search/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://docs.9bon.org/search/</guid><description/></item></channel></rss>

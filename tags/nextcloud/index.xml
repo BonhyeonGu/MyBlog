@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>nextcloud on 9Bon's_Docs</title><link>https://docs.9bon.org/tags/nextcloud/</link><description>Recent content in nextcloud on 9Bon's_Docs</description><generator>Hugo -- gohugo.io</generator><language>ko-kr</language><lastBuildDate>Sun, 03 Oct 2021 01:40:54 +0900</lastBuildDate><atom:link href="https://docs.9bon.org/tags/nextcloud/index.xml" rel="self" type="application/rss+xml"/><item><title>도커 명령어와 예제</title><link>https://docs.9bon.org/p/%EB%8F%84%EC%BB%A4-%EB%AA%85%EB%A0%B9%EC%96%B4%EC%99%80-%EC%98%88%EC%A0%9C/</link><pubDate>Sun, 03 Oct 2021 01:40:54 +0900</pubDate><guid>https://docs.9bon.org/p/%EB%8F%84%EC%BB%A4-%EB%AA%85%EB%A0%B9%EC%96%B4%EC%99%80-%EC%98%88%EC%A0%9C/</guid><description>&lt;img src="https://docs.9bon.org/p/%EB%8F%84%EC%BB%A4-%EB%AA%85%EB%A0%B9%EC%96%B4%EC%99%80-%EC%98%88%EC%A0%9C/thum.png" alt="Featured image of post 도커 명령어와 예제" />&lt;h2 id="기본">기본&lt;/h2>
+&lt;h3 id="컨테이너-조회">컨테이너 조회&lt;/h3>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-Docker" data-lang="Docker">&lt;span class="line">&lt;span class="cl">docker ps -a&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>첨자&lt;/th>
+&lt;th>뜻&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>-a&lt;/td>
+&lt;td>꺼져있는 것을 포함하여 모두&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="컨테이너-시작-종료">컨테이너 시작, 종료&lt;/h3>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-Docker" data-lang="Docker">&lt;span class="line">&lt;span class="cl">docker apache start&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>이후 내용&lt;/th>
+&lt;th>뜻&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>start&lt;/td>
+&lt;td>실행&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>restart&lt;/td>
+&lt;td>재시작&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>stop&lt;/td>
+&lt;td>중지&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>status&lt;/td>
+&lt;td>상태확인&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="컨테이너-생성수정">컨테이너 생성/수정&lt;/h2>
+&lt;h3 id="일반적인-경우">일반적인 경우&lt;/h3>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-Docker" data-lang="Docker">&lt;span class="line">&lt;span class="cl">docker container run --name nextcloud -d -v /media/ext1/Docker/cloud/:/var/www/html/data -p 1234:80 nextcloud&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>첨자&lt;/th>
+&lt;th>뜻&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>-run&lt;/td>
+&lt;td>생성 후 바로 실행함&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&amp;ndash;name&lt;/td>
+&lt;td>생성될 컨테이너의 이름 지정&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>-d&lt;/td>
+&lt;td>백그라운드(데몬 프로세스)로 실행&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>-v (복수가능)&lt;/td>
+&lt;td>저장공간 맵핑/마운트 컨테이너 외부(호스트) : 컨테이너 내부&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>-p (복수가능)&lt;/td>
+&lt;td>포트 맵핑/포워딩 컨테이너 외부(호스트) : 컨테이너 내부&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;em>이후 내용엔 이미지 파일 이름&lt;/em>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="환경변수-설정">환경변수 설정&lt;/h3>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-Docker" data-lang="Docker">&lt;span class="line">&lt;span class="cl">docker container run --name test_DB_YJ -d -p 49152:22 -p 1234:3306 -e &lt;span class="nv">MYSQL_ROOT_PASSWORD&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="m">12345&lt;/span> mariadb --character-set-server&lt;span class="o">=&lt;/span>utf8mb4 --collation-server&lt;span class="o">=&lt;/span>utf8mb4_unicode_ci&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>docker run -e &lt;span class="s2">&amp;#34;ACCEPT_EULA=Y&amp;#34;&lt;/span> -e &lt;span class="s2">&amp;#34;SA_PASSWORD=12345&amp;#34;&lt;/span> -p 1234:1433 --name rpadb -d mcr.microsoft.com/mssql/server:2019-latest&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>첨자&lt;/th>
+&lt;th>뜻&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>-e&lt;/td>
+&lt;td>컨테이너 내부 환경변수 수정&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="실행">실행&lt;/h2>
+&lt;h3 id="컨테이너-내부-쉘실행">컨테이너 내부 쉘실행&lt;/h3>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-Docker" data-lang="Docker">&lt;span class="line">&lt;span class="cl">docker &lt;span class="nb">exec&lt;/span> -it nextcloud bash&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>첨자&lt;/th>
+&lt;th>뜻&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>-i&lt;/td>
+&lt;td>상호작용 할 것, 입력 출력이 가능해짐&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>-t&lt;/td>
+&lt;td>쉘과 같이 사용 될 것&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;em>이후 내용엔 실행할 명령어&lt;/em>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="컨테이너-내부-권한으로-명령-실행">컨테이너 내부 권한으로 명령 실행&lt;/h3>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-docker" data-lang="docker">&lt;span class="line">&lt;span class="cl">docker &lt;span class="nb">exec&lt;/span> -u www-data nextcloud php occ files:scan --all&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">&lt;/span>docker &lt;span class="nb">exec&lt;/span> -u &lt;span class="m">0&lt;/span> -it rpadb /bin/bash&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>첨자 및 매게변수&lt;/th>
+&lt;th>뜻&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>-u&lt;/td>
+&lt;td>해당 유저의 권한으로&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;em>이후 내용엔 실행할 명령어&lt;/em>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table></description></item></channel></rss>

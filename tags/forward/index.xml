@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>forward on 9Bon's_Docs</title><link>https://docs.9bon.org/tags/forward/</link><description>Recent content in forward on 9Bon's_Docs</description><generator>Hugo -- gohugo.io</generator><language>ko-kr</language><lastBuildDate>Mon, 15 May 2023 17:22:49 +0900</lastBuildDate><atom:link href="https://docs.9bon.org/tags/forward/index.xml" rel="self" type="application/rss+xml"/><item><title>Gateway에 OpenVPN 설치</title><link>https://docs.9bon.org/p/gateway%EC%97%90-openvpn-%EC%84%A4%EC%B9%98/</link><pubDate>Mon, 15 May 2023 17:22:49 +0900</pubDate><guid>https://docs.9bon.org/p/gateway%EC%97%90-openvpn-%EC%84%A4%EC%B9%98/</guid><description>&lt;img src="https://docs.9bon.org/p/gateway%EC%97%90-openvpn-%EC%84%A4%EC%B9%98/thum.png" alt="Featured image of post Gateway에 OpenVPN 설치" />&lt;h2 id="서론">서론&lt;/h2>
+&lt;h3 id="개요">개요&lt;/h3>
+&lt;p>라우팅, 방화벽, NAT 등의 조건이 걸린 Gateway를 경우에 따라서 다른 망의 호스트로 부터 접근하고 싶은 경우가 있습니다.&lt;br>
+클라이언트가 속한 망이 본인 권한이 아닐 경우 VPN을 Gateway에 설치하는 것이 이상적인 솔루션입니다.&lt;/p>
+&lt;p>물론 이것이 클라이언트가 속한 망의 정책에 위반되지 않는지 검토되어야 하며,&lt;br>
+라우팅은 네트워크 계층을, VPN은 네트워크와 전송 계층의 사이에 존재하는 서비스이기 때문에,&lt;br>
+정작 실제 망에 문제가 생기면 VPN 설정과 무관하게 됨을 이해해야 합니다.&lt;/p>
+&lt;h3 id="vpn의-udp-tcp">VPN의 UDP? TCP?&lt;/h3>
+&lt;p>VPN도 네트워크 서비스인 만큼, 두 네트워크 프로토콜중에 하나를 골라야 합니다.&lt;br>
+하지만 궁금증이 생길 수 있습니다. 만약 UDP로 VPN을 연결하면 TCP서비스를 사용하지 못하는가?&lt;br>
+답은 &amp;lsquo;그렇지 않다.&amp;rsquo; 입니다. VPN에서 선택하는 프로토콜은 VPN 터널에서 사용할 패킷을 어떻게 전달하느냐 입니다.&lt;br>
+이 위에 올라갈 서비스와는 다른 것입니다.&lt;/p>
+&lt;p>하지만 이것은 신중히 선택되어야 합니다. 만약 VPN을 UDP로 설정한다면, 서비스가 TCP를 사용한들&lt;br>
+TCP 본연의 신뢰성을 잃거나, 서비스의 handshake를 VPN의 UDP가 손실시켜 본래의 속도보다 더 느릴 수 있습니다.&lt;/p>
+&lt;p>이번 예에서는 VPN을 UDP로 설정합니다. 해당 경우로 얻길 원하는 이점은 VPN으로 소요되는 시간을 최소화 하는 것입니다.&lt;/p>
+&lt;h2 id="설치">설치&lt;/h2>
+&lt;p>설명되는 과정은 Ubunut 22.04 LTS 기준입니다. 기본 게이트웨이의 설정&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-zsh" data-lang="zsh">&lt;span class="line">&lt;span class="cl">net.ipv4.ip_forward&lt;span class="o">=&lt;/span>&lt;span class="m">1&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>과 같은 것은 마무리 되었다고 가정합니다.&lt;/p>
+&lt;h3 id="인증서">인증서&lt;/h3>
+&lt;p>인증서를 만들어줄 패키지를 설치하고, 인증서 설정이 포함된 디렉토리를 생성,&lt;br>
+그 후 인증서 메타데이터를 수정합니다.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-zsh" data-lang="zsh">&lt;span class="line">&lt;span class="cl">sudo apt-get update
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo apt-get install easy-rsa openvpn
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">make-cadir ~/openvpn-ca
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">cd&lt;/span> ~/openvpn-ca
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">nano vars
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>vars의 내용물은 대부분 주석으로 처리되어 있는 내용일 경우 필자와 동일한 Easy-RAS 3.x 환경입니다.
+만약 export 등의 키워드가 붙어있다면 2.x 임으로 다른 문서를 확인해주세요&lt;br>
+저는 다음과 같이 정의하겠습니다.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-zsh" data-lang="zsh">&lt;span class="line">&lt;span class="cl">set_var EASYRSA_REQ_COUNTRY &lt;span class="s2">&amp;#34;KR&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">set_var EASYRSA_REQ_PROVINCE &lt;span class="s2">&amp;#34;Busan&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">set_var EASYRSA_REQ_CITY &lt;span class="s2">&amp;#34;Busan&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">set_var EASYRSA_REQ_ORG &lt;span class="s2">&amp;#34;Oklab&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">set_var EASYRSA_REQ_EMAIL &lt;span class="s2">&amp;#34;bonhyeon.gu@9bon.org&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">set_var EASYRSA_REQ_OU &lt;span class="s2">&amp;#34;graduate&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>이후 필요한 파일을 출력하겠습니다. 인증, 인증서, 키, 서명등의 이론적 설명은 다음에 포스팅에 하도록 하겠습니다.&lt;br>
+클라이언트 이름을 h100으로 하는 예제입니다.&lt;/p>
+&lt;p>공개키 인프라 초기화&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-zsh" data-lang="zsh">&lt;span class="line">&lt;span class="cl">./easyrsa init-pki
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>CA인증서 및 키 생성&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-zsh" data-lang="zsh">&lt;span class="line">&lt;span class="cl">./easyrsa build-ca nopass
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>서버의 인증서 요청(CSR) 및 개인 키 생성&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-zsh" data-lang="zsh">&lt;span class="line">&lt;span class="cl">./easyrsa gen-req server nopass
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>서버 CSR에 서명하여 서버 인증서 생성&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-zsh" data-lang="zsh">&lt;span class="line">&lt;span class="cl">./easyrsa sign-req server server
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>클라이언트의 인증서 요청(CSR) 및 개인 키 생성&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-zsh" data-lang="zsh">&lt;span class="line">&lt;span class="cl">./easyrsa gen-req h100 nopass
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>클라이언트 CSR에 서명하여 클라이언트 인증서 생성&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-zsh" data-lang="zsh">&lt;span class="line">&lt;span class="cl">./easyrsa sign-req client h100
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>DH 파라미터 생성&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-zsh" data-lang="zsh">&lt;span class="line">&lt;span class="cl">./easyrsa gen-dh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>CRL(인증서 폐지 목록) 생성&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-zsh" data-lang="zsh">&lt;span class="line">&lt;span class="cl">./easyrsa gen-crl
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>작업의 편리함을 위하여 생성된 파일을 openvpn 디렉토리에 복사하도록 하겠습니다.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-zsh" data-lang="zsh">&lt;span class="line">&lt;span class="cl">sudo cp ./pki/ca.crt /etc/openvpn/server/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo cp ./pki/issued/server.crt /etc/openvpn/server/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo cp ./pki/private/server.key /etc/openvpn/server/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo cp ./pki/dh.pem /etc/openvpn/server/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo cp ./pki/crl.pem /etc/openvpn/server/
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="openvpn-서버-설정">OpenVPN 서버 설정&lt;/h3>
+&lt;p>MitM(중간자공격)을 방지하기 위해 TLS-Auth를 설정할 수 있습니다. 이를 위해서는 추가적인 키 생성이 필요합니다.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-zsh" data-lang="zsh">&lt;span class="line">&lt;span class="cl">&lt;span class="nb">cd&lt;/span> /etc/openvpn/server/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">openvpn --genkey --secret ta.key
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>다음으로 &lt;em>/etc/openvpn/server.conf&lt;/em> 를 생성합니다.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-zsh" data-lang="zsh">&lt;span class="line">&lt;span class="cl">port &lt;span class="m">1194&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">proto udp
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">dev tun
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">ca server/ca.crt
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cert server/server.crt
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">key server/server.key
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">dh server/dh.pem
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">server 10.8.0.0 255.255.255.0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">ifconfig-pool-persist ipp.txt
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">push &lt;span class="s2">&amp;#34;redirect-gateway def1 bypass-dhcp&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">push &lt;span class="s2">&amp;#34;dhcp-option DNS 8.8.8.8&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">push &lt;span class="s2">&amp;#34;dhcp-option DNS 8.8.4.4&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">keepalive &lt;span class="m">10&lt;/span> &lt;span class="m">120&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">tls-auth server/ta.key &lt;span class="m">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cipher AES-256-CBC
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">auth SHA256
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">compress lz4-v2
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">push &lt;span class="s2">&amp;#34;compress lz4-v2&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">user nobody
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">group nogroup
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">persist-key
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">persist-tun
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">status openvpn-status.log
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">verb &lt;span class="m">3&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">crl-verify server/crl.pem
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">client-config-dir /etc/openvpn/ccd
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>다음으로 &lt;em>/etc/openvpn/ccd/&lt;/em> 디렉토리를 만들고 &lt;em>/etc/openvpn/ccd/h100&lt;/em> 를 생성합니다. 이 작업은&lt;br>
+클라이언트의 정보를 지정하는 것입니다. h100이라는 이름도 클라이언트 인증서의 CN을 따라갑니다.&lt;br>
+앞에서 &lt;em>./easyrsa gen-req h100 nopass&lt;/em> 의 명령과 관련이 있습니다.&lt;/p>
+&lt;p>해당 파일에는 다음과 같은 고정 아이피 주소와 같은 내용을 넣을 수 있습니다.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-zsh" data-lang="zsh">&lt;span class="line">&lt;span class="cl">ifconfig-push 10.8.0.2 255.255.255.0
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>이제 재시작 하여 설정을 적용시켜야 합니다.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-zsh" data-lang="zsh">&lt;span class="line">&lt;span class="cl">sudo systemctl start openvpn@server
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo systemctl &lt;span class="nb">enable&lt;/span> openvpn@server
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="클라이언트-설정">클라이언트 설정&lt;/h3>
+&lt;p>지금부터는 클라이언트(H100)의 설정입니다. 클라이언트에도 패키지를 설치해 줍니다.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-zsh" data-lang="zsh">&lt;span class="line">&lt;span class="cl">sudo apt-get update
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo apt-get install openvpn
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>다음으로 &lt;em>/etc/openvpn/client/&lt;/em> 에 앞에서 만들었던 해당 파일을 옮겨주어야 합니다.&lt;br>
+당연히 인증서와 키를 옮기는 과정은 주의가 필요합니다.&lt;/p>
+&lt;ul>
+&lt;li>ca.crt&lt;/li>
+&lt;li>h100.crt&lt;/li>
+&lt;li>h100.key&lt;/li>
+&lt;li>ta.key&lt;/li>
+&lt;/ul>
+&lt;p>그 후 다음 설정파일을 &lt;em>/etc/openvpn/client.conf&lt;/em> 에 작성하겠습니다.&lt;br>
+vpn.server.com 은 VPN 서버의 주소가 들어가야 합니다.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-zsh" data-lang="zsh">&lt;span class="line">&lt;span class="cl">client
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">dev tun
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">proto udp
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">remote vpn.server.com &lt;span class="m">1194&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">resolv-retry infinite
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">nobind
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">user nobody
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">group nogroup
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">persist-key
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">persist-tun
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">ca /etc/openvpn/client/ca.crt
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cert /etc/openvpn/client/h100.crt
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">key /etc/openvpn/client/h100.key
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">tls-auth /etc/openvpn/client/ta.key &lt;span class="m">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cipher AES-256-CBC
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">auth SHA256
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">verb &lt;span class="m">3&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>마지막으로 다음의 명령어로 설정 변경을 적용시킵니다.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-zsh" data-lang="zsh">&lt;span class="line">&lt;span class="cl">sudo systemctl restart openvpn@client
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>그 후 &lt;em>ifconfig&lt;/em> 그리고 &lt;em>ping&lt;/em> 등으로 부여된 주소 및 연결을 확인할 수 있습니다.&lt;/p>
+&lt;h2 id="nat-설정-참고">NAT 설정 참고&lt;/h2>
+&lt;p>만약 Gateway에서 VPN 연결 대상으로 넘겨주기 위해서는 게이트웨이에 다음과 같은 예를 사용할 수 있습니다.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-zsh" data-lang="zsh">&lt;span class="line">&lt;span class="cl">sudo iptables -t nat -A PREROUTING -p tcp --dport &lt;span class="o">[&lt;/span>외부에서 들어올 포트번호&lt;span class="o">]&lt;/span> -j DNAT --to-destination &lt;span class="o">[&lt;/span>VPN주소&lt;span class="o">]&lt;/span>:22
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo iptables -A FORWARD -p tcp -d &lt;span class="o">[&lt;/span>VPN주소&lt;span class="o">]&lt;/span> --dport &lt;span class="o">[&lt;/span>외부에서 들어올 포트번호&lt;span class="o">]&lt;/span> -j ACCEPT
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></description></item></channel></rss>

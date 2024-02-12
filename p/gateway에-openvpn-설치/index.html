@@ -1,0 +1,182 @@
+<!doctype html><html lang=ko-kr dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="다른 망에 설치된 Gateway를 사용하기 위한 VPN 설정에 대한 내용입니다."><title>Gateway에 OpenVPN 설치</title>
+<link rel=canonical href=https://docs.9bon.org/p/gateway%EC%97%90-openvpn-%EC%84%A4%EC%B9%98/><link rel=stylesheet href=/scss/style.min.abbd69b2908fdfcd5179898beaafd374514a86538d81639ddd2c58c06ae54e40.css><meta property="og:title" content="Gateway에 OpenVPN 설치"><meta property="og:description" content="다른 망에 설치된 Gateway를 사용하기 위한 VPN 설정에 대한 내용입니다."><meta property="og:url" content="https://docs.9bon.org/p/gateway%EC%97%90-openvpn-%EC%84%A4%EC%B9%98/"><meta property="og:site_name" content="9Bon's_Docs"><meta property="og:type" content="article"><meta property="article:section" content="Post"><meta property="article:tag" content="address"><meta property="article:tag" content="certificate"><meta property="article:tag" content="vpn"><meta property="article:tag" content="openvpn"><meta property="article:tag" content="gateway"><meta property="article:tag" content="forward"><meta property="article:published_time" content="2023-05-15T17:22:49+09:00"><meta property="article:modified_time" content="2023-05-15T17:22:49+09:00"><meta property="og:image" content="https://docs.9bon.org/p/gateway%EC%97%90-openvpn-%EC%84%A4%EC%B9%98/thum.png"><meta name=twitter:title content="Gateway에 OpenVPN 설치"><meta name=twitter:description content="다른 망에 설치된 Gateway를 사용하기 위한 VPN 설정에 대한 내용입니다."><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://docs.9bon.org/p/gateway%EC%97%90-openvpn-%EC%84%A4%EC%B9%98/thum.png"><link rel="shortcut icon" href=/favicon.png><script async src="https://www.googletagmanager.com/gtag/js?id=G-J6VYRNTTDG"></script><script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-J6VYRNTTDG",{anonymize_ip:!1})}</script><style>:root{--article-font-family:"IBM Plex Sans KR", var(--base-font-family)}</style><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@200&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label="메뉴 여닫기">
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/avatar_huaef87c9587ca1f1e28e83ecfd9cba8c0_184448_300x0_resize_box_3.png width=300 height=300 class=site-logo loading=lazy alt=Avatar></a></figure><div class=site-meta><h1 class=site-name><a href=/>9Bon's_Docs</a></h1><h2 class=site-description>Hungry</h2></div></header><ol class=social-menu><li><a href=https://github.com/BonhyeonGu target=_blank title=0_GitHub rel=me><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li><li><a href=https://bonhyeon.9bon.org target=_blank title=1_Porfolio rel=me><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mood-wink" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="12" cy="12" r="9"/><path d="M15 10h.01"/><path d="M9.5 15a3.5 3.5.0 005 0"/><path d="M8.5 8.5 10 10l-1.5 1.5"/></svg></a></li><li><a href=https://cloud.9bon.org target=_blank title=3_Cloud rel=me><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-cloud" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 18a4.6 4.4.0 010-9 5 4.5.0 0111 2h1a3.5 3.5.0 010 7H7"/></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg>
+<span>Home</span></a></li><li><a href=/about/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg>
+<span>About</span></a></li><li><a href=/archives/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+<span>Archives</span></a></li><li><a href=/search/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+<span>Search</span></a></li><div class=menu-bottom-section><li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>다크 모드</span></li></div></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">목차</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#서론>서론</a><ol><li><a href=#개요>개요</a></li><li><a href=#vpn의-udp-tcp>VPN의 UDP? TCP?</a></li></ol></li><li><a href=#설치>설치</a><ol><li><a href=#인증서>인증서</a></li><li><a href=#openvpn-서버-설정>OpenVPN 서버 설정</a></li><li><a href=#클라이언트-설정>클라이언트 설정</a></li></ol></li><li><a href=#nat-설정-참고>NAT 설정 참고</a></li></ol></nav></div></section></aside><main class="main full-width"><article class="has-image main-article"><header class=article-header><div class=article-image><a href=/p/gateway%EC%97%90-openvpn-%EC%84%A4%EC%B9%98/><img src=/p/gateway%EC%97%90-openvpn-%EC%84%A4%EC%B9%98/thum_hu5a0a7b44549fccb70eb622685b43408e_102490_800x0_resize_box_3.png srcset="/p/gateway%EC%97%90-openvpn-%EC%84%A4%EC%B9%98/thum_hu5a0a7b44549fccb70eb622685b43408e_102490_800x0_resize_box_3.png 800w, /p/gateway%EC%97%90-openvpn-%EC%84%A4%EC%B9%98/thum_hu5a0a7b44549fccb70eb622685b43408e_102490_1600x0_resize_box_3.png 1600w" width=800 height=249 loading=lazy alt="Featured image of post Gateway에 OpenVPN 설치"></a></div><div class=article-details><header class=article-category><a href=/categories/%EB%A6%AC%EB%88%85%EC%8A%A4/ style=background-color:#784bee;color:#fff>리눅스
+</a><a href=/categories/%EC%84%9C%EB%B2%84/ style=background-color:#080b35;color:#fff>서버</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/p/gateway%EC%97%90-openvpn-%EC%84%A4%EC%B9%98/>Gateway에 OpenVPN 설치</a></h2><h3 class=article-subtitle>다른 망에 설치된 Gateway를 사용하기 위한 VPN 설정에 대한 내용입니다.</h3></div><footer class=article-time><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published>May 15, 2023</time></div><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<time class=article-time--reading>4 분 정도</time></div></footer></div></header><section class=article-content><h2 id=서론>서론</h2><h3 id=개요>개요</h3><p>라우팅, 방화벽, NAT 등의 조건이 걸린 Gateway를 경우에 따라서 다른 망의 호스트로 부터 접근하고 싶은 경우가 있습니다.<br>클라이언트가 속한 망이 본인 권한이 아닐 경우 VPN을 Gateway에 설치하는 것이 이상적인 솔루션입니다.</p><p>물론 이것이 클라이언트가 속한 망의 정책에 위반되지 않는지 검토되어야 하며,<br>라우팅은 네트워크 계층을, VPN은 네트워크와 전송 계층의 사이에 존재하는 서비스이기 때문에,<br>정작 실제 망에 문제가 생기면 VPN 설정과 무관하게 됨을 이해해야 합니다.</p><h3 id=vpn의-udp-tcp>VPN의 UDP? TCP?</h3><p>VPN도 네트워크 서비스인 만큼, 두 네트워크 프로토콜중에 하나를 골라야 합니다.<br>하지만 궁금증이 생길 수 있습니다. 만약 UDP로 VPN을 연결하면 TCP서비스를 사용하지 못하는가?<br>답은 &lsquo;그렇지 않다.&rsquo; 입니다. VPN에서 선택하는 프로토콜은 VPN 터널에서 사용할 패킷을 어떻게 전달하느냐 입니다.<br>이 위에 올라갈 서비스와는 다른 것입니다.</p><p>하지만 이것은 신중히 선택되어야 합니다. 만약 VPN을 UDP로 설정한다면, 서비스가 TCP를 사용한들<br>TCP 본연의 신뢰성을 잃거나, 서비스의 handshake를 VPN의 UDP가 손실시켜 본래의 속도보다 더 느릴 수 있습니다.</p><p>이번 예에서는 VPN을 UDP로 설정합니다. 해당 경우로 얻길 원하는 이점은 VPN으로 소요되는 시간을 최소화 하는 것입니다.</p><h2 id=설치>설치</h2><p>설명되는 과정은 Ubunut 22.04 LTS 기준입니다. 기본 게이트웨이의 설정</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-zsh data-lang=zsh><span class=line><span class=cl>net.ipv4.ip_forward<span class=o>=</span><span class=m>1</span>
+</span></span></code></pre></td></tr></table></div></div><p>과 같은 것은 마무리 되었다고 가정합니다.</p><h3 id=인증서>인증서</h3><p>인증서를 만들어줄 패키지를 설치하고, 인증서 설정이 포함된 디렉토리를 생성,<br>그 후 인증서 메타데이터를 수정합니다.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-zsh data-lang=zsh><span class=line><span class=cl>sudo apt-get update
+</span></span><span class=line><span class=cl>sudo apt-get install easy-rsa openvpn
+</span></span><span class=line><span class=cl>make-cadir ~/openvpn-ca
+</span></span><span class=line><span class=cl><span class=nb>cd</span> ~/openvpn-ca
+</span></span><span class=line><span class=cl>nano vars
+</span></span></code></pre></td></tr></table></div></div><p>vars의 내용물은 대부분 주석으로 처리되어 있는 내용일 경우 필자와 동일한 Easy-RAS 3.x 환경입니다.
+만약 export 등의 키워드가 붙어있다면 2.x 임으로 다른 문서를 확인해주세요<br>저는 다음과 같이 정의하겠습니다.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-zsh data-lang=zsh><span class=line><span class=cl>set_var EASYRSA_REQ_COUNTRY    <span class=s2>&#34;KR&#34;</span>
+</span></span><span class=line><span class=cl>set_var EASYRSA_REQ_PROVINCE   <span class=s2>&#34;Busan&#34;</span>
+</span></span><span class=line><span class=cl>set_var EASYRSA_REQ_CITY       <span class=s2>&#34;Busan&#34;</span>
+</span></span><span class=line><span class=cl>set_var EASYRSA_REQ_ORG        <span class=s2>&#34;Oklab&#34;</span>
+</span></span><span class=line><span class=cl>set_var EASYRSA_REQ_EMAIL      <span class=s2>&#34;bonhyeon.gu@9bon.org&#34;</span>
+</span></span><span class=line><span class=cl>set_var EASYRSA_REQ_OU         <span class=s2>&#34;graduate&#34;</span>
+</span></span></code></pre></td></tr></table></div></div><p>이후 필요한 파일을 출력하겠습니다. 인증, 인증서, 키, 서명등의 이론적 설명은 다음에 포스팅에 하도록 하겠습니다.<br>클라이언트 이름을 h100으로 하는 예제입니다.</p><p>공개키 인프라 초기화</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-zsh data-lang=zsh><span class=line><span class=cl>./easyrsa init-pki
+</span></span></code></pre></td></tr></table></div></div><p>CA인증서 및 키 생성</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-zsh data-lang=zsh><span class=line><span class=cl>./easyrsa build-ca nopass
+</span></span></code></pre></td></tr></table></div></div><p>서버의 인증서 요청(CSR) 및 개인 키 생성</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-zsh data-lang=zsh><span class=line><span class=cl>./easyrsa gen-req server nopass
+</span></span></code></pre></td></tr></table></div></div><p>서버 CSR에 서명하여 서버 인증서 생성</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-zsh data-lang=zsh><span class=line><span class=cl>./easyrsa sign-req server server
+</span></span></code></pre></td></tr></table></div></div><p>클라이언트의 인증서 요청(CSR) 및 개인 키 생성</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-zsh data-lang=zsh><span class=line><span class=cl>./easyrsa gen-req h100 nopass
+</span></span></code></pre></td></tr></table></div></div><p>클라이언트 CSR에 서명하여 클라이언트 인증서 생성</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-zsh data-lang=zsh><span class=line><span class=cl>./easyrsa sign-req client h100
+</span></span></code></pre></td></tr></table></div></div><p>DH 파라미터 생성</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-zsh data-lang=zsh><span class=line><span class=cl>./easyrsa gen-dh
+</span></span></code></pre></td></tr></table></div></div><p>CRL(인증서 폐지 목록) 생성</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-zsh data-lang=zsh><span class=line><span class=cl>./easyrsa gen-crl
+</span></span></code></pre></td></tr></table></div></div><p>작업의 편리함을 위하여 생성된 파일을 openvpn 디렉토리에 복사하도록 하겠습니다.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-zsh data-lang=zsh><span class=line><span class=cl>sudo cp ./pki/ca.crt /etc/openvpn/server/
+</span></span><span class=line><span class=cl>sudo cp ./pki/issued/server.crt /etc/openvpn/server/
+</span></span><span class=line><span class=cl>sudo cp ./pki/private/server.key /etc/openvpn/server/
+</span></span><span class=line><span class=cl>sudo cp ./pki/dh.pem /etc/openvpn/server/
+</span></span><span class=line><span class=cl>sudo cp ./pki/crl.pem /etc/openvpn/server/
+</span></span></code></pre></td></tr></table></div></div><h3 id=openvpn-서버-설정>OpenVPN 서버 설정</h3><p>MitM(중간자공격)을 방지하기 위해 TLS-Auth를 설정할 수 있습니다. 이를 위해서는 추가적인 키 생성이 필요합니다.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-zsh data-lang=zsh><span class=line><span class=cl><span class=nb>cd</span> /etc/openvpn/server/
+</span></span><span class=line><span class=cl>openvpn --genkey --secret ta.key
+</span></span></code></pre></td></tr></table></div></div><p>다음으로 <em>/etc/openvpn/server.conf</em> 를 생성합니다.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-zsh data-lang=zsh><span class=line><span class=cl>port <span class=m>1194</span>
+</span></span><span class=line><span class=cl>proto udp
+</span></span><span class=line><span class=cl>dev tun
+</span></span><span class=line><span class=cl>ca server/ca.crt
+</span></span><span class=line><span class=cl>cert server/server.crt
+</span></span><span class=line><span class=cl>key server/server.key
+</span></span><span class=line><span class=cl>dh server/dh.pem
+</span></span><span class=line><span class=cl>server 10.8.0.0 255.255.255.0
+</span></span><span class=line><span class=cl>ifconfig-pool-persist ipp.txt
+</span></span><span class=line><span class=cl>push <span class=s2>&#34;redirect-gateway def1 bypass-dhcp&#34;</span>
+</span></span><span class=line><span class=cl>push <span class=s2>&#34;dhcp-option DNS 8.8.8.8&#34;</span>
+</span></span><span class=line><span class=cl>push <span class=s2>&#34;dhcp-option DNS 8.8.4.4&#34;</span>
+</span></span><span class=line><span class=cl>keepalive <span class=m>10</span> <span class=m>120</span>
+</span></span><span class=line><span class=cl>tls-auth server/ta.key <span class=m>0</span>
+</span></span><span class=line><span class=cl>cipher AES-256-CBC
+</span></span><span class=line><span class=cl>auth SHA256
+</span></span><span class=line><span class=cl>compress lz4-v2
+</span></span><span class=line><span class=cl>push <span class=s2>&#34;compress lz4-v2&#34;</span>
+</span></span><span class=line><span class=cl>user nobody
+</span></span><span class=line><span class=cl>group nogroup
+</span></span><span class=line><span class=cl>persist-key
+</span></span><span class=line><span class=cl>persist-tun
+</span></span><span class=line><span class=cl>status openvpn-status.log
+</span></span><span class=line><span class=cl>verb <span class=m>3</span>
+</span></span><span class=line><span class=cl>crl-verify server/crl.pem
+</span></span><span class=line><span class=cl>client-config-dir /etc/openvpn/ccd
+</span></span></code></pre></td></tr></table></div></div><p>다음으로 <em>/etc/openvpn/ccd/</em> 디렉토리를 만들고 <em>/etc/openvpn/ccd/h100</em> 를 생성합니다. 이 작업은<br>클라이언트의 정보를 지정하는 것입니다. h100이라는 이름도 클라이언트 인증서의 CN을 따라갑니다.<br>앞에서 <em>./easyrsa gen-req h100 nopass</em> 의 명령과 관련이 있습니다.</p><p>해당 파일에는 다음과 같은 고정 아이피 주소와 같은 내용을 넣을 수 있습니다.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-zsh data-lang=zsh><span class=line><span class=cl>ifconfig-push 10.8.0.2 255.255.255.0
+</span></span></code></pre></td></tr></table></div></div><p>이제 재시작 하여 설정을 적용시켜야 합니다.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-zsh data-lang=zsh><span class=line><span class=cl>sudo systemctl start openvpn@server
+</span></span><span class=line><span class=cl>sudo systemctl <span class=nb>enable</span> openvpn@server
+</span></span></code></pre></td></tr></table></div></div><h3 id=클라이언트-설정>클라이언트 설정</h3><p>지금부터는 클라이언트(H100)의 설정입니다. 클라이언트에도 패키지를 설치해 줍니다.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-zsh data-lang=zsh><span class=line><span class=cl>sudo apt-get update
+</span></span><span class=line><span class=cl>sudo apt-get install openvpn
+</span></span></code></pre></td></tr></table></div></div><p>다음으로 <em>/etc/openvpn/client/</em> 에 앞에서 만들었던 해당 파일을 옮겨주어야 합니다.<br>당연히 인증서와 키를 옮기는 과정은 주의가 필요합니다.</p><ul><li>ca.crt</li><li>h100.crt</li><li>h100.key</li><li>ta.key</li></ul><p>그 후 다음 설정파일을 <em>/etc/openvpn/client.conf</em> 에 작성하겠습니다.<br>vpn.server.com 은 VPN 서버의 주소가 들어가야 합니다.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-zsh data-lang=zsh><span class=line><span class=cl>client
+</span></span><span class=line><span class=cl>dev tun
+</span></span><span class=line><span class=cl>proto udp
+</span></span><span class=line><span class=cl>remote vpn.server.com <span class=m>1194</span>
+</span></span><span class=line><span class=cl>resolv-retry infinite
+</span></span><span class=line><span class=cl>nobind
+</span></span><span class=line><span class=cl>user nobody
+</span></span><span class=line><span class=cl>group nogroup
+</span></span><span class=line><span class=cl>persist-key
+</span></span><span class=line><span class=cl>persist-tun
+</span></span><span class=line><span class=cl>ca /etc/openvpn/client/ca.crt
+</span></span><span class=line><span class=cl>cert /etc/openvpn/client/h100.crt
+</span></span><span class=line><span class=cl>key /etc/openvpn/client/h100.key
+</span></span><span class=line><span class=cl>tls-auth /etc/openvpn/client/ta.key <span class=m>1</span>
+</span></span><span class=line><span class=cl>cipher AES-256-CBC
+</span></span><span class=line><span class=cl>auth SHA256
+</span></span><span class=line><span class=cl>verb <span class=m>3</span>
+</span></span></code></pre></td></tr></table></div></div><p>마지막으로 다음의 명령어로 설정 변경을 적용시킵니다.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-zsh data-lang=zsh><span class=line><span class=cl>sudo systemctl restart openvpn@client
+</span></span></code></pre></td></tr></table></div></div><p>그 후 <em>ifconfig</em> 그리고 <em>ping</em> 등으로 부여된 주소 및 연결을 확인할 수 있습니다.</p><h2 id=nat-설정-참고>NAT 설정 참고</h2><p>만약 Gateway에서 VPN 연결 대상으로 넘겨주기 위해서는 게이트웨이에 다음과 같은 예를 사용할 수 있습니다.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-zsh data-lang=zsh><span class=line><span class=cl>sudo iptables -t nat -A PREROUTING -p tcp --dport <span class=o>[</span>외부에서 들어올 포트번호<span class=o>]</span> -j DNAT --to-destination <span class=o>[</span>VPN주소<span class=o>]</span>:22
+</span></span><span class=line><span class=cl>sudo iptables -A FORWARD -p tcp -d <span class=o>[</span>VPN주소<span class=o>]</span> --dport <span class=o>[</span>외부에서 들어올 포트번호<span class=o>]</span> -j ACCEPT
+</span></span></code></pre></td></tr></table></div></div></section><footer class=article-footer><section class=article-tags><a href=/tags/address/>address</a>
+<a href=/tags/certificate/>certificate</a>
+<a href=/tags/vpn/>vpn</a>
+<a href=/tags/openvpn/>openvpn</a>
+<a href=/tags/gateway/>gateway</a>
+<a href=/tags/forward/>forward</a></section><section class=article-copyright><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
+<span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>관련 글</h2><div class=related-content><div class="flex article-list--tile"><article class=has-image><a href=/p/dns-server-bind9/><div class=article-image><img src=/p/dns-server-bind9/thum.f68d12ea7bc480efb838f4446fab1e30_hu824554077030e2b5363c801976600b24_607940_250x150_fill_box_smart1_3.png width=250 height=150 loading=lazy alt="Featured image of post DNS Server, BIND9" data-hash="md5-9o0S6nvEgO+4OPREb6seMA=="></div><div class=article-details><h2 class=article-title>DNS Server, BIND9</h2></div></a></article><article class=has-image><a href=/p/vmware-%EC%84%9C%EB%B2%84-%EA%B3%B5%EB%B6%80%ED%99%98%EA%B2%BD-%EB%A7%8C%EB%93%A4%EA%B8%B0/><div class=article-image><img src=/p/vmware-%EC%84%9C%EB%B2%84-%EA%B3%B5%EB%B6%80%ED%99%98%EA%B2%BD-%EB%A7%8C%EB%93%A4%EA%B8%B0/thum.50041dff7df9331350bd180ce7d44ef6_hu935fc5a71ae9667b09b6d28bb6bef806_18367_250x150_fill_box_smart1_3.png width=250 height=150 loading=lazy alt="Featured image of post VMWare 서버 공부환경 만들기" data-hash="md5-UAQd/335MxNQvRgM59RO9g=="></div><div class=article-details><h2 class=article-title>VMWare 서버 공부환경 만들기</h2></div></a></article><article class=has-image><a href=/p/%EC%BF%A0%EB%B2%84%ED%94%8C%EB%A1%9C%EC%9A%B0-%EC%84%A4%EC%B9%98/><div class=article-image><img src=/p/%EC%BF%A0%EB%B2%84%ED%94%8C%EB%A1%9C%EC%9A%B0-%EC%84%A4%EC%B9%98/thum.a2f813e6f283a7e4620120d900e38265_hua73f32689426d4b33249e781ef385a89_69335_250x150_fill_box_smart1_3.png width=250 height=150 loading=lazy alt="Featured image of post 쿠버플로우 설치" data-hash="md5-ovgT5vKDp+RiASDZAOOCZQ=="></div><div class=article-details><h2 class=article-title>쿠버플로우 설치</h2></div></a></article><article class=has-image><a href=/p/%EB%A6%AC%EB%88%85%EC%8A%A4-dhcp-ddns/><div class=article-image><img src=/p/%EB%A6%AC%EB%88%85%EC%8A%A4-dhcp-ddns/thum.14f1ec5c525ad9baab3168b69477ec52_huee7b2a00b68fcdcb5e6741874e0a4086_16212_250x150_fill_box_smart1_3.png width=250 height=150 loading=lazy alt="Featured image of post 리눅스 DHCP, DDNS" data-hash="md5-FPHsXFJa2bqrMWi2lHfsUg=="></div><div class=article-details><h2 class=article-title>리눅스 DHCP, DDNS</h2></div></a></article><article class=has-image><a href=/p/%EC%95%84%ED%8C%8C%EC%B9%98-ssl-%EC%A0%81%EC%9A%A9-lets-encrypt/><div class=article-image><img src=/p/%EC%95%84%ED%8C%8C%EC%B9%98-ssl-%EC%A0%81%EC%9A%A9-lets-encrypt/thum.a57549c796089ac47d231b61fcad2ce7_hu41c3bc7f4d7437a9085f5f36b9638c8f_31272_250x150_fill_box_smart1_3.png width=250 height=150 loading=lazy alt="Featured image of post 아파치 SSL 적용, Let's Encrypt" data-hash="md5-pXVJx5YImsR9Ixth/K0s5w=="></div><div class=article-details><h2 class=article-title>아파치 SSL 적용, Let's Encrypt</h2></div></a></article></div></div></aside><div class=disqus-container><div id=disqus_thread></div><script>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//docs-9bon-org.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div><style>.disqus-container{background-color:var(--card-background);border-radius:var(--card-border-radius);box-shadow:var(--shadow-l1);padding:var(--card-padding)}</style><script>window.addEventListener("onColorSchemeChange",e=>{typeof DISQUS=="object"&&DISQUS.reset({reload:!0})})</script><footer class=site-footer><section class=copyright>&copy;
+2020 -
+2024 9Bon's_Docs</section><section class=powerby><a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a>로 만듦<br><a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a>의 <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.21.0>Stack</a></b> 테마 사용 중</section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.js defer></script><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>
